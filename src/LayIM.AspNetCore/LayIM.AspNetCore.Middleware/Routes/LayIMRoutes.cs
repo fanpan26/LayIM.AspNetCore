@@ -20,7 +20,10 @@ namespace LayIM.AspNetCore.Middleware.Routes
         /// </summary>
         private static void RegisterCommands()
         {
-            
+            routes.AddQueryCommand<object>("/init", context =>
+            {
+                return context.Request.Query["uid"];
+            });
         }
 
         /// <summary>

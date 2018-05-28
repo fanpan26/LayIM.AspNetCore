@@ -12,9 +12,17 @@ namespace LayIM.AspNetCore.Middleware.Dispatcher
 
         protected abstract Func<HttpContext, TResult> ExecuteFunction { get; }
 
+        protected virtual void SetContentType(HttpContext context)
+        {
+            context.Response.ContentType = "application/json;charset=utf-8";
+        }
+
         protected override Task DispatchInternal(HttpContext context)
         {
             var result = ExecuteFunction(context);
+            
+            SetContentType(context);
+
             return context.Response.WriteAsync(JsonUtil.ToJSON(result));
         }
         
