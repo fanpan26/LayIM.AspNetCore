@@ -26,15 +26,7 @@ namespace LayIM.AspNetCore.Middleware.Application
                 await next?.Invoke(context);
                 return;
             }
-            string path = string.Empty;
-            if (!string.IsNullOrEmpty(options.ApiPrefix))
-            {
-                path = context.Request.Path.Value.Substring(options.ApiPrefix.Length);
-            }
-            else {
-                path = context.Request.Path.Value;
-            }
-
+            string path = RemovePrefix(context);
             var dispatcher = LayIMRoutes.Routes.FindDispatcher(path);
             if (dispatcher != null)
             {
@@ -42,8 +34,31 @@ namespace LayIM.AspNetCore.Middleware.Application
             }
             else
             {
-                context.Response.StatusCode = StatusCodes.Status404NotFound;
+                // static resources goto next
+                if (LayIMRoutes.IsStaticResource(path))
+                {
+                    await next?.Invoke(context);
+                }
+                else
+                {
+                    //not found
+                    context.Response.StatusCode = StatusCodes.Status404NotFound;
+                }
             }
+        }
+
+        private string RemovePrefix(HttpContext context)
+        {
+            string path = string.Empty;
+            if (!string.IsNullOrEmpty(options.ApiPrefix))
+            {
+                path = context.Request.Path.Value.Substring(options.ApiPrefix.Length);
+            }
+            else
+            {
+                path = context.Request.Path.Value;
+            }
+            return path;
         }
 
         /// <summary>

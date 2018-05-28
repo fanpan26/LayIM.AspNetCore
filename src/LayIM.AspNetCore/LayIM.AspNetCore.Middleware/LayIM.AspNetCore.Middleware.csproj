@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Dispatcher\EmbeddedResourceDispatcher.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\js\test.js" />
   </ItemGroup>
 

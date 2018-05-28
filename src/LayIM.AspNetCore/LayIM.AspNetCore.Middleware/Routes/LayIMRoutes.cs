@@ -12,7 +12,6 @@ namespace LayIM.AspNetCore.Middleware.Routes
         static LayIMRoutes()
         {
             RegisterCommands();
-            RegisterResources();
             RegisterPages();
         }
 
@@ -32,12 +31,9 @@ namespace LayIM.AspNetCore.Middleware.Routes
 
         }
 
-        /// <summary>
-        /// 注册资源
-        /// </summary>
-        private static void RegisterResources()
+        internal static bool IsStaticResource(string path)
         {
-            routes.AddFiles(new string[] { "/js/test.js" });
+            return path.StartsWith("/js") || path.StartsWith("/css");
         }
     }
 }
