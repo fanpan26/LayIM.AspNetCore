@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LayIM.AspNetCore.Middleware
 {
-    public sealed class Error
+    internal sealed class Error
     {
         public static void ThrowIfNull(object obj,string name)
         {
