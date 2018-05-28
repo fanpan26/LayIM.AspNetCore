@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LayIM.AspNetCore.Middleware
 {
-    public class JsonUtil
+    internal class JsonUtil
     {
         public static string ToJSON(object obj)
         {

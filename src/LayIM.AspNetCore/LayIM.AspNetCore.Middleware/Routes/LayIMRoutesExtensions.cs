@@ -6,7 +6,7 @@ using System.Text;
 
 namespace LayIM.AspNetCore.Middleware.Routes
 {
-    public static class LayIMRoutesExtensions
+    internal static class LayIMRoutesExtensions
     {
         /// <summary>
         /// 注册返回值为boolean类型的命令路由

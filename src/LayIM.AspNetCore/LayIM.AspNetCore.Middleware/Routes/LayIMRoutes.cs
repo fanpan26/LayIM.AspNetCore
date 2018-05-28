@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LayIM.AspNetCore.Middleware.Routes
 {
-    public sealed class LayIMRoutes
+    internal sealed class LayIMRoutes
     {
         private static readonly RoutesCollection routes = new RoutesCollection();
         public static RoutesCollection Routes => routes;

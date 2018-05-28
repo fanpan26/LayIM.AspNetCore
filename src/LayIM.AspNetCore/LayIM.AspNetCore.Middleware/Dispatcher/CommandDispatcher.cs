@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace LayIM.AspNetCore.Middleware.Dispatcher
 {
-    public abstract class CommandDispatcher<TResult> : ILayIMDispatcher
+    internal abstract class CommandDispatcher<TResult> : ILayIMDispatcher
     {
         public CommandDispatcher()
         {

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace LayIM.AspNetCore.Middleware.Dispatcher
 {
-    public class QueryCommandDispatcher<TResult> : CommandDispatcher<TResult>
+    internal class QueryCommandDispatcher<TResult> : CommandDispatcher<TResult>
     {
         protected override string AllowMethod => HttpGet;
 

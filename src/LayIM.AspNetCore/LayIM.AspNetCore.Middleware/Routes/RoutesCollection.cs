@@ -9,7 +9,7 @@ namespace LayIM.AspNetCore.Middleware.Routes
     /// <summary>
     /// 路由集合
     /// </summary>
-    public class RoutesCollection
+    internal class RoutesCollection
     {
         private readonly List<Tuple<string, ILayIMDispatcher>> dispatchers = new List<Tuple<string, ILayIMDispatcher>>();
 

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace LayIM.AspNetCore.Middleware.Dispatcher
 {
-    public class BooleanCommandDispatcher : CommandDispatcher<bool>
+    internal class BooleanCommandDispatcher : CommandDispatcher<bool>
     {
 
         private readonly Func<HttpContext, bool> executeFunction;
