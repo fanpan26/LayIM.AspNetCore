@@ -7,29 +7,16 @@ using Newtonsoft.Json;
 
 namespace LayIM.AspNetCore.Middleware.Dispatcher
 {
-    internal abstract class CommandDispatcher<TResult> : ILayIMDispatcher
+    internal abstract class CommandDispatcher<TResult> : MethodFilterDispatcher
     {
-        public CommandDispatcher()
-        {
-        }
-
-        protected static readonly string HttpGet = "GET";
-        protected static readonly string HttpPost = "POST";
-
-        protected abstract string AllowMethod { get; }
 
         protected abstract Func<HttpContext, TResult> ExecuteFunction { get; }
 
-
-        public Task Dispatch(HttpContext context)
+        protected override Task DispatchInternal(HttpContext context)
         {
-            if (!context.Request.Method.Equals(AllowMethod, StringComparison.OrdinalIgnoreCase))
-            {
-                context.Response.StatusCode = StatusCodes.Status405MethodNotAllowed;
-                return Task.CompletedTask;
-            }
             var result = ExecuteFunction(context);
             return context.Response.WriteAsync(JsonUtil.ToJSON(result));
         }
+        
     }
 }

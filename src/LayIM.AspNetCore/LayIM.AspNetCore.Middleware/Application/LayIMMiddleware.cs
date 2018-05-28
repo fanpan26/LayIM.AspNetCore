@@ -26,8 +26,16 @@ namespace LayIM.AspNetCore.Middleware.Application
                 await next?.Invoke(context);
                 return;
             }
+            string path = string.Empty;
+            if (!string.IsNullOrEmpty(options.ApiPrefix))
+            {
+                path = context.Request.Path.Value.Substring(options.ApiPrefix.Length);
+            }
+            else {
+                path = context.Request.Path.Value;
+            }
 
-            var dispatcher = LayIMRoutes.Routes.FindDispatcher(context.Request.Path.Value);
+            var dispatcher = LayIMRoutes.Routes.FindDispatcher(path);
             if (dispatcher != null)
             {
                 await dispatcher.Dispatch(context);

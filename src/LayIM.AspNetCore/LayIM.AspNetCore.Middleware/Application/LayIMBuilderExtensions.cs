@@ -1,6 +1,8 @@
 ﻿using LayIM.AspNetCore.Middleware.Application;
+using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 
@@ -8,11 +10,21 @@ namespace Microsoft.AspNetCore.Builder
 {
     public static class LayIMBuilderExtensions
     {
+        private const string LayIMEmbeddedFileNamespace = "LayIM.AspNetCore.Middleware.Resources";
+
         public static IApplicationBuilder UseLayIM(this IApplicationBuilder app, Action<LayIMOptions> initFunc = null)
         {
             var options = new LayIMOptions();
             initFunc?.Invoke(options);
-            return app.UseMiddleware<LayIMMiddleware>(options);
+            app.UseMiddleware<LayIMMiddleware>(options);
+
+            app.UseFileServer(new FileServerOptions
+            {
+                RequestPath = options.ApiPrefix,
+                FileProvider = new EmbeddedFileProvider(typeof(LayIMBuilderExtensions).GetTypeInfo().Assembly, LayIMEmbeddedFileNamespace),
+            });
+
+            return app;
         }
     }
 }

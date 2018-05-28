@@ -36,6 +36,19 @@ namespace LayIM.AspNetCore.Middleware.Routes
 
             routes.Add(path, new QueryCommandDispatcher<TResult>(command));
         }
+
+        public static void AddFiles(this RoutesCollection routes, string[] files)
+        {
+            foreach (var file in files)
+            {
+                routes.AddFile(file);
+            }
+        }
+
+        public static void AddFile(this RoutesCollection routes, string path)
+        {
+            routes.Add(path, new EmbeddedResourceDispatcher());
+        }
     }
 
 }

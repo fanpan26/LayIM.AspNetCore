@@ -21,7 +21,7 @@ namespace LayIM.AspNetCore.Middleware.Routes
         /// </summary>
         private static void RegisterCommands()
         {
-
+            
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace LayIM.AspNetCore.Middleware.Routes
         /// </summary>
         private static void RegisterResources()
         {
-
+            routes.AddFiles(new string[] { "/js/test.js" });
         }
     }
 }
