@@ -17,12 +17,15 @@ namespace Microsoft.AspNetCore.Builder
             var options = new LayIMOptions();
             initFunc?.Invoke(options);
             app.UseMiddleware<LayIMMiddleware>(options);
+            //设置全局配置
+            LayIMServiceLocator.SetOptions(options);
 
             app.UseFileServer(new FileServerOptions
             {
                 RequestPath = options.ApiPrefix,
                 FileProvider = new EmbeddedFileProvider(typeof(LayIMBuilderExtensions).GetTypeInfo().Assembly, LayIMEmbeddedFileNamespace),
             });
+
             return app;
         }
 
@@ -31,6 +34,9 @@ namespace Microsoft.AspNetCore.Builder
             return UseLayIM(app, options =>
             {
                 options.ApiPrefix = prefix;
+                //options.UIConfig = new LayIMConfig {
+
+                //}
             });
         }
     }

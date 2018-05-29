@@ -7,12 +7,20 @@ namespace LayIM.AspNetCore.Core.Application
     internal static class LayIMServiceLocator
     {
         private static IServiceProvider serviceProvider;
-        public static IServiceProvider ServiceProvider => serviceProvider;
+        private static LayIMOptions layimOptions;
 
-        public static void SetServiceProvider(IServiceProvider serviceProvider)
+        public static LayIMOptions Options => layimOptions;
+
+        public static void SetOptions(LayIMOptions options)
         {
-            LayIMServiceLocator.serviceProvider = serviceProvider;
+            layimOptions = options;
         }
+
+        public static void SetServiceProvider(IServiceProvider provider)
+        {
+            serviceProvider = provider;
+        }
+
 
         public static TService GetService<TService>()
         {

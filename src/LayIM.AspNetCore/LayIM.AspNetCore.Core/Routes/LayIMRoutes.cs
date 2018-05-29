@@ -34,6 +34,12 @@ namespace LayIM.AspNetCore.Core.Routes
         /// </summary>
         private static void RegisterCommands()
         {
+            //获取当前LayIM配置
+            routes.AddQueryCommand("/config", context =>
+            {
+                return LayIMServiceLocator.Options.UIConfig;
+            });
+
             //layim初始化接口
             routes.AddQueryCommand<object>("/init", context =>
             {
