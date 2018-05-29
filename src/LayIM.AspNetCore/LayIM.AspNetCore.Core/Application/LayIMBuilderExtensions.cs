@@ -23,7 +23,6 @@ namespace Microsoft.AspNetCore.Builder
                 RequestPath = options.ApiPrefix,
                 FileProvider = new EmbeddedFileProvider(typeof(LayIMBuilderExtensions).GetTypeInfo().Assembly, LayIMEmbeddedFileNamespace),
             });
-
             return app;
         }
     }

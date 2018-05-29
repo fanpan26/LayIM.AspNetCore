@@ -9,13 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LayIM.AspNetCore.IM", "LayI
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LayIM.AspNetCore.Storage", "LayIM.AspNetCore.Storage", "{1915707E-68A7-4150-B6DC-03D2CE8180C5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayIM.AspNetCore.Core", "LayIM.AspNetCore.Middleware\LayIM.AspNetCore.Core.csproj", "{232F4903-B654-4693-B58F-988C61A0A6B3}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LayIM.AspNetCore.Demo", "LayIM.AspNetCore.Demo", "{A03D3839-6153-439B-B1CE-7DE2A0780CE9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayIM.AspNetCore.WebDemo", "..\LayIM.AspNetCore.Demo\LayIM.AspNetCore.WebDemo\LayIM.AspNetCore.WebDemo.csproj", "{D18635D5-6276-4540-9BB6-828088D84CD5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayIM.AspNetCore.Tests", "..\..\tests\LayIM.AspNetCore.Tests\LayIM.AspNetCore.Tests.csproj", "{DCB8F6FD-F3BA-4EBF-AC59-25829EF24A5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayIM.AspNetCore.RongCloud", "LayIM.AspNetCore.RongCloud\LayIM.AspNetCore.RongCloud.csproj", "{0481517A-45E8-46B3-9DC3-F3C2D3902472}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayIM.AspNetCore.Core", "LayIM.AspNetCore.Core\LayIM.AspNetCore.Core.csproj", "{FF78AA6C-AD30-4187-8AEF-FBD6956381EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,25 +23,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{232F4903-B654-4693-B58F-988C61A0A6B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{232F4903-B654-4693-B58F-988C61A0A6B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{232F4903-B654-4693-B58F-988C61A0A6B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{232F4903-B654-4693-B58F-988C61A0A6B3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D18635D5-6276-4540-9BB6-828088D84CD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D18635D5-6276-4540-9BB6-828088D84CD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D18635D5-6276-4540-9BB6-828088D84CD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D18635D5-6276-4540-9BB6-828088D84CD5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DCB8F6FD-F3BA-4EBF-AC59-25829EF24A5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DCB8F6FD-F3BA-4EBF-AC59-25829EF24A5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DCB8F6FD-F3BA-4EBF-AC59-25829EF24A5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DCB8F6FD-F3BA-4EBF-AC59-25829EF24A5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0481517A-45E8-46B3-9DC3-F3C2D3902472}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0481517A-45E8-46B3-9DC3-F3C2D3902472}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0481517A-45E8-46B3-9DC3-F3C2D3902472}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0481517A-45E8-46B3-9DC3-F3C2D3902472}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF78AA6C-AD30-4187-8AEF-FBD6956381EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF78AA6C-AD30-4187-8AEF-FBD6956381EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF78AA6C-AD30-4187-8AEF-FBD6956381EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF78AA6C-AD30-4187-8AEF-FBD6956381EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{232F4903-B654-4693-B58F-988C61A0A6B3} = {F9CB2A37-2A35-4EC0-BD23-EFC23421B28E}
 		{D18635D5-6276-4540-9BB6-828088D84CD5} = {A03D3839-6153-439B-B1CE-7DE2A0780CE9}
+		{0481517A-45E8-46B3-9DC3-F3C2D3902472} = {1F094733-5A4A-4F40-A8E0-DFFFB7BDA17A}
+		{FF78AA6C-AD30-4187-8AEF-FBD6956381EE} = {F9CB2A37-2A35-4EC0-BD23-EFC23421B28E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A2A1D304-2D34-4AFC-8A05-CD7A467F5F23}

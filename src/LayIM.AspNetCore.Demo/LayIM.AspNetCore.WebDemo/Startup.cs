@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using LayIM.AspNetCore.RongCloud;
 
 namespace LayIM.AspNetCore.WebDemo
 {
@@ -22,6 +23,18 @@ namespace LayIM.AspNetCore.WebDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddRongCloud(config =>
+            {
+                config.AppKey = "";
+                config.AppSecret = "";
+            });
+
+            //services.AddRongCloud(new RongCloudConfig
+            //{
+            //    AppKey = "",
+            //    AppSecret = ""
+            //});
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

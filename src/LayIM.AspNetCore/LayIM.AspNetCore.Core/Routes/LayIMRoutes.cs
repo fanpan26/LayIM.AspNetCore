@@ -31,6 +31,7 @@ namespace LayIM.AspNetCore.Core.Routes
         /// </summary>
         private static void RegisterCommands()
         {
+            //layim初始化接口
             routes.AddQueryCommand<object>("/init", context =>
             {
                 return context.Request.Query["uid"];
