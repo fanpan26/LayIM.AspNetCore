@@ -15,15 +15,15 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="services"></param>
         /// <param name="setConfig"></param>
-        public static void AddRongCloud(this IServiceCollection services, Action<RongCloudConfig> setConfig)
+        public static void AddLayIM(this IServiceCollection services, Action<RongCloudConfig> setConfig)
         {
             var config = new RongCloudConfig();
             setConfig?.Invoke(config);
 
-            AddRongCloud(services, config);
+            AddLayIM(services, config);
         }
 
-        public static void AddRongCloud(this IServiceCollection services, RongCloudConfig config)
+        public static void AddLayIM(this IServiceCollection services, RongCloudConfig config)
         {
             services.AddSingleton(config);
             services.AddSingleton<ILayIMServer, RongCloudServer>();

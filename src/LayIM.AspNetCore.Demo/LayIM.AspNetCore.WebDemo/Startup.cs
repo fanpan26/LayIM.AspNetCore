@@ -23,18 +23,12 @@ namespace LayIM.AspNetCore.WebDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddRongCloud(config =>
+
+            services.AddLayIM(config =>
             {
                 config.AppKey = "123456";
                 config.AppSecret = "654321";
             });
-
-            //services.AddRongCloud(new RongCloudConfig
-            //{
-            //    AppKey = "",
-            //    AppSecret = ""
-            //});
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
