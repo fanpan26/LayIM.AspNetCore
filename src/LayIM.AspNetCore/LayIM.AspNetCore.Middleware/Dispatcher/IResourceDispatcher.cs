@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using LayIM.AspNetCore.Middleware.Application;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,6 @@ namespace LayIM.AspNetCore.Middleware.Dispatcher
 {
     public interface IResourceDispatcher
     {
-        Task Dispatch(HttpContext context, RequestDelegate next);
+        Task Dispatch(HttpContext context,LayIMOptions options,RequestDelegate next);
     }
 }

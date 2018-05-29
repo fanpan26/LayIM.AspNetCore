@@ -21,12 +21,14 @@ namespace LayIM.AspNetCore.Middleware.Application
 
         public async Task Invoke(HttpContext context)
         {
-            if (!IsLayIMRequest(context))
+            if (context.IsLayIMRequest(options) == false)
             {
                 await next?.Invoke(context);
                 return;
             }
-            string path = RemovePrefix(context);
+           
+            string path = context.ToRoutePath(options);
+
             var dispatcher = LayIMRoutes.Routes.FindDispatcher(path);
             if (dispatcher != null)
             {
@@ -34,42 +36,8 @@ namespace LayIM.AspNetCore.Middleware.Application
             }
             else
             {
-                // static resources goto next
-                if (LayIMRoutes.IsStaticResource(path))
-                {
-                    await next?.Invoke(context);
-                }
-                else
-                {
-                    //not found
-                    context.Response.StatusCode = StatusCodes.Status404NotFound;
-                }
+                await LayIMRoutes.ResourceDispatcher.Dispatch(context, options, next);
             }
         }
-
-        private string RemovePrefix(HttpContext context)
-        {
-            string path = string.Empty;
-            if (!string.IsNullOrEmpty(options.ApiPrefix))
-            {
-                path = context.Request.Path.Value.Substring(options.ApiPrefix.Length);
-            }
-            else
-            {
-                path = context.Request.Path.Value;
-            }
-            return path;
-        }
-
-        /// <summary>
-        /// 判断是否是layim的接口
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        private bool IsLayIMRequest(HttpContext context)
-        {
-            return context.Request.Path.Value.StartsWith(options.ApiPrefix, StringComparison.CurrentCultureIgnoreCase);
-        }
-
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LayIM.AspNetCore.Middleware.Dispatcher;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,6 +10,15 @@ namespace LayIM.AspNetCore.Middleware.Routes
     {
         private static readonly RoutesCollection routes = new RoutesCollection();
         public static RoutesCollection Routes => routes;
+
+        private static class ResourceDispatcherCreator
+        {
+            public static readonly IResourceDispatcher dispatcher = new ResourceDispatcher();
+        }
+
+        public static IResourceDispatcher ResourceDispatcher
+            => ResourceDispatcherCreator.dispatcher;
+        
 
         static LayIMRoutes()
         {
@@ -34,9 +45,6 @@ namespace LayIM.AspNetCore.Middleware.Routes
 
         }
 
-        internal static bool IsStaticResource(string path)
-        {
-            return path.StartsWith("/js") || path.StartsWith("/css");
-        }
+       
     }
 }
