@@ -23,8 +23,15 @@ namespace Microsoft.AspNetCore.Builder
                 RequestPath = options.ApiPrefix,
                 FileProvider = new EmbeddedFileProvider(typeof(LayIMBuilderExtensions).GetTypeInfo().Assembly, LayIMEmbeddedFileNamespace),
             });
-
             return app;
+        }
+
+        public static IApplicationBuilder UseLayIM(this IApplicationBuilder app, string prefix)
+        {
+            return UseLayIM(app, options =>
+            {
+                options.ApiPrefix = prefix;
+            });
         }
     }
 }

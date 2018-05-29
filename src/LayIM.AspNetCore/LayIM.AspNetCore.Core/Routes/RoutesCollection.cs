@@ -1,5 +1,6 @@
 ﻿using LayIM.AspNetCore.Core.Dispatcher;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -13,6 +14,7 @@ namespace LayIM.AspNetCore.Core.Routes
     {
         private readonly List<Tuple<string, ILayIMDispatcher>> dispatchers = new List<Tuple<string, ILayIMDispatcher>>();
 
+        private static readonly ConcurrentDictionary<string, ILayIMDispatcher> dispatcherCache = new ConcurrentDictionary<string, ILayIMDispatcher>();
         /// <summary>
         /// 路由注册
         /// </summary>
@@ -34,10 +36,18 @@ namespace LayIM.AspNetCore.Core.Routes
         /// <returns></returns>
         public ILayIMDispatcher FindDispatcher(string path)
         {
+            dispatcherCache.TryGetValue(path, out var dispatch);
+            if (dispatch != null)
+            {
+                return dispatch;
+            }
+
             var match = FindDispatcherMatch(path);
             if (match == null) {
                 return null;
             }
+
+            dispatcherCache.TryAdd(path, match.Item1);
             return match.Item1;
         }
         /// <summary>
@@ -54,16 +64,8 @@ namespace LayIM.AspNetCore.Core.Routes
 
             foreach (var dispatcher in dispatchers)
             {
-                var pattern = dispatcher.Item1;
+                var pattern = $"^{dispatcher.Item1}$" ;
 
-                if (!pattern.StartsWith("^", StringComparison.OrdinalIgnoreCase))
-                {
-                    pattern = $"^{pattern}";
-                }
-                if (!pattern.EndsWith("$", StringComparison.OrdinalIgnoreCase))
-                {
-                    pattern += "$";
-                }
                 var match = Regex.Match(path, pattern, RegexOptions.CultureInvariant | RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
                 if (match.Success)

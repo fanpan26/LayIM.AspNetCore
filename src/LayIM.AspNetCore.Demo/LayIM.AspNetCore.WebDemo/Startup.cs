@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using LayIM.AspNetCore.RongCloud;
 
 namespace LayIM.AspNetCore.WebDemo
 {
@@ -22,6 +23,12 @@ namespace LayIM.AspNetCore.WebDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddLayIM(config =>
+            {
+                config.AppKey = "123456";
+                config.AppSecret = "654321";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,7 +46,7 @@ namespace LayIM.AspNetCore.WebDemo
 
             app.UseStaticFiles();
 
-            app.UseLayIM(x => x.ApiPrefix = "/layim");
+            app.UseLayIM("/layim");
 
             app.UseMvc(routes =>
             {

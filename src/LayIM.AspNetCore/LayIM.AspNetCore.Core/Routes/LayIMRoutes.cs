@@ -1,4 +1,7 @@
-﻿using LayIM.AspNetCore.Core.Dispatcher;
+﻿using LayIM.AspNetCore.Core.Application;
+using LayIM.AspNetCore.Core.Dispatcher;
+using LayIM.AspNetCore.Core.IM;
+using LayIM.AspNetCore.Core.Models;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -31,9 +34,17 @@ namespace LayIM.AspNetCore.Core.Routes
         /// </summary>
         private static void RegisterCommands()
         {
+            //layim初始化接口
             routes.AddQueryCommand<object>("/init", context =>
             {
                 return context.Request.Query["uid"];
+            });
+
+            //获取连接websocket的token
+            routes.AddQueryCommand("/token", context =>
+            {
+                var server = LayIMServiceLocator.GetService<ILayIMServer>();
+                return server.GetToken(context.Request.Query["uid"]);
             });
         }
 

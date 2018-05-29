@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Application\LayIMServiceConfig.cs" />
+    <Compile Remove="Application\LayIMServiceExtensions.cs" />
     <Compile Remove="Dispatcher\EmbeddedResourceDispatcher.cs" />
   </ItemGroup>
 
@@ -24,6 +26,8 @@
 
   <ItemGroup>
     <Folder Include="Resources\css\" />
+    <Folder Include="Storage\" />
+    <Folder Include="Cache\" />
   </ItemGroup>
 
   <ItemGroup>
