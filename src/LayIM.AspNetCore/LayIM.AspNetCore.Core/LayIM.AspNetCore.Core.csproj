@@ -11,11 +11,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Resources\js\test.js" />
+    <None Remove="Resources\js\protobuf.js" />
+    <None Remove="Resources\js\rmlib.js" />
+    <None Remove="Resources\js\socket.js" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\js\test.js" />
+    <EmbeddedResource Include="Resources\js\protobuf.js" />
+    <EmbeddedResource Include="Resources\js\rmlib.js" />
+    <EmbeddedResource Include="Resources\js\socket.js" />
   </ItemGroup>
 
   <ItemGroup>

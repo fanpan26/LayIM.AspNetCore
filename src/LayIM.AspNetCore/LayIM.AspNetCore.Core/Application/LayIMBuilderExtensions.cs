@@ -29,15 +29,9 @@ namespace Microsoft.AspNetCore.Builder
             return app;
         }
 
-        public static IApplicationBuilder UseLayIM(this IApplicationBuilder app, string prefix)
+        public static IApplicationBuilder UseLayIM(this IApplicationBuilder app)
         {
-            return UseLayIM(app, options =>
-            {
-                options.ApiPrefix = prefix;
-                //options.UIConfig = new LayIMConfig {
-
-                //}
-            });
+            return UseLayIM(app, null);
         }
     }
 }

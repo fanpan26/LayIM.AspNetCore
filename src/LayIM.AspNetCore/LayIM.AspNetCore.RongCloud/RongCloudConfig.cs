@@ -1,10 +1,11 @@
-﻿using System;
+﻿using LayIM.AspNetCore.Core.IM;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace LayIM.AspNetCore.RongCloud
 {
-    public class RongCloudConfig
+    public class RongCloudConfig : ILayIMAppInfo
     {
         private string appKey;
         private string appSecret;

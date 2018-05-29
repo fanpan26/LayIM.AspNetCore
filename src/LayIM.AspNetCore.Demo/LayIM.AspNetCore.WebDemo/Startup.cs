@@ -27,8 +27,8 @@ namespace LayIM.AspNetCore.WebDemo
 
             services.AddLayIM(config =>
             {
-                config.AppKey = "123456";
-                config.AppSecret = "654321";
+                config.AppKey = "pvxdm17jpv1or";
+                config.AppSecret = "I8a4qFGzFe8";
             });
         }
 
@@ -49,7 +49,7 @@ namespace LayIM.AspNetCore.WebDemo
 
             app.UseStaticFiles();
 
-            app.UseLayIM("/layim");
+            app.UseLayIM();
 
             app.UseMvc(routes =>
             {

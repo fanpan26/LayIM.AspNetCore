@@ -37,7 +37,17 @@ namespace LayIM.AspNetCore.Core.Application
         /// <returns></returns>
         public static bool IsLayIMRequest(this HttpContext context, LayIMOptions options)
         {
-            return context.Request.Path.Value.StartsWith(options.ApiPrefix, StringComparison.CurrentCultureIgnoreCase);
+            return IsConfigPath(context.Request.Path.Value) || context.Request.Path.Value.StartsWith(options.ApiPrefix, StringComparison.CurrentCultureIgnoreCase);
+        }
+
+        /// <summary>
+        /// 是否是配置路径
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private static bool IsConfigPath(string path)
+        {
+            return "/layim/config".Equals(path, StringComparison.CurrentCultureIgnoreCase);
         }
 
         /// <summary>

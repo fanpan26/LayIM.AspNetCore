@@ -25,7 +25,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static void AddLayIM(this IServiceCollection services, RongCloudConfig config)
         {
-            services.AddSingleton(config);
+            services.AddSingleton<ILayIMAppInfo>(config);
             services.AddSingleton<ILayIMServer, RongCloudServer>();
         }
     }

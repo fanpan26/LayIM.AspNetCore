@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using LayIM.AspNetCore.Core.IM;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -102,7 +103,7 @@ namespace LayIM.AspNetCore.Core.Application
             {
                 if (UseMessageBoxPage)
                 {
-                    return $"{LayIMServiceLocator.Options.ApiPrefix}/html/msgbox.html"; 
+                    return $"{LayIMServiceLocator.Options.ApiPrefix}/html/msgbox.html";
                 }
                 return string.Empty;
             }
@@ -160,5 +161,23 @@ namespace LayIM.AspNetCore.Core.Application
         /// </summary>
         [JsonProperty("custom")]
         public bool UseCustomService { get; set; } = false;
+
+        [JsonProperty("api")]
+        public string ApiPrefix
+        {
+            get
+            {
+                return LayIMServiceLocator.Options.ApiPrefix;
+            }
+        }
+
+        [JsonProperty("initUrl")]
+        public string InitUrl => $"{LayIMServiceLocator.Options.ApiPrefix}/init";
+
+        [JsonProperty("memberUrl")]
+        public string MemberUrl => $"{LayIMServiceLocator.Options.ApiPrefix}/member";
+
+        [JsonProperty("appKey")]
+        public string AppKey => LayIMServiceLocator.GetService<ILayIMAppInfo>()?.AppKey ?? "";
     }
 }
