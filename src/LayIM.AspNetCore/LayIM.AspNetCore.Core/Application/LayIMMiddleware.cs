@@ -18,6 +18,7 @@ namespace LayIM.AspNetCore.Core.Application
             this.next = next;
             this.options = options;
             this.serviceProvider = serviceProvider;
+            LayIMServiceLocator.SetServiceProvider(this.serviceProvider);
         }
 
 

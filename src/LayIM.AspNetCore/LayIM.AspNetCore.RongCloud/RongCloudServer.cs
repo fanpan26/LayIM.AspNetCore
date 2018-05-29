@@ -15,7 +15,12 @@ namespace LayIM.AspNetCore.RongCloud
         }
         public TokenResult GetToken(string userId)
         {
-            throw new NotImplementedException();
+            return new TokenResult
+            {
+                code = 0,
+                msg = "ok",
+                token = "123456"
+            };
         }
 
         public LayIMBaseResult SendGroupMessage(string targetId, object message)

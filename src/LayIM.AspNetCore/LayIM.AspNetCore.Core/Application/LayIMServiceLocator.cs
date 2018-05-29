@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LayIM.AspNetCore.Core.Application
 {
-    public static class LayIMServiceLocator
+    internal static class LayIMServiceLocator
     {
         private static IServiceProvider serviceProvider;
         public static IServiceProvider ServiceProvider => serviceProvider;

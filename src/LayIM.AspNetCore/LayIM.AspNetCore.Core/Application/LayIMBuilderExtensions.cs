@@ -25,6 +25,14 @@ namespace Microsoft.AspNetCore.Builder
             });
             return app;
         }
+
+        public static IApplicationBuilder UseLayIM(this IApplicationBuilder app, string prefix)
+        {
+            return UseLayIM(app, options =>
+            {
+                options.ApiPrefix = prefix;
+            });
+        }
     }
 }
 

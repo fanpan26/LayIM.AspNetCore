@@ -25,8 +25,8 @@ namespace LayIM.AspNetCore.WebDemo
             services.AddMvc();
             services.AddRongCloud(config =>
             {
-                config.AppKey = "";
-                config.AppSecret = "";
+                config.AppKey = "123456";
+                config.AppSecret = "654321";
             });
 
             //services.AddRongCloud(new RongCloudConfig
@@ -52,7 +52,7 @@ namespace LayIM.AspNetCore.WebDemo
 
             app.UseStaticFiles();
 
-            app.UseLayIM(x => x.ApiPrefix = "/layim");
+            app.UseLayIM("/layim");
 
             app.UseMvc(routes =>
             {
