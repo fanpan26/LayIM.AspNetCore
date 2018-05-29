@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\LayIM.AspNetCore\LayIM.AspNetCore.Middleware\LayIM.AspNetCore.Middleware.csproj" />
+    <ProjectReference Include="..\..\src\LayIM.AspNetCore\LayIM.AspNetCore.Middleware\LayIM.AspNetCore.Core.csproj" />
   </ItemGroup>
 
 </Project>

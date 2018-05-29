@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LayIM.AspNetCore.Middleware.Application
+namespace LayIM.AspNetCore.Core.Application
 {
     internal static class HttpContextExtensions
     {

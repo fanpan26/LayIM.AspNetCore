@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using LayIM.AspNetCore.Middleware.Application;
+using LayIM.AspNetCore.Core.Application;
 
-namespace LayIM.AspNetCore.Middleware.Dispatcher
+namespace LayIM.AspNetCore.Core.Dispatcher
 {
     internal class ResourceDispatcher : IResourceDispatcher
     {

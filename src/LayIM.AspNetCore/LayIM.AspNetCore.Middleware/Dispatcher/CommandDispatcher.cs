@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-namespace LayIM.AspNetCore.Middleware.Dispatcher
+namespace LayIM.AspNetCore.Core.Dispatcher
 {
     internal abstract class CommandDispatcher<TResult> : MethodFilterDispatcher
     {

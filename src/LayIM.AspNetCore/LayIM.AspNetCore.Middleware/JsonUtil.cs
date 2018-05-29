@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LayIM.AspNetCore.Middleware
+namespace LayIM.AspNetCore.Core
 {
     internal class JsonUtil
     {

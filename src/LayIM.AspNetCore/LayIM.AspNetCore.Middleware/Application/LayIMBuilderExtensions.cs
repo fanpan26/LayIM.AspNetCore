@@ -1,4 +1,4 @@
-﻿using LayIM.AspNetCore.Middleware.Application;
+﻿using LayIM.AspNetCore.Core.Application;
 using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace Microsoft.AspNetCore.Builder
 {
     public static class LayIMBuilderExtensions
     {
-        private const string LayIMEmbeddedFileNamespace = "LayIM.AspNetCore.Middleware.Resources";
+        private const string LayIMEmbeddedFileNamespace = "LayIM.AspNetCore.Core.Resources";
 
         public static IApplicationBuilder UseLayIM(this IApplicationBuilder app, Action<LayIMOptions> initFunc = null)
         {

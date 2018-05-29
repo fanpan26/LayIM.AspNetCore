@@ -1,11 +1,11 @@
-﻿using LayIM.AspNetCore.Middleware.Routes;
+﻿using LayIM.AspNetCore.Core.Routes;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LayIM.AspNetCore.Middleware.Application
+namespace LayIM.AspNetCore.Core.Application
 {
     public class LayIMMiddleware
     {

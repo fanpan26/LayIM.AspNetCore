@@ -1,10 +1,10 @@
-﻿using LayIM.AspNetCore.Middleware.Dispatcher;
+﻿using LayIM.AspNetCore.Core.Dispatcher;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace LayIM.AspNetCore.Middleware.Routes
+namespace LayIM.AspNetCore.Core.Routes
 {
     /// <summary>
     /// 路由集合

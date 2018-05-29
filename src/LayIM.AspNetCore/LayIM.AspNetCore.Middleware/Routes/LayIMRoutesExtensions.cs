@@ -1,10 +1,10 @@
-﻿using LayIM.AspNetCore.Middleware.Dispatcher;
+﻿using LayIM.AspNetCore.Core.Dispatcher;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LayIM.AspNetCore.Middleware.Routes
+namespace LayIM.AspNetCore.Core.Routes
 {
     internal static class LayIMRoutesExtensions
     {

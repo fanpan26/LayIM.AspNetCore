@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LayIM.AspNetCore.Middleware.Application
+namespace LayIM.AspNetCore.Core.Application
 {
     public class LayIMOptions
     {

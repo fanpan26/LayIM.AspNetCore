@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace LayIM.AspNetCore.Middleware.Dispatcher
+namespace LayIM.AspNetCore.Core.Dispatcher
 {
     public abstract class MethodFilterDispatcher : ILayIMDispatcher
     {
