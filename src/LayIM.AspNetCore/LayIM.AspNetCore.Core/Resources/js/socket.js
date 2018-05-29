@@ -18,23 +18,23 @@
         code && (call['status'] ? call['status'](code) : log(code));
 
     }
-    var layimConfig = null;
+    var conf = null;
     //记录日志
     var log = function (msg) {
-        conf.log && console.log(msg);
+        conf.other.log && console.log(msg);
     }
 
     //这里引用融云，但是socket接口都是一致的
     //事件有很多 open 
     var socket = {
         start: function () {
-            request.config(function (conf) {
-                build.config(conf);
+            request.config(function (c) {
+                build.config(c);
                 socket.init();
             });
         },
         init: function () {
-            layim.config(layimConfig);
+            layim.config(conf);
             im.init();
             this.open();
             this.register();
@@ -66,19 +66,20 @@
     };
 
     var build = {
-        config: function (conf) {
+        config: function (c) {
             var conf0 = {
                 init: {
-                    url: conf.initUrl
+                    url: c.config.url.base
                 }
                 , members: {
-                    url: conf.memberUrl
+                    url: c.config.url.member
                 }
             };
-            $.extend(conf0, conf);
-            layimConfig = conf0;
-
-            return conf0;
+            $.extend(conf0, c.config);
+            conf0.uid = c.uid;
+            conf = conf0;
+            log('初始化完毕，配置信息为：');
+            log(conf);
         }
     };
 
@@ -88,9 +89,9 @@
         connected: false,
         init: function () {
             //初始化融云设置
-            log('初始化融云设置,key=' + layimConfig.appKey);
-            if (conf.key) {
-                lib.RongIMClient.init(conf.key);
+            log('初始化融云设置,key=' + conf.other.appKey);
+            if (conf.other.appKey) {
+                lib.RongIMClient.init(conf.other.appKey);
                 this.initListener();
                 this.defineMessage();
             } else {
@@ -113,27 +114,24 @@
             errorAppkey: { code: 10010, msg: 'appkey 无效' },
             errorService: { code: 10011, msg: '服务器不可用' }
         },
-        getToken: function (uid, callback) {
+        getToken: function (callback) {
             //从本地读取
-            var t = token.get(uid);
+            var t = token.get(conf.uid);
 
             if (t && t.length > 10) {
                 log('从本地获取token');
                 callback(t);
                 return;
             }
-            if (!conf.token.url) {
+            if (!conf.url.token) {
                 layer.msg('请检查config.token.url配置');
                 return;
             }
             //根据网络请求获取token
             log("从网络获取token");
-            $.get(conf.token.url, { id: uid }, function (res) {
+            $.get(conf.url.token,function (res) {
                 if (res.token && callback) {
-                    if (conf.token.uselocal) {
-                        log('将token保存到本地');
-                        token.save(res.token);
-                    }
+                    token.save(res.token);
                     callback(res.token);
                 } else {
                     layer.msg('token获取失败，请检查相应配置或者服务端代码');
@@ -141,8 +139,7 @@
             });
         },
         connectWithToken: function () {
-            im.getToken(conf.uid, function (t) {
-                console.log(t);
+            im.getToken(function (t) {
                 RongIMClient.connect(t, {
                     onSuccess: function (userId) {
                         im.connectSuccess(userId);
@@ -350,7 +347,11 @@
             this.save('reset');
         }
     };
-
+    var out = {
+        info: 'LayIM.AspNetCore',
+        version: '1.0',
+        author: '645857874@qq.com'
+    }
     var request = {
         apply: function (callback) {
             $.get('/layim/apply/count?uid=' + conf.uid, function (res) {
@@ -363,18 +364,12 @@
         },
         config: function (callback) {
             console.info(out);
-            $.get('/layim/config', function (conf) {
+            $.get('/layim/config?uid=123456', function (conf) {
                 callback && callback(conf);
             });
         }
     };
 
     socket.start();
-
-    var out = {
-        info: 'LayIM.AspNetCore',
-        ver: '1.0',
-        author: '645857874@qq.com'
-    }
     exports('socket', out)
 });

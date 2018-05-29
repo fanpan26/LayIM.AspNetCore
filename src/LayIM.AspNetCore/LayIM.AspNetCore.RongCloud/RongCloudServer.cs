@@ -8,10 +8,10 @@ namespace LayIM.AspNetCore.RongCloud
 {
     public class RongCloudServer : ILayIMServer
     {
-        private readonly RongCloudConfig config;
-        public RongCloudServer(RongCloudConfig config)
+        private readonly ILayIMAppInfo appInfo;
+        public RongCloudServer(ILayIMAppInfo appInfo)
         {
-            this.config = config;
+            this.appInfo = appInfo;
         }
         public TokenResult GetToken(string userId)
         {

@@ -5,8 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Application\ILayIMUserIdFactory.cs" />
     <Compile Remove="Application\LayIMServiceConfig.cs" />
-    <Compile Remove="Application\LayIMServiceExtensions.cs" />
+    <Compile Remove="Application\LayIMServiceExtension.cs" />
     <Compile Remove="Dispatcher\EmbeddedResourceDispatcher.cs" />
   </ItemGroup>
 

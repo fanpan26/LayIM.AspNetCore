@@ -156,28 +156,41 @@ namespace LayIM.AspNetCore.Core.Application
         [JsonProperty("initSkin")]
         public string InitSkin { get; set; }
 
+        [JsonProperty("other")]
+        public OtherConfig Other { get; set; } = OtherConfig.DefaultOtherConfig;
+
+
+        [JsonProperty("url")]
+        public UrlConfig Url { get; set; } = UrlConfig.DefaultUrlConfig;
+    }
+
+    public class OtherConfig
+    {
+        internal static readonly OtherConfig DefaultOtherConfig = new OtherConfig();
         /// <summary>
         /// 开启客服模式
         /// </summary>
         [JsonProperty("custom")]
         public bool UseCustomService { get; set; } = false;
 
-        [JsonProperty("api")]
-        public string ApiPrefix
-        {
-            get
-            {
-                return LayIMServiceLocator.Options.ApiPrefix;
-            }
-        }
-
-        [JsonProperty("initUrl")]
-        public string InitUrl => $"{LayIMServiceLocator.Options.ApiPrefix}/init";
-
-        [JsonProperty("memberUrl")]
-        public string MemberUrl => $"{LayIMServiceLocator.Options.ApiPrefix}/member";
-
         [JsonProperty("appKey")]
         public string AppKey => LayIMServiceLocator.GetService<ILayIMAppInfo>()?.AppKey ?? "";
+
+        [JsonProperty("log")]
+        public bool UseConsoleLog { get; set; } = true;
+    }
+
+    public class UrlConfig
+    {
+        internal static readonly UrlConfig DefaultUrlConfig = new UrlConfig();
+
+        [JsonProperty("base")]
+        public string InitUrl => $"{LayIMServiceLocator.Options.ApiPrefix}/init";
+
+        [JsonProperty("member")]
+        public string MemberUrl => $"{LayIMServiceLocator.Options.ApiPrefix}/member";
+
+        [JsonProperty("token")]
+        public string TokenUrl => $"{LayIMServiceLocator.Options.ApiPrefix}/token";
     }
 }
