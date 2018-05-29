@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="WebApiClient.JIT" Version="0.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\LayIM.AspNetCore.Core\LayIM.AspNetCore.Core.csproj" />
   </ItemGroup>
 
