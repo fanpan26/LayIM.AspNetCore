@@ -18,7 +18,13 @@
         code && (call['status'] ? call['status'](code) : log(code));
 
     }
-    var conf = null;
+    //全局配置
+    var conf = {
+        api: {},
+        config: {},
+        other: {},
+        uid: ''
+    };
     //记录日志
     var log = function (msg) {
         conf.other.log && console.log(msg);
@@ -28,13 +34,13 @@
     //事件有很多 open 
     var socket = {
         start: function () {
-            request.config(function (c) {
-                build.config(c);
+            request.config(function (conf) {
+                build.resetConf(conf);
                 socket.init();
             });
         },
         init: function () {
-            layim.config(conf);
+            layim.config(conf.config);
             im.init();
             this.open();
             this.register();
@@ -66,19 +72,20 @@
     };
 
     var build = {
-        config: function (c) {
+        resetConf: function (c) {
             var conf0 = {
                 init: {
-                    url: c.config.url.base
+                    url: c.api.base
                 }
                 , members: {
-                    url: c.config.url.member
+                    url: c.api.member
                 }
             };
             $.extend(conf0, c.config);
-            conf0.uid = c.uid;
-            conf = conf0;
+
+            c.config = conf0;
             log('初始化完毕，配置信息为：');
+            $.extend(conf, c);
             log(conf);
         }
     };

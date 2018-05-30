@@ -5,7 +5,7 @@ using System.Text;
 using WebApiClient;
 using WebApiClient.Attributes;
 
-namespace LayIM.AspNetCore.RongCloud
+namespace LayIM.AspNetCore.IM.RongCloud
 {
     [HttpHost("https://api.cn.ronghub.com/")]
     public interface IRongCloudApi : IHttpApi

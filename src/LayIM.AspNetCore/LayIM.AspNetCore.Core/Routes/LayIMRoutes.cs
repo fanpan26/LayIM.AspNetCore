@@ -2,6 +2,7 @@
 using LayIM.AspNetCore.Core.Dispatcher;
 using LayIM.AspNetCore.Core.IM;
 using LayIM.AspNetCore.Core.Models;
+using LayIM.AspNetCore.Core.Storage;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -22,8 +23,8 @@ namespace LayIM.AspNetCore.Core.Routes
         public static IResourceDispatcher ResourceDispatcher
             => ResourceDispatcherCreator.dispatcher;
 
-        private static Lazy<ILayIMServer> server = new Lazy<ILayIMServer>(()=> LayIMServiceLocator.GetService<ILayIMServer>());
-
+        private static Lazy<ILayIMServer> api = new Lazy<ILayIMServer>(()=> LayIMServiceLocator.GetService<ILayIMServer>());
+        private static Lazy<ILayIMStorage> storage = new Lazy<ILayIMStorage>(() => LayIMServiceLocator.GetService<ILayIMStorage>());
 
         private static string CurrentUserId(HttpContext context)
         {
@@ -47,19 +48,20 @@ namespace LayIM.AspNetCore.Core.Routes
                 new
                 {
                     config = LayIMServiceLocator.Options.UIConfig,
-                    uid = CurrentUserId(context)
+                    uid = CurrentUserId(context),
+                    api = UrlConfig.DefaultUrlConfig,
+                    other = OtherConfig.DefaultOtherConfig
                 }
             );
 
             //layim初始化接口
-            routes.AddQueryCommand<object>("/init", context =>
-            {
-                return context.Request.Query["uid"];
-            });
+            routes.AddQueryCommand("/init", context
+                => storage.Value.GetInitData(CurrentUserId(context))
+            );
 
             //获取连接websocket的token
             routes.AddQueryCommand("/token", context =>
-                 server.Value.GetToken(CurrentUserId(context)));
+                 api.Value.GetToken(CurrentUserId(context)));
         }
 
         /// <summary>

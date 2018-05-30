@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using WebApiClient;
 using WebApiClient.Contexts;
 
-namespace LayIM.AspNetCore.RongCloud
+namespace LayIM.AspNetCore.IM.RongCloud
 {
     public class ApiFilter : IApiActionFilter
     {

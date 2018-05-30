@@ -138,6 +138,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\LayIM.AspNetCore\LayIM.AspNetCore.Core\LayIM.AspNetCore.Core.csproj" />
-    <ProjectReference Include="..\..\LayIM.AspNetCore\LayIM.AspNetCore.RongCloud\LayIM.AspNetCore.RongCloud.csproj" />
+    <ProjectReference Include="..\..\LayIM.AspNetCore\LayIM.AspNetCore.IM.RongCloud\LayIM.AspNetCore.IM.RongCloud.csproj" />
   </ItemGroup>
 </Project>

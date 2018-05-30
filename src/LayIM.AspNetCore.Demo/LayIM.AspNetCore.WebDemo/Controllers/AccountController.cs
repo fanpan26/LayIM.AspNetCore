@@ -9,9 +9,18 @@ namespace LayIM.AspNetCore.WebDemo.Controllers
 {
     public class AccountController : Controller
     {
-        public IActionResult Index()
+        /// <summary>
+        /// 模拟登录
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        public IActionResult Index(string uid)
         {
-            HttpContext.Session.SetString("layim_uid", "123456");
+            if (string.IsNullOrEmpty(uid))
+            {
+                return Ok(new { msg = "请输入参数:uid" });
+            }
+            HttpContext.Session.SetString("layim_uid", uid);
             return Redirect("/");
         }
     }

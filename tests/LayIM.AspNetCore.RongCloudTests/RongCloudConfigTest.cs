@@ -1,4 +1,4 @@
-using LayIM.AspNetCore.RongCloud;
+using LayIM.AspNetCore.IM.RongCloud;
 using System;
 using Xunit;
 

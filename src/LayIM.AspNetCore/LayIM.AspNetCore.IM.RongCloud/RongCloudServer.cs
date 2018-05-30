@@ -5,7 +5,7 @@ using System.Text;
 using LayIM.AspNetCore.Core.Models;
 using WebApiClient;
 
-namespace LayIM.AspNetCore.RongCloud
+namespace LayIM.AspNetCore.IM.RongCloud
 {
     public class RongCloudServer : ILayIMServer
     {

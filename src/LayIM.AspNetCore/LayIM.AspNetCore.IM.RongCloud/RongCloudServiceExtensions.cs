@@ -1,6 +1,6 @@
 ﻿using LayIM.AspNetCore.Core.Application;
 using LayIM.AspNetCore.Core.IM;
-using LayIM.AspNetCore.RongCloud;
+using LayIM.AspNetCore.IM.RongCloud;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

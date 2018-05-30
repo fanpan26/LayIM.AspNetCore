@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LayIM.AspNetCore.RongCloud
+namespace LayIM.AspNetCore.IM.RongCloud
 {
     public class RongCloudConfig : ILayIMAppInfo
     {
