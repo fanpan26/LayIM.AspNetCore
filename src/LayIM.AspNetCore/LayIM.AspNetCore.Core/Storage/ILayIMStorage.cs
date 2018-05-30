@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LayIM.AspNetCore.Core.Storage
 {
@@ -12,6 +13,6 @@ namespace LayIM.AspNetCore.Core.Storage
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        LayIMBaseResult<LayIMInitModel> GetInitData(string userId);
+       Task<LayIMInitModel> GetInitData(string userId);
     }
 }

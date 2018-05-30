@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LayIM.AspNetCore.Core\LayIM.AspNetCore.Core.csproj" />
+    <ProjectReference Include="..\LayIM.AspNetCore.Storage.Infra.Dapper\LayIM.AspNetCore.Storage.Infra.Dapper.csproj" />
+  </ItemGroup>
+
+</Project>

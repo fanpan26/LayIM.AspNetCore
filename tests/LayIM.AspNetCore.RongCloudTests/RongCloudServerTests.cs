@@ -21,7 +21,7 @@ namespace LayIM.AspNetCore.RongCloudTests
                             AppSecret = "I8a4qFGzFe8"
                         }));
 
-            var tokenResult = server.GetToken("123456");
+            var tokenResult = server.GetToken("123456").Result;
             Assert.NotEqual(tokenResult, null);
             Assert.Equal(tokenResult.code, 200);
         }

@@ -21,6 +21,11 @@ namespace LayIM.AspNetCore.Core.Models
         {
 
         }
+
+        public LayIMCommonResult(object data) : this(0, null)
+        {
+            this.data = data;
+        }
         public LayIMCommonResult(int code, string msg)
         {
             this.code = code;
@@ -31,6 +36,11 @@ namespace LayIM.AspNetCore.Core.Models
         public static LayIMCommonResult Error(string msg)
         {
             return new LayIMCommonResult(-1, msg);
+        }
+
+        public static LayIMCommonResult Result(object data)
+        {
+            return new LayIMCommonResult(data);
         }
     }
 }

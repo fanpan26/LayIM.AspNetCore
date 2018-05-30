@@ -10,20 +10,20 @@ namespace LayIM.AspNetCore.Core.Dispatcher
     internal abstract class CommandDispatcher<TResult> : MethodFilterDispatcher
     {
 
-        protected abstract Func<HttpContext, TResult> ExecuteFunction { get; }
+        protected abstract Func<HttpContext, Task<TResult>> ExecuteFunction { get; }
 
         protected virtual void SetContentType(HttpContext context)
         {
             context.Response.ContentType = "application/json;charset=utf-8";
         }
 
-        protected override Task DispatchInternal(HttpContext context)
+        protected override async Task DispatchInternal(HttpContext context)
         {
-            var result = ExecuteFunction(context);
-            
+            var result = await ExecuteFunction(context);
+
             SetContentType(context);
 
-            return context.Response.WriteAsync(JsonUtil.ToJSON(result));
+            await context.Response.WriteAsync(JsonUtil.ToJSON(result));
         }
         
     }

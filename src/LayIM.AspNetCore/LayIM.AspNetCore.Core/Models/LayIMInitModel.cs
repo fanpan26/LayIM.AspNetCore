@@ -8,7 +8,7 @@ namespace LayIM.AspNetCore.Core.Models
     public class LayIMInitModel
     {
         public MineUserModel mine { get; set; }
-        public IList<FriendGroupModel> friend { get; set; }
-        public IList<BigGroupModel> group { get; set; }
+        public IEnumerable<FriendGroupModel> friend { get; set; }
+        public IEnumerable<BigGroupModel> group { get; set; }
     }
 }

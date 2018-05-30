@@ -6,7 +6,7 @@ namespace LayIM.AspNetCore.Core.Models.Base
 {
     public class BaseModel
     {
-        public string id { get; set; }
+        public long id { get; set; }
     }
     public class BaseAvatarModel : BaseModel
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LayIM.AspNetCore.Storage.Dapper
+namespace LayIM.AspNetCore.Storage.MySql
 {
     public class Class1
     {

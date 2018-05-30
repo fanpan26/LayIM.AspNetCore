@@ -17,22 +17,20 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="services"></param>
         /// <param name="setConfig"></param>
-        public static void AddRongCloud(this IServiceCollection services, Action<RongCloudConfig> setConfig, ILayIMUserFactory factory = null)
+        public static IServiceCollection AddRongCloud(this IServiceCollection services, Action<RongCloudConfig> setConfig)
         {
             var config = new RongCloudConfig();
             setConfig?.Invoke(config);
-            services.AddRongCloud(config);
-            if (factory != null)
-            {
-                services.AddSingleton(factory);
-            }
+            return services.AddRongCloud(config);
+
         }
 
-        public static void AddRongCloud(this IServiceCollection services, RongCloudConfig config)
+        public static IServiceCollection AddRongCloud(this IServiceCollection services, RongCloudConfig config)
         {
             services.AddSingleton<ILayIMAppInfo>(config);
             services.AddSingleton<ILayIMServer, RongCloudServer>();
             services.AddSingleton<IApiActionFilter, ApiFilter>();
+            return services;
         }
     }
 }

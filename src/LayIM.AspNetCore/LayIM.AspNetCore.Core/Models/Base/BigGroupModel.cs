@@ -13,6 +13,6 @@ namespace LayIM.AspNetCore.Core.Models.Base
     {
         public string groupname { get; set; }
         public int online { get; set; }
-        public IList<UserModel> list { get; set; }
+        public IEnumerable<UserModel> list { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LayIM.AspNetCore.Core.Routes
 {
@@ -45,23 +46,27 @@ namespace LayIM.AspNetCore.Core.Routes
         {
             //获取当前LayIM配置
             routes.AddQueryCommand("/config", context =>
-                new
+            {
+                return Task.FromResult(new
                 {
                     config = LayIMServiceLocator.Options.UIConfig,
                     uid = CurrentUserId(context),
                     api = UrlConfig.DefaultUrlConfig,
                     other = OtherConfig.DefaultOtherConfig
+                });
+            });
+
+            //layim初始化接口
+            routes.AddQueryCommand("/init", async context =>
+                {
+                    var res = await storage.Value.GetInitData(CurrentUserId(context));
+                    return LayIMCommonResult.Result(res);
                 }
             );
 
-            //layim初始化接口
-            routes.AddQueryCommand("/init", context
-                => storage.Value.GetInitData(CurrentUserId(context))
-            );
-
             //获取连接websocket的token
-            routes.AddQueryCommand("/token", context =>
-                 api.Value.GetToken(CurrentUserId(context)));
+            routes.AddQueryCommand("/token", async context =>
+                await api.Value.GetToken(CurrentUserId(context)));
         }
 
         /// <summary>

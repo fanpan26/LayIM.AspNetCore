@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using LayIM.AspNetCore.Core.Models;
 using WebApiClient;
+using System.Threading.Tasks;
 
 namespace LayIM.AspNetCore.IM.RongCloud
 {
@@ -26,9 +27,9 @@ namespace LayIM.AspNetCore.IM.RongCloud
             client = HttpApiClient.Create<IRongCloudApi>(config);
         }
 
-        public TokenResult GetToken(string userId)
+        public async Task<TokenResult> GetToken(string userId)
         {
-            return client.GetToken(userId).GetAwaiter().GetResult();
+            return await client.GetToken(userId);
         }
 
         public LayIMBaseResult SendGroupMessage(string targetId, object message)

@@ -12,6 +12,6 @@ namespace LayIM.AspNetCore.Core.Models.Base
 
     public class MineUserModel : UserModel
     {
-        public string status { get; set; }
+        public string status { get; set; } = "online";
     }
 }

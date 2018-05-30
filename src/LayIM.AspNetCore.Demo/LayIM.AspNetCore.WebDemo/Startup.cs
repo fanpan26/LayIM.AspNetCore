@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using LayIM.AspNetCore.IM.RongCloud;
-using LayIM.AspNetCore.WebDemo.Middleware;
 using LayIM.AspNetCore.WebDemo.User;
 
 namespace LayIM.AspNetCore.WebDemo
@@ -28,10 +26,11 @@ namespace LayIM.AspNetCore.WebDemo
 
             services.AddLayIM()
                 .AddRongCloud(config =>
-            {
-                config.AppKey = "pvxdm17jpv1or";
-                config.AppSecret = "I8a4qFGzFe8";
-            });
+                    {
+                        config.AppKey = "pvxdm17jpv1or";
+                        config.AppSecret = "I8a4qFGzFe8";
+                    })
+                .AddSqlServer("server=192.168.1.18;user id=sa;password=123123;database=LayIM;Min Pool Size=16;Connect Timeout=500;");
 
             services.AddSession();
         }
@@ -54,6 +53,7 @@ namespace LayIM.AspNetCore.WebDemo
             app.UseStaticFiles();
             //客户端模拟使用session保存当前用户ID
             app.UseSession();
+
             app.UseLayIM(options => {
                 options.UserFactory = new MyUserFactory();
             });

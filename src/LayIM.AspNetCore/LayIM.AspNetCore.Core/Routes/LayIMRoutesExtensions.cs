@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LayIM.AspNetCore.Core.Routes
 {
@@ -14,7 +15,7 @@ namespace LayIM.AspNetCore.Core.Routes
         /// <param name="routes">当前路由集合</param>
         /// <param name="path">路径</param>
         /// <param name="command">执行命令</param>
-        public static void AddBooleanCommand(this RoutesCollection routes, string path, Func<HttpContext, bool> command)
+        public static void AddBooleanCommand(this RoutesCollection routes, string path, Func<HttpContext, Task<bool>> command)
         {
             Error.ThrowIfNull(path, nameof(path));
             Error.ThrowIfNull(command, nameof(command));
@@ -29,7 +30,7 @@ namespace LayIM.AspNetCore.Core.Routes
         /// <param name="routes">当前路有集合</param>
         /// <param name="path">路径</param>
         /// <param name="command">执行命令</param>
-        public static void AddQueryCommand<TResult>(this RoutesCollection routes, string path, Func<HttpContext, TResult> command)
+        public static void AddQueryCommand<TResult>(this RoutesCollection routes, string path, Func<HttpContext, Task<TResult>> command)
         {
             Error.ThrowIfNull(path, nameof(path));
             Error.ThrowIfNull(command, nameof(command));
