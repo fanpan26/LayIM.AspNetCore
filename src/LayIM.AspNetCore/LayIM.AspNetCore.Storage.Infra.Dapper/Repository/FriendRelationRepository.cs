@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LayIM.AspNetCore.Storage.Infra.Dapper.Repository
@@ -15,6 +16,7 @@ namespace LayIM.AspNetCore.Storage.Infra.Dapper.Repository
 
         public Task<IEnumerable<FriendRelationShip>> GetFriendRelations(string userId)
         {
+            Thread.Sleep(1000);
             var sql = @"select uid1 as userId,friend_group_1 as groupId,uid2 as friendId from layim_friend_relation where uid1=@uid and friend_group_1 >0
   union all select uid2 as userId,friend_group_2 as groupId,uid1 as friendId from layim_friend_relation where uid2 = @uid and friend_group_2 > 0";
             return QueryAsync<FriendRelationShip>(sql, new { uid = userId });

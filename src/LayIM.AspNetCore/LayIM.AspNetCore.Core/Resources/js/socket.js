@@ -56,10 +56,10 @@
             //监听ready事件
             layim.on('ready', function () {
                 log('初始化群组信息...');
-                userGroups = conf.layim.cache().group || [];
-                request.apply(function (c) {
-                    conf.layim.msgbox(c);
-                })
+                userGroups = layim.cache().group || [];
+               // request.apply(function (c) {
+                //    layim.msgbox(c);
+               // })
 
             });
         },
@@ -217,9 +217,9 @@
 
         },
         saveMsg: function (uid, toid, type, msg) {
-            $.post('/layim/chat', { "uid": uid, "toid": toid, "type": type, "msg": msg }, function (res) {
-
-            })
+            //$.post('/layim/chat', { "uid": uid, "toid": toid, "type": type, "msg": msg }, function (res) {
+            //
+            //})
         },
         sendMsg: function (data) {
             //根据layim提供的data数据，进行解析
@@ -313,7 +313,7 @@
                     switch (message.messageType) {
                         case RongIMClient.MessageType.LAYIM_TEXT_MESSAGE:
                             //message.content.timestamp = message.sentTime;
-                            conf.layim.getMessage(message.content);
+                            layim.getMessage(message.content);
                             break;
 
                     }

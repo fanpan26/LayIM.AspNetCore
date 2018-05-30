@@ -62,18 +62,18 @@ namespace LayIM.AspNetCore.Storage.Infra.Dapper.Repository
             throw new NotSupportedException("invalid DbType");
         }
 
-        private async Task<TResult> Execute<TResult>(Func<IDbConnection, Task<TResult>> func)
+        private Task<TResult> Execute<TResult>(Func<IDbConnection, Task<TResult>> func)
         {
             using (IDbConnection connection = GetConnection())
             {
                 try
                 {
                     connection.Open();
-                    return await func(connection);
+                    return  func(connection);
                 }
                 finally
                 {
-                    connection.Close();
+                    //connection.Close();
                 }
             }
         }
