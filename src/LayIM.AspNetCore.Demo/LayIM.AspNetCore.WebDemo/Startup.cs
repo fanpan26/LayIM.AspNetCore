@@ -49,7 +49,7 @@ namespace LayIM.AspNetCore.WebDemo
 
             app.UseStaticFiles();
 
-            app.UseLayIM("/layim");
+            app.UseLayIM("/mylayim");
 
             app.UseMvc(routes =>
             {
