@@ -35,5 +35,7 @@ namespace LayIM.AspNetCore.Core.Application
         /// 对应界面配置
         /// </summary>
         public LayIMConfig UIConfig { get; set; } = defaultConfig;
+
+        public ILayIMUserFactory UserFactory { get; set; } = new DefaultQueryUserFactory();
     }
 }

@@ -7,9 +7,10 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class LayIMServiceExtensions
     {
-        public static void AddLayIM(IServiceCollection services, ILayIMUserFactory factory)
+        public static IServiceCollection AddLayIM(this IServiceCollection services)
         {
-            services.AddSingleton(factory);
+            services.AddSingleton<ILayIMUserFactory,DefaultQueryUserFactory>();
+            return services;
         }
     }
 }

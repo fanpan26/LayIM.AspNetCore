@@ -1,4 +1,5 @@
-﻿using LayIM.AspNetCore.Core.Routes;
+﻿using LayIM.AspNetCore.Core.Dispatcher;
+using LayIM.AspNetCore.Core.Routes;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace LayIM.AspNetCore.Core.Application
         private readonly LayIMOptions options;
         private readonly IServiceProvider serviceProvider;
 
-        public LayIMMiddleware(RequestDelegate next, LayIMOptions options,IServiceProvider serviceProvider)
+        public LayIMMiddleware(RequestDelegate next, LayIMOptions options, IServiceProvider serviceProvider)
         {
             this.next = next;
             this.options = options;
@@ -29,13 +30,14 @@ namespace LayIM.AspNetCore.Core.Application
                 await next?.Invoke(context);
                 return;
             }
-           
+
             string path = context.ToRoutePath(options);
 
             var dispatcher = LayIMRoutes.Routes.FindDispatcher(path);
+
             if (dispatcher != null)
             {
-                await dispatcher.Dispatch(context);
+                await DispatcherWrapper.Wrapper.Dispatch(dispatcher, context);
             }
             else
             {

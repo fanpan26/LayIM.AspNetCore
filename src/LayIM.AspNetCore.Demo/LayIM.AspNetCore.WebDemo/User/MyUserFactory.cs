@@ -4,14 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using System.Text;
 
 namespace LayIM.AspNetCore.WebDemo.User
 {
     public class MyUserFactory : ILayIMUserFactory
     {
+        /// <summary>
+        /// 业务方自定义用户ID
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public string GetUserId(HttpContext context)
         {
-            return context.Request.Query["uid"];
+            context.Session.TryGetValue("layim_uid", out var userId);
+            return userId == null ? null : Encoding.Default.GetString(userId);
         }
     }
 }

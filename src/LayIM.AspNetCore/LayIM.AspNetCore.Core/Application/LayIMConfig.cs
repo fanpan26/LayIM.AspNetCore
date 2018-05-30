@@ -155,16 +155,9 @@ namespace LayIM.AspNetCore.Core.Application
         /// </summary>
         [JsonProperty("initSkin")]
         public string InitSkin { get; set; }
-
-        [JsonProperty("other")]
-        public OtherConfig Other { get; set; } = OtherConfig.DefaultOtherConfig;
-
-
-        [JsonProperty("url")]
-        public UrlConfig Url { get; set; } = UrlConfig.DefaultUrlConfig;
     }
 
-    public class OtherConfig
+    internal class OtherConfig
     {
         internal static readonly OtherConfig DefaultOtherConfig = new OtherConfig();
         /// <summary>
@@ -180,7 +173,7 @@ namespace LayIM.AspNetCore.Core.Application
         public bool UseConsoleLog { get; set; } = true;
     }
 
-    public class UrlConfig
+    internal class UrlConfig
     {
         internal static readonly UrlConfig DefaultUrlConfig = new UrlConfig();
 

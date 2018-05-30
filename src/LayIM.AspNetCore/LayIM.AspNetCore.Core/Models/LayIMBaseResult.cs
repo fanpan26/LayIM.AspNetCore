@@ -17,6 +17,20 @@ namespace LayIM.AspNetCore.Core.Models
 
     public class LayIMCommonResult : LayIMBaseResult<object>
     {
+        public LayIMCommonResult() : this(0, null)
+        {
 
+        }
+        public LayIMCommonResult(int code, string msg)
+        {
+            this.code = code;
+            this.msg = msg;
+        }
+
+        
+        public static LayIMCommonResult Error(string msg)
+        {
+            return new LayIMCommonResult(-1, msg);
+        }
     }
 }

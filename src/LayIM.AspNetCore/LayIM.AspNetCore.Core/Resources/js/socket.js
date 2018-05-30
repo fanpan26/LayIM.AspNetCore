@@ -124,7 +124,7 @@
                 return;
             }
             if (!conf.url.token) {
-                layer.msg('请检查config.token.url配置');
+                layer.msg('请检查config.url.token配置');
                 return;
             }
             //根据网络请求获取token
@@ -364,7 +364,7 @@
         },
         config: function (callback) {
             console.info(out);
-            $.get('/layim/config?uid=123456', function (conf) {
+            $.get('/layim/config', function (conf) {
                 callback && callback(conf);
             });
         }

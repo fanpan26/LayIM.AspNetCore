@@ -3,24 +3,32 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using LayIM.AspNetCore.Core.Models;
+using WebApiClient;
 
 namespace LayIM.AspNetCore.RongCloud
 {
     public class RongCloudServer : ILayIMServer
     {
-        private readonly ILayIMAppInfo appInfo;
-        public RongCloudServer(ILayIMAppInfo appInfo)
+
+        private IRongCloudApi client;
+        private readonly IApiActionFilter filter;
+
+        public RongCloudServer(IApiActionFilter filter)
         {
-            this.appInfo = appInfo;
+            this.filter = filter;
+            InitClient();
         }
+
+        private void InitClient()
+        {
+            var config = new HttpApiConfig();
+            config.GlobalFilters.Add(filter);
+            client = HttpApiClient.Create<IRongCloudApi>(config);
+        }
+
         public TokenResult GetToken(string userId)
         {
-            return new TokenResult
-            {
-                code = 0,
-                msg = "ok",
-                token = "123456"
-            };
+            return client.GetToken(userId).GetAwaiter().GetResult();
         }
 
         public LayIMBaseResult SendGroupMessage(string targetId, object message)
