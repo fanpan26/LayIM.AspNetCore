@@ -49,9 +49,7 @@ namespace LayIM.AspNetCore.WebDemo
 
             app.UseStaticFiles();
 
-            app.UseLayIM(options => {
-                options.ApiPrefix = "/mylayim";
-            });
+            app.UseLayIM();
 
             app.UseMvc(routes =>
             {
