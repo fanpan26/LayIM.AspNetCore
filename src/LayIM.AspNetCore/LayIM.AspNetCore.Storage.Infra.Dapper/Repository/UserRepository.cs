@@ -22,7 +22,6 @@ namespace LayIM.AspNetCore.Storage.Infra.Dapper.Repository
         /// <returns></returns>
         public Task<MineUserModel> GetUserById(string userId)
         {
-            Thread.Sleep(1000);
             var sql = "SELECT [id],[name] as username,[avatar],[sign] FROM layim_user where id=@uid";
             return QuerySingleAsync<MineUserModel>(sql, new { uid = userId });
         }

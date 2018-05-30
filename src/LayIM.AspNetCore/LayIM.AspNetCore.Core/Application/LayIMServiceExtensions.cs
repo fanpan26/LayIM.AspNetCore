@@ -9,6 +9,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddLayIM(this IServiceCollection services)
         {
+            services.AddMemoryCache();
             services.AddSingleton<ILayIMUserFactory,DefaultQueryUserFactory>();
             return services;
         }

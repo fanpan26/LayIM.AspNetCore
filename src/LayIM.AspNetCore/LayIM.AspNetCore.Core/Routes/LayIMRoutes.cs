@@ -4,6 +4,7 @@ using LayIM.AspNetCore.Core.IM;
 using LayIM.AspNetCore.Core.Models;
 using LayIM.AspNetCore.Core.Storage;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,17 +16,24 @@ namespace LayIM.AspNetCore.Core.Routes
     {
         private static readonly RoutesCollection routes = new RoutesCollection();
         public static RoutesCollection Routes => routes;
+        public static IResourceDispatcher ResourceDispatcher
+            => ResourceDispatcherCreator.dispatcher;
 
         private static class ResourceDispatcherCreator
         {
             public static readonly IResourceDispatcher dispatcher = new ResourceDispatcher();
         }
 
-        public static IResourceDispatcher ResourceDispatcher
-            => ResourceDispatcherCreator.dispatcher;
+        
 
-        private static Lazy<ILayIMServer> api = new Lazy<ILayIMServer>(()=> LayIMServiceLocator.GetService<ILayIMServer>());
-        private static Lazy<ILayIMStorage> storage = new Lazy<ILayIMStorage>(() => LayIMServiceLocator.GetService<ILayIMStorage>());
+        private static Lazy<ILayIMServer> api = GetLazyService<ILayIMServer>();
+        private static Lazy<ILayIMStorage> storage = GetLazyService<ILayIMStorage>();
+        private static Lazy<IMemoryCache> cache = GetLazyService<IMemoryCache>();
+
+        private static Lazy<TService> GetLazyService<TService>()
+        {
+            return new Lazy<TService>(() => LayIMServiceLocator.GetService<TService>());
+        }
 
         private static string CurrentUserId(HttpContext context)
         {
@@ -59,10 +67,17 @@ namespace LayIM.AspNetCore.Core.Routes
             //layim初始化接口
             routes.AddQueryCommand("/init", async context =>
                 {
-                    var res = await storage.Value.GetInitData(CurrentUserId(context));
-                    return LayIMCommonResult.Result(res);
-                }
-            );
+                    var userId = CurrentUserId(context);
+                    var cacheKey = $"layim_cache_{userId}";
+                    cache.Value.TryGetValue<LayIMCommonResult>(cacheKey, out var cacheInitData);
+                    if (cacheInitData == null)
+                    {
+                        var res = await storage.Value.GetInitData(CurrentUserId(context));
+                        cacheInitData = LayIMCommonResult.Result(res);
+                        cache.Value.Set(cacheKey, cacheInitData);
+                    }
+                    return cacheInitData;
+                });
 
             //获取连接websocket的token
             routes.AddQueryCommand("/token", async context =>
@@ -76,7 +91,5 @@ namespace LayIM.AspNetCore.Core.Routes
         {
 
         }
-
-       
     }
 }
