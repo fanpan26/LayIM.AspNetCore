@@ -136,7 +136,7 @@
             }
             //根据网络请求获取token
             log("从网络获取token");
-            $.get(api.url.token,function (res) {
+            $.get(conf.api.token,function (res) {
                 if (res.token && callback) {
                     token.save(res.token);
                     callback(res.token);
