@@ -13,7 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
     public static class StorageSqlServerExtensions
     {
         /// <summary>
-        /// 使用融云通信
+        /// 使用SqlServer
         /// </summary>
         /// <param name="services"></param>
         /// <param name="setConfig"></param>

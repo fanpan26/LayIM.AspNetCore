@@ -56,6 +56,8 @@ namespace LayIM.AspNetCore.WebDemo
 
             app.UseLayIM(options => {
                 options.UserFactory = new MyUserFactory();
+                options.UIConfig.UseUploadFile = false;
+                options.UIConfig.UseUploadImage = false;
             });
 
             app.UseMvc(routes =>
