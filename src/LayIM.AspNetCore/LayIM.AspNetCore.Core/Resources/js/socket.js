@@ -130,13 +130,13 @@
                 callback(t);
                 return;
             }
-            if (!conf.url.token) {
-                layer.msg('请检查config.url.token配置');
+            if (!conf.api.token) {
+                layer.msg('请检查config.api.token配置');
                 return;
             }
             //根据网络请求获取token
             log("从网络获取token");
-            $.get(conf.url.token,function (res) {
+            $.get(api.url.token,function (res) {
                 if (res.token && callback) {
                     token.save(res.token);
                     callback(res.token);
