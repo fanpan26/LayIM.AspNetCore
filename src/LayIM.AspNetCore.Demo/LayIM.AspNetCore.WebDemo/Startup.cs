@@ -57,6 +57,8 @@ namespace LayIM.AspNetCore.WebDemo
             app.UseLayIM(options => {
                 options.ApiPrefix = "/myapi";
                 options.UserFactory = new MyUserFactory();
+                //options.OtherConfig.UseConsoleLog = false;
+                options.OtherConfig.SaveMsgAfterSend = false;
             });
 
             app.UseMvc(routes =>

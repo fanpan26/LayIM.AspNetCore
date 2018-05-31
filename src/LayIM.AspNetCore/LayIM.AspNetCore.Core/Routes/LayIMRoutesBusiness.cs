@@ -25,23 +25,11 @@ namespace LayIM.AspNetCore.Core.Routes
 
         private static Lazy<ILayIMServer> api = GetLazyService<ILayIMServer>();
         private static Lazy<ILayIMStorage> storage = GetLazyService<ILayIMStorage>();
-        private static Lazy<IMemoryCache> cache = GetLazyService<IMemoryCache>();
         private static Lazy<ILayIMFileUploader> uploader = GetLazyService<ILayIMFileUploader>();
 
         private static Lazy<TService> GetLazyService<TService>()
         {
             return new Lazy<TService>(() => LayIMServiceLocator.GetService<TService>());
-        }
-
-        /// <summary>
-        /// 获取用户ID
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        private static string CurrentUserId(HttpContext context)
-        {
-            context.Items.TryGetValue(LayIMGlobal.USER_KEY, out var userId);
-            return userId?.ToString();
         }
 
         /// <summary>
@@ -52,7 +40,7 @@ namespace LayIM.AspNetCore.Core.Routes
         /// <returns></returns>
         private static async Task<LayIMCommonResult> GetUploadResult(HttpContext context, bool isImg)
         {
-            bool userUseApi = isImg ? LayIMServiceLocator.Options.UIConfig.UseUploadImage : LayIMServiceLocator.Options.UIConfig.UseUploadFile
+            bool userUseApi = isImg ? LayIMServiceLocator.Options.UIConfig.UseUploadImage : LayIMServiceLocator.Options.UIConfig.UseUploadFile;
             if (userUseApi == false)
             {
                 return LayIMCommonResult.Error("未开启上传接口，非法的请求");
@@ -82,7 +70,7 @@ namespace LayIM.AspNetCore.Core.Routes
         /// <returns></returns>
         private static async Task<LayIMCommonResult> GetInitData(HttpContext context)
         {
-            var res = await storage.Value.GetInitData(CurrentUserId(context));
+            var res = await storage.Value.GetInitData(context.UserId());
             return LayIMCommonResult.Result(res);
         }
 
@@ -93,13 +81,13 @@ namespace LayIM.AspNetCore.Core.Routes
         /// <returns></returns>
         private static  Task<int> SaveChatMessage(HttpContext context)
         {
-            if (LayIMServiceLocator.Options.UIConfig.SaveMsgAfterSend == false) {
+            if (LayIMServiceLocator.Options.OtherConfig.SaveMsgAfterSend == false) {
                 return Task.FromResult(0);
             }
 
             return storage.Value.SaveMessage(new Models.Base.LayIMMessageModel
             {
-                From = CurrentUserId(context),
+                From = context.UserId(),
                 To = context.Request.Form["to"],
                 Type = context.Request.Form["type"],
                 AddTime = DateTime.Now.ToTimestamp(),

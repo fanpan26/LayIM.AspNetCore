@@ -75,5 +75,11 @@ namespace LayIM.AspNetCore.Core.Application
             long.TryParse(value, out var result);
             return result;
         }
+
+        public static string UserId(this HttpContext context)
+        {
+            context.Items.TryGetValue(LayIMGlobal.USER_KEY, out var userId);
+            return userId?.ToString();
+        }
     }
 }

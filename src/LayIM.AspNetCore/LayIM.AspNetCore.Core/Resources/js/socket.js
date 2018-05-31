@@ -224,7 +224,7 @@
                     log('保存消息结果：' + res);
                 });
             } else {
-                log('未开启保存消息，消息将不被保存，若要开启，请将')
+                log('未开启保存消息，消息将不被保存.若要开启，请将[options.OtherConfig.SaveMsgAfterSend]设置为true')
             }
         },
         sendMsg: function (data) {
@@ -232,7 +232,7 @@
             var mine = data.mine;
             var to = data.to;
             var id = conf.uid || mine.id;//当前用户id
-            var group = to.type == 'group';
+            var group = to.type === 'group';
             if (group) {
                 id = to.id;//如果是group类型，id就是当前groupid，切记不可写成 mine.id否则会出现一些问题。
             }
@@ -369,7 +369,7 @@
     var request = {
         apply: function (callback) {
             $.get('/layim/apply/count?uid=' + conf.uid, function (res) {
-                if (res.code == 0) {
+                if (res.code === 0) {
                     res.data.apply && callback && callback(res.data.apply)
                 } else {
                     layer.msg('获取申请信息失败');
