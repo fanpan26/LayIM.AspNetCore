@@ -15,12 +15,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="project.json" />
+    <None Remove="Resources\js\layim-init.js" />
+    <None Remove="Resources\js\layim-init.min.js" />
     <None Remove="Resources\js\protobuf.js" />
     <None Remove="Resources\js\rmlib.js" />
     <None Remove="Resources\js\socket.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\js\layim-init.js" />
+    <EmbeddedResource Include="Resources\js\layim-init.min.js" />
     <EmbeddedResource Include="Resources\js\protobuf.js" />
     <EmbeddedResource Include="Resources\js\rmlib.js" />
     <EmbeddedResource Include="Resources\js\socket.js" />

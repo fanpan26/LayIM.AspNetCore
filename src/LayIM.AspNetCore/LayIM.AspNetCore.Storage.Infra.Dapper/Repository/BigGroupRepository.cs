@@ -20,6 +20,7 @@ namespace LayIM.AspNetCore.Storage.Infra.Dapper.Repository
             {
                 var strs = string.Join(",", groupIds);
                 var sql = $"SELECT [id],[name] as groupname,[avatar] FROM layim_big_group where id in ({strs})";
+                return QueryAsync<BigGroupModel>(sql);
             }
             return Task.FromResult<IEnumerable<BigGroupModel>>(new List<BigGroupModel>());
         }

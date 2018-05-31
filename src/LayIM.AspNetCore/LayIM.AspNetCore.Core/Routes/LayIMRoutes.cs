@@ -38,7 +38,8 @@ namespace LayIM.AspNetCore.Core.Routes
                     config = LayIMServiceLocator.Options.UIConfig,
                     uid = CurrentUserId(context),
                     api = UrlConfig.DefaultUrlConfig,
-                    other = OtherConfig.DefaultOtherConfig
+                    other = OtherConfig.DefaultOtherConfig,
+                    extend = ExtendConfig.DefaultExtendConfig
                 });
             });
 

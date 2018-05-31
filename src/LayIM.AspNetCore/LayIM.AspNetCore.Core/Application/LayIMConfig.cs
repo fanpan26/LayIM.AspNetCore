@@ -195,4 +195,21 @@ namespace LayIM.AspNetCore.Core.Application
         [JsonProperty("token")]
         public string TokenUrl => $"{LayIMServiceLocator.Options.ApiPrefix}/token";
     }
+
+    internal class ExtendConfig
+    {
+        internal static readonly ExtendConfig DefaultExtendConfig = new ExtendConfig();
+
+        [JsonProperty("rmlib")]
+        public string RmLibJs => $"{LayIMServiceLocator.Options.ApiPrefix}/js/rmlib";
+
+        [JsonProperty("protobuf")]
+        public string ProtoBufJs => $"{LayIMServiceLocator.Options.ApiPrefix}/js/protobuf";
+
+        [JsonProperty("socket")]
+        public string SocketJs => $"{LayIMServiceLocator.Options.ApiPrefix}/js/socket";
+
+        [JsonProperty("init")]
+        public string InitJs => "socket";
+    }
 }

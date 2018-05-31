@@ -2,6 +2,8 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    //这里要和后台对应
+    var layimPrefix = "/myapi";
 }
 
 <div class="row">
@@ -12,13 +14,6 @@
             }
         </style>
     <script src="~/layui/layui.js"></script>
-        <script>
-            layui.extend({
-                'socket': '/layim/js/socket',
-                'rmlib': '/layim/js/rmlib',
-                'protobuf':'/layim/js/protobuf'
-            });
-            layui.use('socket', function (socket) { });
-        </script>
-
+    <!--对应后台配置前缀-->
+    <script src="@layimPrefix/js/layim-init.js"></script>
 </div>

@@ -1,0 +1,5 @@
+﻿{
+  "buildOptions": {
+    "embed": ["Resources/js/*.js"]
+  }
+}

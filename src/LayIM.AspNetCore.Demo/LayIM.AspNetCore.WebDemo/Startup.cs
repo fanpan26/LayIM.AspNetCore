@@ -55,6 +55,7 @@ namespace LayIM.AspNetCore.WebDemo
             app.UseSession();
 
             app.UseLayIM(options => {
+                options.ApiPrefix = "/myapi";
                 options.UserFactory = new MyUserFactory();
             });
 
