@@ -1,4 +1,5 @@
 ﻿using LayIM.AspNetCore.Core.Models;
+using LayIM.AspNetCore.Core.Models.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +14,13 @@ namespace LayIM.AspNetCore.Core.Storage
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-       Task<LayIMInitModel> GetInitData(string userId);
+        Task<LayIMInitModel> GetInitData(string userId);
+
+        /// <summary>
+        /// 保存聊天记录
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        Task<int> SaveMessage(LayIMMessageModel message);
     }
 }

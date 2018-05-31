@@ -29,6 +29,10 @@ namespace LayIM.AspNetCore.Core.Routes
         /// </summary>
         public static readonly string LAYIM_ROUTE_UPLOAD_FILE = "/upload/file";
         /// <summary>
+        /// 路由：保存聊天记录
+        /// </summary>
+        public static readonly string LAYIM_ROUTE_SAVE_CHAT = "/chat/msg";
+        /// <summary>
         /// 路由：获取群员列表
         /// </summary>
         public static readonly string LAYIM_ROUTE_GROUP_MEMBERS = "/group/members";

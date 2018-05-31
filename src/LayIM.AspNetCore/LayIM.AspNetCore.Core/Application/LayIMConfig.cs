@@ -201,6 +201,9 @@ namespace LayIM.AspNetCore.Core.Application
 
         [JsonProperty("up_file")]
         public string UploadFileUrl => LayIMUrls.BuildUrl(LayIMUrls.LAYIM_ROUTE_UPLOAD_FILE);
+
+        [JsonProperty("save")]
+        public string SaveMsgUrl => LayIMUrls.BuildUrl(LayIMUrls.LAYIM_ROUTE_SAVE_CHAT);
     }
 
     internal class ExtendConfig

@@ -219,9 +219,9 @@
 
         },
         saveMsg: function (uid, toid, type, msg) {
-            //$.post('/layim/chat', { "uid": uid, "toid": toid, "type": type, "msg": msg }, function (res) {
-            //
-            //})
+            $.post(conf.api.save, { "to": toid, "type": type, "msg": msg }, function (res) {
+                log('保存消息结果：' + res);
+            })
         },
         sendMsg: function (data) {
             //根据layim提供的data数据，进行解析

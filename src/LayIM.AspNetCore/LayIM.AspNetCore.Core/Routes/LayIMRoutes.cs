@@ -50,6 +50,8 @@ namespace LayIM.AspNetCore.Core.Routes
             routes.AddExecute(LayIMUrls.LAYIM_ROUTE_UPLOAD_IMAGE, async context => await GetUploadResult(context, true));
             //上传文件
             routes.AddExecute(LayIMUrls.LAYIM_ROUTE_UPLOAD_FILE, async context => await GetUploadResult(context, false));
+            //保存聊天记录
+            routes.AddExecute(LayIMUrls.LAYIM_ROUTE_SAVE_CHAT,  context => SaveChatMessage(context));
         }
         /// <summary>
         /// 注册页面

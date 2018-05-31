@@ -1,5 +1,6 @@
 ﻿using LayIM.AspNetCore.Core.Application;
 using LayIM.AspNetCore.Core.Dispatcher;
+using LayIM.AspNetCore.Core.Extensions;
 using LayIM.AspNetCore.Core.IM;
 using LayIM.AspNetCore.Core.Models;
 using LayIM.AspNetCore.Core.Storage;
@@ -43,6 +44,12 @@ namespace LayIM.AspNetCore.Core.Routes
             return userId?.ToString();
         }
 
+        /// <summary>
+        /// 获取上传结果
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="isImg"></param>
+        /// <returns></returns>
         private static async Task<LayIMCommonResult> GetUploadResult(HttpContext context, bool isImg)
         {
             bool userUseApi = isImg ? LayIMServiceLocator.Options.UIConfig.UseUploadImage : LayIMServiceLocator.Options.UIConfig.UseUploadFile
@@ -68,10 +75,36 @@ namespace LayIM.AspNetCore.Core.Routes
             return LayIMCommonResult.Result(result);
         }
 
+        /// <summary>
+        /// 获取初始化数据
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         private static async Task<LayIMCommonResult> GetInitData(HttpContext context)
         {
             var res = await storage.Value.GetInitData(CurrentUserId(context));
             return LayIMCommonResult.Result(res);
+        }
+
+        /// <summary>
+        /// 保存聊天消息
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        private static  Task<int> SaveChatMessage(HttpContext context)
+        {
+            if (LayIMServiceLocator.Options.UIConfig.SaveMsgAfterSend == false) {
+                return Task.FromResult(0);
+            }
+
+            return storage.Value.SaveMessage(new Models.Base.LayIMMessageModel
+            {
+                From = CurrentUserId(context),
+                To = context.Request.Form["to"],
+                Type = context.Request.Form["type"],
+                AddTime = DateTime.Now.ToTimestamp(),
+                Msg = context.Request.Form["msg"]
+            });
         }
         #endregion
     }
