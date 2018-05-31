@@ -42,15 +42,15 @@ namespace LayIM.AspNetCore.Core.Routes
             /// <summary>
             /// 静态资源：/js/token.js
             /// </summary>
-            public static readonly string LAYIM_JS_IM_SOCKET = "/js/socket.js";
+            public static readonly string LAYIM_JS_IM_SOCKET = "/js/socket";
             /// <summary>
             /// 静态资源：/js/rmlib.js
             /// </summary>
-            public static readonly string LAYIM_JS_IM_RONG_LIB = "/js/rmlib.js";
+            public static readonly string LAYIM_JS_IM_RONG_LIB = "/js/rmlib";
             /// <summary>
             /// 静态资源：/js/protobuf.js
             /// </summary>
-            public static readonly string LAYIM_JS_IM_PROTOBUF = "/js/protobuf.js";
+            public static readonly string LAYIM_JS_IM_PROTOBUF = "/js/protobuf";
             /// <summary>
             /// 入口js
             /// </summary>

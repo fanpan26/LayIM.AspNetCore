@@ -45,6 +45,12 @@ namespace LayIM.AspNetCore.Core.Routes
 
         private static async Task<LayIMCommonResult> GetUploadResult(HttpContext context, bool isImg)
         {
+            bool userUseApi = isImg ? LayIMServiceLocator.Options.UIConfig.UseUploadImage : LayIMServiceLocator.Options.UIConfig.UseUploadFile
+            if (userUseApi == false)
+            {
+                return LayIMCommonResult.Error("未开启上传接口，非法的请求");
+            }
+
             var uploadResult = await uploader.Value.Upload(context);
             if (string.IsNullOrEmpty(uploadResult?.FileUrl))
             {
