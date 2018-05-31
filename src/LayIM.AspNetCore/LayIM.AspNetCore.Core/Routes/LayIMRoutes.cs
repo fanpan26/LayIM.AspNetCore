@@ -14,32 +14,9 @@ namespace LayIM.AspNetCore.Core.Routes
 {
     internal sealed class LayIMRoutes
     {
-        private static readonly RoutesCollection routes = new RoutesCollection();
         public static RoutesCollection Routes => routes;
         public static IResourceDispatcher ResourceDispatcher
             => ResourceDispatcherCreator.dispatcher;
-
-        private static class ResourceDispatcherCreator
-        {
-            public static readonly IResourceDispatcher dispatcher = new ResourceDispatcher();
-        }
-
-        
-
-        private static Lazy<ILayIMServer> api = GetLazyService<ILayIMServer>();
-        private static Lazy<ILayIMStorage> storage = GetLazyService<ILayIMStorage>();
-        private static Lazy<IMemoryCache> cache = GetLazyService<IMemoryCache>();
-
-        private static Lazy<TService> GetLazyService<TService>()
-        {
-            return new Lazy<TService>(() => LayIMServiceLocator.GetService<TService>());
-        }
-
-        private static string CurrentUserId(HttpContext context)
-        {
-            context.Items.TryGetValue(LayIMGlobal.USER_KEY, out var userId);
-            return userId?.ToString();
-        }
 
         static LayIMRoutes()
         {
@@ -47,6 +24,7 @@ namespace LayIM.AspNetCore.Core.Routes
             RegisterPages();
         }
 
+        #region 注册相应命令
         /// <summary>
         /// 注册命令
         /// </summary>
@@ -60,7 +38,8 @@ namespace LayIM.AspNetCore.Core.Routes
                     config = LayIMServiceLocator.Options.UIConfig,
                     uid = CurrentUserId(context),
                     api = UrlConfig.DefaultUrlConfig,
-                    other = OtherConfig.DefaultOtherConfig
+                    other = OtherConfig.DefaultOtherConfig,
+                    extend = ExtendConfig.DefaultExtendConfig
                 });
             });
 
@@ -91,5 +70,35 @@ namespace LayIM.AspNetCore.Core.Routes
         {
 
         }
+        #endregion
+
+        #region 私有变量，方法等
+        private static readonly RoutesCollection routes = new RoutesCollection();
+
+        private static class ResourceDispatcherCreator
+        {
+            public static readonly IResourceDispatcher dispatcher = new ResourceDispatcher();
+        }
+
+        private static Lazy<ILayIMServer> api = GetLazyService<ILayIMServer>();
+        private static Lazy<ILayIMStorage> storage = GetLazyService<ILayIMStorage>();
+        private static Lazy<IMemoryCache> cache = GetLazyService<IMemoryCache>();
+
+        private static Lazy<TService> GetLazyService<TService>()
+        {
+            return new Lazy<TService>(() => LayIMServiceLocator.GetService<TService>());
+        }
+
+        /// <summary>
+        /// 获取用户ID
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        private static string CurrentUserId(HttpContext context)
+        {
+            context.Items.TryGetValue(LayIMGlobal.USER_KEY, out var userId);
+            return userId?.ToString();
+        }
+        #endregion
     }
 }

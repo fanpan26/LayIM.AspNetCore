@@ -33,11 +33,9 @@
     //这里引用融云，但是socket接口都是一致的
     //事件有很多 open 
     var socket = {
-        start: function () {
-            request.config(function (conf) {
-                build.resetConf(conf);
-                socket.init();
-            });
+        start: function (conf) {
+            build.resetConf(conf);
+            socket.init();
         },
         init: function () {
             layim.config(conf.config);
@@ -341,13 +339,13 @@
     //token
     var token = {
         save: function (t) {
-            layui.data('SOCKET_TOKEN', {
-                key: conf.uid,
+            layui.data('layim_global', {
+                key:'rong_token_'+ conf.uid,
                 value: t
             });
         },
         get: function (uid) {
-            return layui.data('SOCKET_TOKEN')[uid] || '';
+            return layui.data('layim_global')['rong_token_' + uid] || '';
         },
         reset: function () {
             log("重置token");
@@ -357,7 +355,8 @@
     var out = {
         info: 'LayIM.AspNetCore',
         version: '1.0',
-        author: '645857874@qq.com'
+        author: '645857874@qq.com',
+        start: socket.start
     }
     var request = {
         apply: function (callback) {
@@ -376,7 +375,5 @@
             });
         }
     };
-
-    socket.start();
     exports('socket', out)
 });
