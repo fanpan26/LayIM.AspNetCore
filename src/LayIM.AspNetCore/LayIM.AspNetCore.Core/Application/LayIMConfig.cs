@@ -1,4 +1,5 @@
 ﻿using LayIM.AspNetCore.Core.IM;
+using LayIM.AspNetCore.Core.Routes;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -112,7 +113,7 @@ namespace LayIM.AspNetCore.Core.Application
             {
                 if (UseMessageBoxPage)
                 {
-                    return $"{LayIMServiceLocator.Options.ApiPrefix}/html/msgbox.html";
+                    return LayIMUrls.BuildUrl(LayIMUrls.Resources.LAYIM_PAGE_MSGBOX);
                 }
                 return string.Empty;
             }
@@ -130,7 +131,7 @@ namespace LayIM.AspNetCore.Core.Application
             {
                 if (UseFindPage)
                 {
-                    return $"{LayIMServiceLocator.Options.ApiPrefix}/html/find.html";
+                    return LayIMUrls.BuildUrl(LayIMUrls.Resources.LAYIM_PAGE_FIND);
                 }
                 return string.Empty;
             }
@@ -148,7 +149,7 @@ namespace LayIM.AspNetCore.Core.Application
             {
                 if (UseHistoryPage)
                 {
-                    return $"{LayIMServiceLocator.Options.ApiPrefix}/html/chatlog.html";
+                    return LayIMUrls.BuildUrl(LayIMUrls.Resources.LAYIM_PAGE_CHATLOG);
                 }
                 return string.Empty;
             }
@@ -187,19 +188,19 @@ namespace LayIM.AspNetCore.Core.Application
         internal static readonly UrlConfig DefaultUrlConfig = new UrlConfig();
 
         [JsonProperty("base")]
-        public string InitUrl => $"{LayIMServiceLocator.Options.ApiPrefix}/init";
+        public string InitUrl => LayIMUrls.BuildUrl(LayIMUrls.LAYIM_ROUTE_INIT);
 
         [JsonProperty("member")]
-        public string MemberUrl => $"{LayIMServiceLocator.Options.ApiPrefix}/member";
+        public string MemberUrl => LayIMUrls.BuildUrl(LayIMUrls.LAYIM_ROUTE_GROUP_MEMBERS);
 
         [JsonProperty("token")]
-        public string TokenUrl => $"{LayIMServiceLocator.Options.ApiPrefix}/token";
+        public string TokenUrl => LayIMUrls.BuildUrl(LayIMUrls.LAYIM_ROUTE_IM_TOKEN);
 
         [JsonProperty("up_img")]
-        public string UploadImageUrl => $"{LayIMServiceLocator.Options.ApiPrefix}/upload/img";
+        public string UploadImageUrl => LayIMUrls.BuildUrl(LayIMUrls.LAYIM_ROUTE_UPLOAD_IMAGE);
 
         [JsonProperty("up_file")]
-        public string UploadFileUrl => $"{LayIMServiceLocator.Options.ApiPrefix}/upload/file";
+        public string UploadFileUrl => LayIMUrls.BuildUrl(LayIMUrls.LAYIM_ROUTE_UPLOAD_FILE);
     }
 
     internal class ExtendConfig
@@ -207,15 +208,15 @@ namespace LayIM.AspNetCore.Core.Application
         internal static readonly ExtendConfig DefaultExtendConfig = new ExtendConfig();
 
         [JsonProperty("rmlib")]
-        public string RmLibJs => $"{LayIMServiceLocator.Options.ApiPrefix}/js/rmlib";
+        public string RmLibJs => LayIMUrls.BuildUrl(LayIMUrls.Resources.LAYIM_JS_IM_RONG_LIB);
 
         [JsonProperty("protobuf")]
-        public string ProtoBufJs => $"{LayIMServiceLocator.Options.ApiPrefix}/js/protobuf";
+        public string ProtoBufJs => LayIMUrls.BuildUrl(LayIMUrls.Resources.LAYIM_JS_IM_PROTOBUF);
 
         [JsonProperty("socket")]
-        public string SocketJs => $"{LayIMServiceLocator.Options.ApiPrefix}/js/socket";
+        public string SocketJs => LayIMUrls.BuildUrl(LayIMUrls.Resources.LAYIM_JS_IM_SOCKET);
 
         [JsonProperty("init")]
-        public string InitJs => "socket";
+        public string InitJs => LayIMUrls.Resources.LAYIM_RESOURCE_INIT_JS;
     }
 }
