@@ -53,7 +53,7 @@ namespace LayIM.AspNetCore.Core.Application
         /// 主面板相对于浏览器右侧的距离
         /// </summary>
         [JsonIgnore]
-        public int MarginRight { get; set; } = 10;
+        public int MarginRight { get; set; } = 0;
 
         [JsonProperty("right")]
         public string MarginRightStr => $"{MarginRight}px";
@@ -62,7 +62,7 @@ namespace LayIM.AspNetCore.Core.Application
         /// 最小化时面板相对于浏览器右侧的距离
         /// </summary>
         [JsonIgnore]
-        public int MinMarginRight { get; set; } = 10;
+        public int MinMarginRight { get; set; } = 0;
         [JsonProperty("minRight")]
         public string MinMarginRightStr => $"{MinMarginRight}px";
 
@@ -194,6 +194,12 @@ namespace LayIM.AspNetCore.Core.Application
 
         [JsonProperty("token")]
         public string TokenUrl => $"{LayIMServiceLocator.Options.ApiPrefix}/token";
+
+        [JsonProperty("up_img")]
+        public string UploadImageUrl => $"{LayIMServiceLocator.Options.ApiPrefix}/upload/img";
+
+        [JsonProperty("up_file")]
+        public string UploadFileUrl => $"{LayIMServiceLocator.Options.ApiPrefix}/upload/file";
     }
 
     internal class ExtendConfig

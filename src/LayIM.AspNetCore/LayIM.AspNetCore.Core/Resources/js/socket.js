@@ -80,10 +80,14 @@
                 }
             };
             $.extend(conf0, c.config);
+            c.config.init = { url: c.api.base };
+            c.config.members = { url: c.api.member };
+            c.config.uploadFile && (c.config.uploadFile = { url: c.api.up_file });
+            c.config.uploadImage && (c.config.uploadImage = { url: c.api.up_img });
 
-            c.config = conf0;
-            log('初始化完毕，配置信息为：');
             $.extend(conf, c);
+            log('初始化完毕，配置信息为：');
+          
             log(conf);
         }
     };

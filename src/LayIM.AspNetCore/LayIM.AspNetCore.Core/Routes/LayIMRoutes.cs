@@ -31,7 +31,7 @@ namespace LayIM.AspNetCore.Core.Routes
         private static void RegisterCommands()
         {
             //获取当前LayIM配置
-            routes.AddQueryCommand("/config", context =>
+            routes.AddQuery("/config", context =>
             {
                 return Task.FromResult(new
                 {
@@ -44,7 +44,7 @@ namespace LayIM.AspNetCore.Core.Routes
             });
 
             //layim初始化接口
-            routes.AddQueryCommand("/init", async context =>
+            routes.AddQuery("/init", async context =>
                 {
                     var userId = CurrentUserId(context);
                     var cacheKey = $"layim_cache_{userId}";
@@ -57,11 +57,17 @@ namespace LayIM.AspNetCore.Core.Routes
                     }
                     return cacheInitData;
                 });
+            //上传图片
+            routes.AddExecute("/upload/img", async context => await GetUploadResult(context, true));
+            //上传文件
+            routes.AddExecute("/upload/file", async context => await GetUploadResult(context, false));
 
             //获取连接websocket的token
-            routes.AddQueryCommand("/token", async context =>
+            routes.AddQuery("/token", async context =>
                 await api.Value.GetToken(CurrentUserId(context)));
         }
+
+       
 
         /// <summary>
         /// 注册页面
@@ -83,6 +89,7 @@ namespace LayIM.AspNetCore.Core.Routes
         private static Lazy<ILayIMServer> api = GetLazyService<ILayIMServer>();
         private static Lazy<ILayIMStorage> storage = GetLazyService<ILayIMStorage>();
         private static Lazy<IMemoryCache> cache = GetLazyService<IMemoryCache>();
+        private static Lazy<ILayIMFileUploader> uploader = GetLazyService<ILayIMFileUploader>();
 
         private static Lazy<TService> GetLazyService<TService>()
         {
@@ -98,6 +105,25 @@ namespace LayIM.AspNetCore.Core.Routes
         {
             context.Items.TryGetValue(LayIMGlobal.USER_KEY, out var userId);
             return userId?.ToString();
+        }
+
+        private static async Task<LayIMCommonResult> GetUploadResult(HttpContext context, bool isImg)
+        {
+            var uploadResult = await uploader.Value.Upload(context);
+            if (string.IsNullOrEmpty(uploadResult?.FileUrl))
+            {
+                return LayIMCommonResult.Error("上传失败");
+            }
+            object result;
+            if (isImg)
+            {
+                result = new { src = uploadResult.FileUrl };
+            }
+            else
+            {
+                result = new { src = uploadResult.FileUrl, name = uploadResult.FileName };
+            }
+            return LayIMCommonResult.Result(result);
         }
         #endregion
     }
