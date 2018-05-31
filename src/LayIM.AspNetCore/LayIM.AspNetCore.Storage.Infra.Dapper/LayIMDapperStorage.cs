@@ -46,9 +46,11 @@ namespace LayIM.AspNetCore.Storage.Infra.Dapper
             var friendRelationsTask = friendRelationRepository.GetFriendRelations(userId);
             var groupIdsTask = groupMemberRepository.GetUserBigGroups(userId);
 
-            LayIMInitModel initModel = new LayIMInitModel();
-            //用户自己
-            initModel.mine = await mineTsk;
+            LayIMInitModel initModel = new LayIMInitModel
+            {
+                //用户自己
+                mine = await mineTsk
+            };
             //好友列表
             List<FriendGroupModel> friend = new List<FriendGroupModel>();
 

@@ -19,8 +19,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="setConfig"></param>
         public static IServiceCollection AddSqlServer(this IServiceCollection services,string connectionString)
         {
-            var dbConfig = new DBConnectionConfig(DBType.SqlServer);
-            dbConfig.ConnectionString = connectionString;
+            var dbConfig = new DBConnectionConfig(DBType.SqlServer)
+            {
+                ConnectionString = connectionString
+            };
 
             services.AddSingleton(dbConfig);
 

@@ -13,8 +13,10 @@ namespace LayIM.AspNetCore.RongCloudTests
             {
                 var appKey = "";
 
-                var config = new RongCloudConfig();
-                config.AppKey = appKey;
+                var config = new RongCloudConfig
+                {
+                    AppKey = appKey
+                };
             }
             catch (Exception ex)
             {
@@ -30,8 +32,10 @@ namespace LayIM.AspNetCore.RongCloudTests
             {
                 var appSecret = "";
 
-                var config = new RongCloudConfig();
-                config.AppSecret = appSecret;
+                var config = new RongCloudConfig
+                {
+                    AppSecret = appSecret
+                };
             }
             catch (Exception ex)
             {
