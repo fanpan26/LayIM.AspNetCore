@@ -40,6 +40,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton<FriendRelationRepository>();
             services.AddSingleton<GroupMemberRepository>();
             services.AddSingleton<UserRepository>();
+            services.AddSingleton<ChatRecordRepository>();
         }
 
     }

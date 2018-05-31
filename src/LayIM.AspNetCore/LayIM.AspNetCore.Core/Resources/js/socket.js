@@ -80,10 +80,14 @@
                 }
             };
             $.extend(conf0, c.config);
+            c.config.init = { url: c.api.base };
+            c.config.members = { url: c.api.member };
+            c.config.uploadFile && (c.config.uploadFile = { url: c.api.up_file });
+            c.config.uploadImage && (c.config.uploadImage = { url: c.api.up_img });
 
-            c.config = conf0;
-            log('初始化完毕，配置信息为：');
             $.extend(conf, c);
+            log('初始化完毕，配置信息为：');
+          
             log(conf);
         }
     };
@@ -94,9 +98,9 @@
         connected: false,
         init: function () {
             //初始化融云设置
-            log('初始化融云设置,key=' + conf.other.appKey);
-            if (conf.other.appKey) {
-                lib.RongIMClient.init(conf.other.appKey);
+            log('初始化融云设置,key=' + conf.extend.appKey);
+            if (conf.extend.appKey) {
+                lib.RongIMClient.init(conf.extend.appKey);
                 this.initListener();
                 this.defineMessage();
             } else {
@@ -215,16 +219,20 @@
 
         },
         saveMsg: function (uid, toid, type, msg) {
-            //$.post('/layim/chat', { "uid": uid, "toid": toid, "type": type, "msg": msg }, function (res) {
-            //
-            //})
+            if (conf.other.saveMsg) {
+                $.post(conf.api.save, { "to": toid, "type": type, "msg": msg }, function (res) {
+                    log('保存消息结果：' + res);
+                });
+            } else {
+                log('未开启保存消息，消息将不被保存.若要开启，请将[options.OtherConfig.SaveMsgAfterSend]设置为true')
+            }
         },
         sendMsg: function (data) {
             //根据layim提供的data数据，进行解析
             var mine = data.mine;
             var to = data.to;
             var id = conf.uid || mine.id;//当前用户id
-            var group = to.type == 'group';
+            var group = to.type === 'group';
             if (group) {
                 id = to.id;//如果是group类型，id就是当前groupid，切记不可写成 mine.id否则会出现一些问题。
             }
@@ -361,7 +369,7 @@
     var request = {
         apply: function (callback) {
             $.get('/layim/apply/count?uid=' + conf.uid, function (res) {
-                if (res.code == 0) {
+                if (res.code === 0) {
                     res.data.apply && callback && callback(res.data.apply)
                 } else {
                     layer.msg('获取申请信息失败');

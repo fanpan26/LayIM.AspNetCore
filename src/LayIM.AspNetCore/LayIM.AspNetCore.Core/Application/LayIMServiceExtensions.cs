@@ -11,6 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddMemoryCache();
             services.AddSingleton<ILayIMUserFactory,DefaultQueryUserFactory>();
+            services.AddSingleton<ILayIMFileUploader, DefaultFileUploader>();
             return services;
         }
     }

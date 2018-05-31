@@ -36,6 +36,8 @@ namespace LayIM.AspNetCore.Core.Application
         /// </summary>
         public LayIMConfig UIConfig { get; set; } = defaultConfig;
 
+        public OtherConfig OtherConfig { get; set; } = OtherConfig.DefaultOtherConfig;
+
         public ILayIMUserFactory UserFactory { get; set; } = new DefaultQueryUserFactory();
     }
 }

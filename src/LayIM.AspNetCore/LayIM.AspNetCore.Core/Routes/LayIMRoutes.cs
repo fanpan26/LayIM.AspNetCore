@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace LayIM.AspNetCore.Core.Routes
 {
-    internal sealed class LayIMRoutes
+    internal sealed partial class LayIMRoutes
     {
         public static RoutesCollection Routes => routes;
         public static IResourceDispatcher ResourceDispatcher
@@ -31,38 +31,36 @@ namespace LayIM.AspNetCore.Core.Routes
         private static void RegisterCommands()
         {
             //获取当前LayIM配置
-            routes.AddQueryCommand("/config", context =>
+            routes.AddQuery(LayIMUrls.LAYIM_ROUTE_CONFIG, context =>
             {
                 return Task.FromResult(new
                 {
                     config = LayIMServiceLocator.Options.UIConfig,
-                    uid = CurrentUserId(context),
+                    uid = context.UserId(),
                     api = UrlConfig.DefaultUrlConfig,
                     other = OtherConfig.DefaultOtherConfig,
                     extend = ExtendConfig.DefaultExtendConfig
                 });
             });
-
-            //layim初始化接口
-            routes.AddQueryCommand("/init", async context =>
-                {
-                    var userId = CurrentUserId(context);
-                    var cacheKey = $"layim_cache_{userId}";
-                    cache.Value.TryGetValue<LayIMCommonResult>(cacheKey, out var cacheInitData);
-                    if (cacheInitData == null)
-                    {
-                        var res = await storage.Value.GetInitData(CurrentUserId(context));
-                        cacheInitData = LayIMCommonResult.Result(res);
-                        cache.Value.Set(cacheKey, cacheInitData);
-                    }
-                    return cacheInitData;
-                });
-
             //获取连接websocket的token
-            routes.AddQueryCommand("/token", async context =>
-                await api.Value.GetToken(CurrentUserId(context)));
+            routes.AddQuery(LayIMUrls.LAYIM_ROUTE_IM_TOKEN, async context => await api.Value.GetToken(context.UserId()), new CacheConfig
+            {
+                CacheKey = "layim_cache_user_token",
+                ExpireMinutes = 60
+            });
+            //layim初始化接口
+            routes.AddQuery(LayIMUrls.LAYIM_ROUTE_INIT, async context => await GetInitData(context), new CacheConfig
+            {
+                CacheKey = "layim_cache_user_init",
+                ExpireMinutes = 20
+            });
+            //上传图片
+            routes.AddExecute(LayIMUrls.LAYIM_ROUTE_UPLOAD_IMAGE, async context => await GetUploadResult(context, true));
+            //上传文件
+            routes.AddExecute(LayIMUrls.LAYIM_ROUTE_UPLOAD_FILE, async context => await GetUploadResult(context, false));
+            //保存聊天记录
+            routes.AddExecute(LayIMUrls.LAYIM_ROUTE_SAVE_CHAT,  context => SaveChatMessage(context));
         }
-
         /// <summary>
         /// 注册页面
         /// </summary>
@@ -72,33 +70,6 @@ namespace LayIM.AspNetCore.Core.Routes
         }
         #endregion
 
-        #region 私有变量，方法等
-        private static readonly RoutesCollection routes = new RoutesCollection();
-
-        private static class ResourceDispatcherCreator
-        {
-            public static readonly IResourceDispatcher dispatcher = new ResourceDispatcher();
-        }
-
-        private static Lazy<ILayIMServer> api = GetLazyService<ILayIMServer>();
-        private static Lazy<ILayIMStorage> storage = GetLazyService<ILayIMStorage>();
-        private static Lazy<IMemoryCache> cache = GetLazyService<IMemoryCache>();
-
-        private static Lazy<TService> GetLazyService<TService>()
-        {
-            return new Lazy<TService>(() => LayIMServiceLocator.GetService<TService>());
-        }
-
-        /// <summary>
-        /// 获取用户ID
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        private static string CurrentUserId(HttpContext context)
-        {
-            context.Items.TryGetValue(LayIMGlobal.USER_KEY, out var userId);
-            return userId?.ToString();
-        }
-        #endregion
+        
     }
 }

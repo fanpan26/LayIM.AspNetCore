@@ -61,5 +61,25 @@ namespace LayIM.AspNetCore.Core.Application
             string path = context.ToRoutePath(options);
             return path.StartsWith("/js") || path.StartsWith("/css");
         }
+
+        /// <summary>
+        /// 从form表单中取值
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static long Int64FormValue(this HttpContext context, string key)
+        {
+            string value = context.Request.Form[key];
+            if (value == null) { return 0; }
+            long.TryParse(value, out var result);
+            return result;
+        }
+
+        public static string UserId(this HttpContext context)
+        {
+            context.Items.TryGetValue(LayIMGlobal.USER_KEY, out var userId);
+            return userId?.ToString();
+        }
     }
 }

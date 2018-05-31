@@ -13,27 +13,33 @@ namespace LayIM.AspNetCore.Storage.Infra.Dapper
 {
     public class LayIMDapperStorage : ILayIMStorage
     {
+        #region 构造函数 私有方法
         private readonly UserRepository userRepository;
         private readonly FriendGroupRepository friendGroupRepository;
         private readonly FriendRelationRepository friendRelationRepository;
         private readonly BigGroupRepository bigGroupRepository;
         private readonly GroupMemberRepository groupMemberRepository;
+        private readonly ChatRecordRepository chatRecordRepository;
 
 
         public LayIMDapperStorage(UserRepository userRepository,
             FriendGroupRepository friendGroupRepository,
             FriendRelationRepository friendRelationRepository,
             BigGroupRepository bigGroupRepository,
-            GroupMemberRepository groupMemberRepository)
+            GroupMemberRepository groupMemberRepository,
+            ChatRecordRepository chatRecordRepository)
         {
             this.userRepository = userRepository;
             this.friendGroupRepository = friendGroupRepository;
             this.friendRelationRepository = friendRelationRepository;
             this.bigGroupRepository = bigGroupRepository;
             this.groupMemberRepository = groupMemberRepository;
+            this.chatRecordRepository = chatRecordRepository;
         }
 
         private static readonly List<UserModel> NoUser = new List<UserModel>();
+        #endregion
+
         /// <summary>
         /// 获取初始化数据
         /// </summary>
@@ -80,6 +86,20 @@ namespace LayIM.AspNetCore.Storage.Infra.Dapper
             initModel.group = await bigGroupsTask;
 
             return initModel;
+        }
+
+        /// <summary>
+        /// 保存聊天记录【单条即时保存】
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public Task<int> SaveMessage(LayIMMessageModel message)
+        {
+            if (message?.IsVlid == true)
+            {
+                return chatRecordRepository.Add(message);
+            }
+            return Task.FromResult(0);
         }
     }
 }

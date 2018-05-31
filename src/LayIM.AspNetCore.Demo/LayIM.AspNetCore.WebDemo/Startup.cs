@@ -55,10 +55,8 @@ namespace LayIM.AspNetCore.WebDemo
             app.UseSession();
 
             app.UseLayIM(options => {
-                options.ApiPrefix = "/myapi";
+                options.ApiPrefix = "/layim";
                 options.UserFactory = new MyUserFactory();
-                options.UIConfig.UseUploadFile = false;
-                options.UIConfig.UseUploadImage = false;
             });
 
             app.UseMvc(routes =>
