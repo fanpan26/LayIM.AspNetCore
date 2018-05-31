@@ -98,9 +98,9 @@
         connected: false,
         init: function () {
             //初始化融云设置
-            log('初始化融云设置,key=' + conf.other.appKey);
-            if (conf.other.appKey) {
-                lib.RongIMClient.init(conf.other.appKey);
+            log('初始化融云设置,key=' + conf.extend.appKey);
+            if (conf.extend.appKey) {
+                lib.RongIMClient.init(conf.extend.appKey);
                 this.initListener();
                 this.defineMessage();
             } else {
@@ -219,9 +219,13 @@
 
         },
         saveMsg: function (uid, toid, type, msg) {
-            $.post(conf.api.save, { "to": toid, "type": type, "msg": msg }, function (res) {
-                log('保存消息结果：' + res);
-            })
+            if (conf.other.saveMsg) {
+                $.post(conf.api.save, { "to": toid, "type": type, "msg": msg }, function (res) {
+                    log('保存消息结果：' + res);
+                });
+            } else {
+                log('未开启保存消息，消息将不被保存，若要开启，请将')
+            }
         },
         sendMsg: function (data) {
             //根据layim提供的data数据，进行解析

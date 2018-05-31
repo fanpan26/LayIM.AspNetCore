@@ -35,11 +35,6 @@ namespace LayIM.AspNetCore.Core.Application
         [JsonProperty("isVideo")]
         public bool UseVideo { get; set; } = false;
         /// <summary>
-        /// 是否保存聊天消息
-        /// </summary>
-        [JsonProperty("saveMsg")]
-        public bool SaveMsgAfterSend { get; set; } = true;
-        /// <summary>
         /// 是否简约模式，即主面板不展示
         /// </summary>
         [JsonProperty("brief")]
@@ -167,7 +162,7 @@ namespace LayIM.AspNetCore.Core.Application
         public string InitSkin { get; set; }
     }
 
-    internal class OtherConfig
+    public class OtherConfig
     {
         internal static readonly OtherConfig DefaultOtherConfig = new OtherConfig();
         /// <summary>
@@ -176,11 +171,13 @@ namespace LayIM.AspNetCore.Core.Application
         [JsonProperty("custom")]
         public bool UseCustomService { get; set; } = false;
 
-        [JsonProperty("appKey")]
-        public string AppKey => LayIMServiceLocator.GetService<ILayIMAppInfo>()?.AppKey ?? "";
-
         [JsonProperty("log")]
         public bool UseConsoleLog { get; set; } = true;
+        /// <summary>
+        /// 是否保存聊天消息
+        /// </summary>
+        [JsonProperty("saveMsg")]
+        public bool SaveMsgAfterSend { get; set; } = true;
     }
 
     internal class UrlConfig
@@ -221,5 +218,8 @@ namespace LayIM.AspNetCore.Core.Application
 
         [JsonProperty("init")]
         public string InitJs => LayIMUrls.Resources.LAYIM_RESOURCE_INIT_JS;
+
+        [JsonProperty("appKey")]
+        public string AppKey => LayIMServiceLocator.GetService<ILayIMAppInfo>()?.AppKey ?? "";
     }
 }
