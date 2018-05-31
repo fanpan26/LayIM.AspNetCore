@@ -23,11 +23,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayIM.AspNetCore.RongCloudT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayIM.AspNetCore.IM.RongCloud", "LayIM.AspNetCore.IM.RongCloud\LayIM.AspNetCore.IM.RongCloud.csproj", "{B9AACC3B-2869-4D53-B3E3-44056CC3181F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayIM.AspNetCore.Storage.SqlServer", "LayIM.AspNetCore.Storage.SqlServer\LayIM.AspNetCore.Storage.SqlServer.csproj", "{231E2C56-B4E3-48B8-A7F5-1984D24C1BC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayIM.AspNetCore.Storage.SqlServer", "LayIM.AspNetCore.Storage.SqlServer\LayIM.AspNetCore.Storage.SqlServer.csproj", "{231E2C56-B4E3-48B8-A7F5-1984D24C1BC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayIM.AspNetCore.Storage.MySql", "LayIM.AspNetCore.Storage.MySql\LayIM.AspNetCore.Storage.MySql.csproj", "{DA06533F-D116-4BC8-A042-553386CED621}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayIM.AspNetCore.Storage.MySql", "LayIM.AspNetCore.Storage.MySql\LayIM.AspNetCore.Storage.MySql.csproj", "{DA06533F-D116-4BC8-A042-553386CED621}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayIM.AspNetCore.Storage.Infra.Dapper", "LayIM.AspNetCore.Storage.Infra.Dapper\LayIM.AspNetCore.Storage.Infra.Dapper.csproj", "{327839B1-309D-4F78-BEAC-D2E855BC2155}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayIM.AspNetCore.Storage.Infra.Dapper", "LayIM.AspNetCore.Storage.Infra.Dapper\LayIM.AspNetCore.Storage.Infra.Dapper.csproj", "{327839B1-309D-4F78-BEAC-D2E855BC2155}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayIM.AspNetCore.IM.SignalR", "LayIM.AspNetCore.IM.SignalR\LayIM.AspNetCore.IM.SignalR.csproj", "{03853F8E-375B-416D-AA7A-2CA785664102}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{327839B1-309D-4F78-BEAC-D2E855BC2155}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{327839B1-309D-4F78-BEAC-D2E855BC2155}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{327839B1-309D-4F78-BEAC-D2E855BC2155}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03853F8E-375B-416D-AA7A-2CA785664102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03853F8E-375B-416D-AA7A-2CA785664102}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03853F8E-375B-416D-AA7A-2CA785664102}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03853F8E-375B-416D-AA7A-2CA785664102}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +85,7 @@ Global
 		{231E2C56-B4E3-48B8-A7F5-1984D24C1BC3} = {1915707E-68A7-4150-B6DC-03D2CE8180C5}
 		{DA06533F-D116-4BC8-A042-553386CED621} = {1915707E-68A7-4150-B6DC-03D2CE8180C5}
 		{327839B1-309D-4F78-BEAC-D2E855BC2155} = {1915707E-68A7-4150-B6DC-03D2CE8180C5}
+		{03853F8E-375B-416D-AA7A-2CA785664102} = {1F094733-5A4A-4F40-A8E0-DFFFB7BDA17A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A2A1D304-2D34-4AFC-8A05-CD7A467F5F23}
