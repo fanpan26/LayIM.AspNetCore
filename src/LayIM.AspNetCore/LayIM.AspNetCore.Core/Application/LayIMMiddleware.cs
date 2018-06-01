@@ -31,7 +31,7 @@ namespace LayIM.AspNetCore.Core.Application
                 return;
             }
 
-            string path = context.ToRoutePath(options);
+            string path = context.GetRoutePath(options);
 
             var dispatcher = LayIMRoutes.Routes.FindDispatcher(path);
 

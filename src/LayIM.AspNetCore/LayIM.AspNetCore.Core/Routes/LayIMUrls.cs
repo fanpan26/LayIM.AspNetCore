@@ -41,6 +41,23 @@ namespace LayIM.AspNetCore.Core.Routes
         /// </summary>
         public static readonly string LAYIM_ROUTE_IM_TOKEN = "/token";
 
+        /// <summary>
+        /// 路由：/page/find.html
+        /// </summary>
+        public static readonly string LAYIM_ROUTE_PAGE_FIND = "/page/find";
+        /// <summary>
+        /// 路由：/page/chatlog.html
+        /// </summary>
+        public static readonly string LAYIM_ROUTE_PAGE_CHATLOG = "/page/chatlog";
+        /// <summary>
+        /// 路由：/page/msgbox.html
+        /// </summary>
+        public static readonly string LAYIM_ROUTE_PAGE_MSGBOX = "/page/msgbox";
+        /// <summary>
+        /// 路由：/page/msgbox.history.html
+        /// </summary>
+        public static readonly string LAYIM_ROUTE_PAGE_HISTORY = "/page/partial/history";
+
         internal static class Resources
         {
             /// <summary>
@@ -59,19 +76,6 @@ namespace LayIM.AspNetCore.Core.Routes
             /// 入口js
             /// </summary>
             public static readonly string LAYIM_RESOURCE_INIT_JS = "socket";
-
-            /// <summary>
-            /// 静态资源：/page/find.html
-            /// </summary>
-            public static readonly string LAYIM_PAGE_FIND = "/page/find.html";
-            /// <summary>
-            /// 静态资源：/page/chatlog.html
-            /// </summary>
-            public static readonly string LAYIM_PAGE_CHATLOG = "/page/chatlog.html";
-            /// <summary>
-            /// 静态资源：/page/msgbox.html
-            /// </summary>
-            public static readonly string LAYIM_PAGE_MSGBOX = "/page/msgbox.html";
         }
 
 

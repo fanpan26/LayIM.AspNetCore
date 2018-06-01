@@ -13,7 +13,7 @@ namespace LayIM.AspNetCore.Core.Application
         /// <param name="context"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public static string ToRoutePath(this HttpContext context, LayIMOptions options)
+        public static string GetRoutePath(this HttpContext context, LayIMOptions options)
         {
             string path = string.Empty;
             string prefix = options.ApiPrefix;
@@ -58,8 +58,8 @@ namespace LayIM.AspNetCore.Core.Application
         /// <returns></returns>
         public static bool IsLayIMResourceRequest(this HttpContext context, LayIMOptions options)
         {
-            string path = context.ToRoutePath(options);
-            return path.StartsWith("/js") || path.StartsWith("/css");
+            string path = context.GetRoutePath(options);
+            return path.StartsWith("/js")|| path.StartsWith("/page") || path.StartsWith("/css");
         }
 
         /// <summary>

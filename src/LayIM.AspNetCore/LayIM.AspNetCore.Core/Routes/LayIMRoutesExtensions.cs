@@ -1,4 +1,5 @@
 ﻿using LayIM.AspNetCore.Core.Dispatcher;
+using LayIM.AspNetCore.Core.Razor;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,20 @@ namespace LayIM.AspNetCore.Core.Routes
             Error.ThrowIfNull(command, nameof(command));
 
             routes.Add(path, new ExecuteCommandDispatcher<TResult>(command));
+        }
+
+        /// <summary>
+        /// 注册路由页面
+        /// </summary>
+        /// <param name="routes"></param>
+        /// <param name="path"></param>
+        /// <param name="pageFunc"></param>
+        public static void AddRazorPage(this RoutesCollection routes, string path, Func<RazorPage> pageFunc)
+        {
+            Error.ThrowIfNull(path, nameof(path));
+            Error.ThrowIfNull(pageFunc, nameof(pageFunc));
+
+            routes.Add(path, new RazorPageDispatcher(pageFunc));
         }
     }
 

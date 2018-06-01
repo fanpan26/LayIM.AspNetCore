@@ -2,6 +2,7 @@
 using LayIM.AspNetCore.Core.Dispatcher;
 using LayIM.AspNetCore.Core.IM;
 using LayIM.AspNetCore.Core.Models;
+using LayIM.AspNetCore.Core.Razor;
 using LayIM.AspNetCore.Core.Storage;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
@@ -66,7 +67,9 @@ namespace LayIM.AspNetCore.Core.Routes
         /// </summary>
         private static void RegisterPages()
         {
-
+            routes.AddRazorPage(LayIMUrls.LAYIM_ROUTE_PAGE_CHATLOG, () => new ChatLogPage());
+            routes.AddRazorPage(LayIMUrls.LAYIM_ROUTE_PAGE_HISTORY, () => new PartialHistoryPage());
+            //routes.AddRazorPage("/msgbox",()=>)
         }
         #endregion
 

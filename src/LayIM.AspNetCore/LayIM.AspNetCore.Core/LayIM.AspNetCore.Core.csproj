@@ -16,6 +16,11 @@
 
   <ItemGroup>
     <None Remove="project.json" />
+    <None Remove="Resources\css\apply.css" />
+    <None Remove="Resources\css\chatlog.css" />
+    <None Remove="Resources\css\layui.css" />
+    <None Remove="Resources\js\chatlog.js" />
+    <None Remove="Resources\js\jquery.js" />
     <None Remove="Resources\js\layim-init.js" />
     <None Remove="Resources\js\layim-init.min.js" />
     <None Remove="Resources\js\protobuf.js" />
@@ -24,6 +29,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\css\apply.css" />
+    <EmbeddedResource Include="Resources\css\chatlog.css" />
+    <EmbeddedResource Include="Resources\css\layui.css" />
+    <EmbeddedResource Include="Resources\js\chatlog.js" />
+    <EmbeddedResource Include="Resources\js\jquery.js" />
     <EmbeddedResource Include="Resources\js\layim-init.js" />
     <EmbeddedResource Include="Resources\js\layim-init.min.js" />
     <EmbeddedResource Include="Resources\js\protobuf.js" />
@@ -39,7 +49,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\css\" />
     <Folder Include="Cache\" />
   </ItemGroup>
 

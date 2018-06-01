@@ -87,7 +87,7 @@ namespace LayIM.AspNetCore.Core.Application
         public bool UseVoiceOnMessageReceived { get; set; } = true;
 
         [JsonProperty("voice")]
-        public string Voice
+        internal string Voice
         {
             get
             {
@@ -102,13 +102,13 @@ namespace LayIM.AspNetCore.Core.Application
         public bool UseMessageBoxPage { get; set; } = false;
 
         [JsonProperty("msgbox")]
-        public string MessageBoxPage
+        internal string MessageBoxPage
         {
             get
             {
                 if (UseMessageBoxPage)
                 {
-                    return LayIMUrls.BuildUrl(LayIMUrls.Resources.LAYIM_PAGE_MSGBOX);
+                    return LayIMUrls.BuildUrl(LayIMUrls.LAYIM_ROUTE_PAGE_MSGBOX);
                 }
                 return string.Empty;
             }
@@ -120,13 +120,13 @@ namespace LayIM.AspNetCore.Core.Application
         public bool UseFindPage { get; set; } = false;
 
         [JsonProperty("find")]
-        public string FindPage
+        internal string FindPage
         {
             get
             {
                 if (UseFindPage)
                 {
-                    return LayIMUrls.BuildUrl(LayIMUrls.Resources.LAYIM_PAGE_FIND);
+                    return LayIMUrls.BuildUrl(LayIMUrls.LAYIM_ROUTE_PAGE_FIND);
                 }
                 return string.Empty;
             }
@@ -138,13 +138,13 @@ namespace LayIM.AspNetCore.Core.Application
         public bool UseHistoryPage { get; set; } = true;
 
         [JsonProperty("chatLog")]
-        public string HistoryPage
+        internal string HistoryPage
         {
             get
             {
                 if (UseHistoryPage)
                 {
-                    return LayIMUrls.BuildUrl(LayIMUrls.Resources.LAYIM_PAGE_CHATLOG);
+                    return LayIMUrls.BuildUrl(LayIMUrls.LAYIM_ROUTE_PAGE_CHATLOG);
                 }
                 return string.Empty;
             }
