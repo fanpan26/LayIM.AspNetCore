@@ -79,13 +79,14 @@ namespace LayIM.AspNetCore.Core.Routes
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        private static  Task<int> SaveChatMessage(HttpContext context)
+        private static Task<LayIMCommonResult> SaveChatMessage(HttpContext context)
         {
-            if (LayIMServiceLocator.Options.OtherConfig.SaveMsgAfterSend == false) {
-                return Task.FromResult(0);
+            if (LayIMServiceLocator.Options.OtherConfig.SaveMsgAfterSend == false)
+            {
+                return Task.FromResult(LayIMCommonResult.Error("未开启上传接口，非法的请求"));
             }
 
-            return storage.Value.SaveMessage(new Models.Base.LayIMMessageModel
+            storage.Value.SaveMessage(new Models.Base.LayIMMessageModel
             {
                 From = context.UserId(),
                 To = context.Request.Form["to"],
@@ -93,6 +94,7 @@ namespace LayIM.AspNetCore.Core.Routes
                 AddTime = DateTime.Now.ToTimestamp(),
                 Msg = context.Request.Form["msg"]
             });
+            return Task.FromResult(LayIMCommonResult.Result(1));
         }
         #endregion
     }
