@@ -52,12 +52,12 @@ namespace LayIM.AspNetCore.Core.Razor
 
         protected virtual void WriteJs(string js)
         {
-            WriteLiteral($"<script src=\"/{ApiPrefix}{js}\"></script>\r\n");
+            WriteLiteral($"<script src=\"{ApiPrefix}{js}\"></script>\r\n");
         }
 
         protected virtual void WriteCss(string css)
         {
-            WriteLiteral($"<link href=\"/{ApiPrefix}{css}\" rel=\"stylesheet\">\r\n");
+            WriteLiteral($"<link href=\"{ApiPrefix}{css}\" rel=\"stylesheet\">\r\n");
         }
 
         protected virtual void Write(object value)
