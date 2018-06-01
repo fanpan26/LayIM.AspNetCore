@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LayIM.AspNetCore.Core.Routes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -32,7 +33,7 @@ namespace LayIM.AspNetCore.Core.Razor
             WriteJs("/js/jquery.js");
             WriteJs("/js/chatlog.js");
 
-            WriteLiteral($"<script>chatLogParam.init('{Query("type")}', '{Query("id")}');</script>\r\n");
+            WriteLiteral($"<script>chatLogParam.init('{Query("type")}', '{Query("id")}','{LayIMUrls.BuildUrl(LayIMUrls.LAYIM_ROUTE_CHAT_HISTORY)}');</script>\r\n");
 
         }
 

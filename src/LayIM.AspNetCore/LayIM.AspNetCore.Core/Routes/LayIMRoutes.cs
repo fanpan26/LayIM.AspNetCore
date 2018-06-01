@@ -61,6 +61,7 @@ namespace LayIM.AspNetCore.Core.Routes
             routes.AddExecute(LayIMUrls.LAYIM_ROUTE_UPLOAD_FILE, async context => await GetUploadResult(context, false));
             //保存聊天记录
             routes.AddExecute(LayIMUrls.LAYIM_ROUTE_SAVE_CHAT,  context => SaveChatMessage(context));
+            //读取聊天历史记录
         }
         /// <summary>
         /// 注册页面
@@ -68,7 +69,6 @@ namespace LayIM.AspNetCore.Core.Routes
         private static void RegisterPages()
         {
             routes.AddRazorPage(LayIMUrls.LAYIM_ROUTE_PAGE_CHATLOG, () => new ChatLogPage());
-            routes.AddRazorPage(LayIMUrls.LAYIM_ROUTE_PAGE_HISTORY, () => new PartialHistoryPage());
             //routes.AddRazorPage("/msgbox",()=>)
         }
         #endregion

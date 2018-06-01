@@ -1,9 +1,10 @@
 ﻿(function () {
-    var _type, _id;
+    var _type, _id,_his;
     var param = {
-        init: function (type, id) {
+        init: function (type, id, his) {
             _type = type;
             _id = id;
+            _his = his;
             helper.loadMsg();
             $('#chatLogMore').on('click', function () {
                 helper.loadMsg();
@@ -15,7 +16,6 @@
     var helper = {
         loadMsg: function () {
             if (!record) { return; }
-            var uid = parent.layui.layim.cache().mine.id;
             var $li = $('#LAY_view').find('li').first();
             var t = 0;
             if ($li.length > 0) {
@@ -23,7 +23,7 @@
             }
             $('#chatLogMore').find('span').text('正在加载...');
 
-            $.get('/layim/history', { uid: uid, type: _type, id: _id, stamp: t, page: 20 }, function (res) {
+            $.get(_his, {type: _type, id: _id, stamp: t, page: 20 }, function (res) {
                 if (res && res.trim() != '') {
                     if ($li.length) {
                         $(res).insertBefore($li);
