@@ -221,7 +221,7 @@
         saveMsg: function (uid, toid, type, msg) {
             if (conf.other.saveMsg) {
                 $.post(conf.api.save, { "to": toid, "type": type, "msg": msg }, function (res) {
-                    log('保存消息结果：' + res);
+                    log('保存消息结果：' + res.code);
                 });
             } else {
                 log('未开启保存消息，消息将不被保存.若要开启，请将[options.OtherConfig.SaveMsgAfterSend]设置为true')
