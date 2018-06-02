@@ -1,14 +1,11 @@
-### 项目简介
+## LayIM.AspNetCore Middleware
 
-###### LayIM.AspNetCore 是基于ASP.NET CORE Middleware 对前端WebIM框架LayIM后端的一个深度封装。目标是通过简单配置即可使用，并且用户可以自定义实现。
-###### LayIM官网地址：http://layim.layui.com/
--- 本人非LayIM作者，LayIM 销售权，著作权请到官网了解详情。
--- 数据库为SQL Server 2008，开发工具为Visual Studio 2017 开发环境：.NET CORE2.1
+一个基于AspNetCore的中间件。对LayIM的功能实现做了深度封装。达到配置即可用。默认提供了融云的实现和SqlServer的存储实现。后期会加上SignalR的实现。
 
-###### 快速开始
----
- 第一步：执行项目中的脚本 ：layim.sqlserver.createdb layim.sqlserver.initdata
- 第二步：修改Demo项目中的配置参数，由于是提供了融云的默认实现，所以目前需要配置融云参数。
+LayIM官网地址：http://layim.layui.com/
+
+### 1 执行项目中的脚本 ：layim.sqlserver.createdb layim.sqlserver.initdata
+### 2 修改Demo项目中的配置参数，由于是提供了融云的默认实现，所以目前需要配置融云参数。
 ```c#
   public void ConfigureServices(IServiceCollection services)
         {
@@ -19,15 +16,16 @@
                 //使用融云通信（如果自定义的话，这里改成自定义的即可。需要实现 ILayIMServer接口）
                 .AddRongCloud(config =>
                     {
-                        config.AppKey = "pvxdm17jpv1or";
-                        config.AppSecret = "I8a4qFGzFe8";
+                        config.AppKey = "******";
+                        config.AppSecret = "******";
                     })
                  //使用SqlServer保存相关信息
-                .AddSqlServer("server=192.168.1.18;user id=sa;password=123123;database=LayIM;Min Pool Size=16;Connect Timeout=500;");
+                .AddSqlServer("******");
 
             services.AddSession();
         }
 ```
+---
 ``` c#
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -51,6 +49,4 @@
 
 --- 
 项目运行图在images文件夹中。部分图示例：
-
 ![](http://img1.gurucv.com/image/2018/6/2/9eb97dc360cb42fca59c757e6fa2511c.png)
-![](http://img1.gurucv.com/image/2018/6/2/ce83babb67dd4a99aa700033e2b59765.png)

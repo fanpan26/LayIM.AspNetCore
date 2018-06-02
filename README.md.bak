@@ -2,12 +2,12 @@
 
 ###### LayIM.AspNetCore 是基于ASP.NET CORE Middleware 对前端WebIM框架LayIM后端的一个深度封装。目标是通过简单配置即可使用，并且用户可以自定义实现。
 ###### LayIM官网地址：http://layim.layui.com/
--- 本人非LayIM作者，LayIM 销售权，著作权请到官网了解详情。
 -- 数据库为SQL Server 2008，开发工具为Visual Studio 2017 开发环境：.NET CORE2.1
 
 ###### 快速开始
 ---
  第一步：执行项目中的脚本 ：layim.sqlserver.createdb layim.sqlserver.initdata
+---
  第二步：修改Demo项目中的配置参数，由于是提供了融云的默认实现，所以目前需要配置融云参数。
 ```c#
   public void ConfigureServices(IServiceCollection services)
@@ -27,40 +27,28 @@
 
             services.AddSession();
         }
+```
+``` c#
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+	    ..其他代码
+            //客户端模拟使用session保存当前用户ID
+            app.UseSession();
 
- //使用LayIM，自定义配置
+            //使用LayIM，自定义配置
             app.UseLayIM(options => {
                 //默认前缀就是/layim，不过也不推荐自定义（可能有bug。。。）
                 //options.ApiPrefix = "/layim";
                 options.UserFactory = new MyUserFactory();
             });
+
+	    ..其他代码
+        }
 ```
 
 ---
-第三步：运行数据库脚本（当前未自动化，需要手动运行） LayIM.SqlServer/layim.sql
-
----
-第三步：修改配置文件，增加数据库连接字符串和融云的appkey，appsecret
-
-```
-	<!--融云配置-->
-    <add key="RongCloud_AppKey" value="pvxdm17jpv1or"/>
-    <add key="RongCloud_AppSecret" value="*********"/>
-```
-
-```
-    <connectionStrings>
-		<add name="LayIM_Connection" connectionString="server=192.168.1.18;user id=sa;password=123123;database=LayIM;Min Pool Size=16;Connect Timeout=500;"/>
-    </connectionStrings>
-```
+运行项目即可，默认进入account/?uid=10001页面，其他浏览器可以使用此路径模拟登录。
 
 --- 
-第四步：将下载的layui文件夹放入项目的 Scripts 文件夹下。（参考HtmlSample项目）
-
---- 
-以下为测试截图：
-
-![](http://img1.gurucv.com/image/2017/6/19/f045156db6744b5eb0c7e2598308c2e1.png)
-![](http://img1.gurucv.com/image/2017/6/19/b64e793eec3a48fa9f060213970477c7.png)
-![](http://img1.gurucv.com/image/2017/6/19/4dd5e0f5a658479fb3895c206c4796fe.png)
-![](http://img1.gurucv.com/image/2017/6/19/deee85dd76c2444abe266110811a0b57.png)
+项目运行图在images文件夹中。部分图示例：
+![](http://img1.gurucv.com/image/2018/6/2/9eb97dc360cb42fca59c757e6fa2511c.png)
