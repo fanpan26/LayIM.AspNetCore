@@ -2,12 +2,12 @@
 
 ###### LayIM.AspNetCore 是基于ASP.NET CORE Middleware 对前端WebIM框架LayIM后端的一个深度封装。目标是通过简单配置即可使用，并且用户可以自定义实现。
 ###### LayIM官网地址：http://layim.layui.com/
--- 本人非LayIM作者，LayIM 销售权，著作权请到官网了解详情。
 -- 数据库为SQL Server 2008，开发工具为Visual Studio 2017 开发环境：.NET CORE2.1
 
 ###### 快速开始
 ---
  第一步：执行项目中的脚本 ：layim.sqlserver.createdb layim.sqlserver.initdata
+---
  第二步：修改Demo项目中的配置参数，由于是提供了融云的默认实现，所以目前需要配置融云参数。
 ```c#
   public void ConfigureServices(IServiceCollection services)
@@ -51,6 +51,4 @@
 
 --- 
 项目运行图在images文件夹中。部分图示例：
-
 ![](http://img1.gurucv.com/image/2018/6/2/9eb97dc360cb42fca59c757e6fa2511c.png)
-![](http://img1.gurucv.com/image/2018/6/2/ce83babb67dd4a99aa700033e2b59765.png)
