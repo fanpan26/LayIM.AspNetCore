@@ -29,7 +29,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayIM.AspNetCore.Storage.My
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayIM.AspNetCore.Storage.Infra.Dapper", "LayIM.AspNetCore.Storage.Infra.Dapper\LayIM.AspNetCore.Storage.Infra.Dapper.csproj", "{327839B1-309D-4F78-BEAC-D2E855BC2155}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayIM.AspNetCore.IM.SignalR", "LayIM.AspNetCore.IM.SignalR\LayIM.AspNetCore.IM.SignalR.csproj", "{03853F8E-375B-416D-AA7A-2CA785664102}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LayIM.AspNetCore.IM.SignalR", "LayIM.AspNetCore.IM.SignalR\LayIM.AspNetCore.IM.SignalR.csproj", "{03853F8E-375B-416D-AA7A-2CA785664102}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayIM.AspNetCore.IM.TioServer", "LayIM.AspNetCore.IM.TioServer\LayIM.AspNetCore.IM.TioServer.csproj", "{F12E7035-D822-4BA8-BF68-910E44AE6C8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LayIM.AspNetCore.Storage.MongoDB", "LayIM.AspNetCore.Storage.MongoDB\LayIM.AspNetCore.Storage.MongoDB.csproj", "{FA87C379-548E-46E4-8B94-D4BB4F586E1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,14 @@ Global
 		{03853F8E-375B-416D-AA7A-2CA785664102}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03853F8E-375B-416D-AA7A-2CA785664102}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03853F8E-375B-416D-AA7A-2CA785664102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F12E7035-D822-4BA8-BF68-910E44AE6C8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F12E7035-D822-4BA8-BF68-910E44AE6C8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F12E7035-D822-4BA8-BF68-910E44AE6C8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F12E7035-D822-4BA8-BF68-910E44AE6C8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA87C379-548E-46E4-8B94-D4BB4F586E1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA87C379-548E-46E4-8B94-D4BB4F586E1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA87C379-548E-46E4-8B94-D4BB4F586E1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA87C379-548E-46E4-8B94-D4BB4F586E1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +98,8 @@ Global
 		{DA06533F-D116-4BC8-A042-553386CED621} = {1915707E-68A7-4150-B6DC-03D2CE8180C5}
 		{327839B1-309D-4F78-BEAC-D2E855BC2155} = {1915707E-68A7-4150-B6DC-03D2CE8180C5}
 		{03853F8E-375B-416D-AA7A-2CA785664102} = {1F094733-5A4A-4F40-A8E0-DFFFB7BDA17A}
+		{F12E7035-D822-4BA8-BF68-910E44AE6C8E} = {1F094733-5A4A-4F40-A8E0-DFFFB7BDA17A}
+		{FA87C379-548E-46E4-8B94-D4BB4F586E1E} = {1915707E-68A7-4150-B6DC-03D2CE8180C5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A2A1D304-2D34-4AFC-8A05-CD7A467F5F23}
