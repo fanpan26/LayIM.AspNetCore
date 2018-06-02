@@ -3,7 +3,6 @@
 一个基于AspNetCore的中间件。对LayIM的功能实现做了深度封装。达到配置即可用。默认提供了融云的实现和SqlServer的存储实现。后期会加上SignalR的实现。
 
 LayIM官网地址：http://layim.layui.com/
-LayIM演示地址：http://www.layui.com/demo/layim.html
 
 ### 1 执行项目中的脚本 ：layim.sqlserver.createdb layim.sqlserver.initdata
 ### 2 修改Demo项目中的配置参数，由于是提供了融云的默认实现，所以目前需要配置融云参数。
