@@ -56,7 +56,7 @@ namespace LayIM.AspNetCore.Core.Routes
         /// <summary>
         /// 路由：/page/msgbox.history.html
         /// </summary>
-        public static readonly string LAYIM_ROUTE_CHAT_HISTORY = "/chat/history";
+        public static readonly string LAYIM_ROUTE_PAGE_HISTORY = "/chat/history";
 
         internal static class Resources
         {

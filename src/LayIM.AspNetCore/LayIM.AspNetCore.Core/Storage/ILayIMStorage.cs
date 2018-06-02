@@ -17,10 +17,21 @@ namespace LayIM.AspNetCore.Core.Storage
         Task<LayIMInitModel> GetInitData(string userId);
 
         /// <summary>
-        /// 保存聊天记录
+        /// save chat messages
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
         Task<int> SaveMessage(LayIMMessageModel message);
+
+        /// <summary>
+        /// get chat history messages
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="targetId"></param>
+        /// <param name="type"></param>
+        /// <param name="fromTimestamp"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        Task<IEnumerable<ChatMessageViewModel>> GetChatMessages(string userId, string targetId, string type, long fromTimestamp, int page = 20);
     }
 }

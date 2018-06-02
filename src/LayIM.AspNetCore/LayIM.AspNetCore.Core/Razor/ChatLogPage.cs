@@ -33,7 +33,7 @@ namespace LayIM.AspNetCore.Core.Razor
             WriteJs("/js/jquery.js");
             WriteJs("/js/chatlog.js");
 
-            WriteLiteral($"<script>chatLogParam.init('{Query("type")}', '{Query("id")}','{LayIMUrls.BuildUrl(LayIMUrls.LAYIM_ROUTE_CHAT_HISTORY)}');</script>\r\n");
+            WriteLiteral($"<script>chatLogParam.init('{Query("type")}', '{Query("id")}','{LayIMUrls.BuildUrl(LayIMUrls.LAYIM_ROUTE_PAGE_HISTORY)}');</script>\r\n");
 
         }
 

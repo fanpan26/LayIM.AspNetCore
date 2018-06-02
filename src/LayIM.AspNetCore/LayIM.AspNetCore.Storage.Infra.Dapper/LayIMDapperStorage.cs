@@ -97,9 +97,44 @@ namespace LayIM.AspNetCore.Storage.Infra.Dapper
         {
             if (message?.IsVlid == true)
             {
+                message.RoomId = RoomIdGenerator.RoomId(message.From, message.To,message.Type);
                 return chatRecordRepository.Add(message);
             }
             return Task.FromResult(0);
+        }
+
+        public async Task<IEnumerable<ChatMessageViewModel>> GetChatMessages(string userId, string targetId, string type, long fromTimestamp, int page = 20)
+        {
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(targetId))
+            {
+                return LayIMNoData.NoChatMessages;
+            }
+            if (page <= 0) { page = 1; }
+
+            string roomId = RoomIdGenerator.RoomId(userId, targetId, type);
+            var chatRecords = await chatRecordRepository.GetList(roomId, page, fromTimestamp);
+            if (chatRecords?.Count() > 0)
+            {
+                var userIds = chatRecords.Select(x => x.FromId);
+                var users = await userRepository.GetUsersByIds(userIds);
+                var result = new List<ChatMessageViewModel>();
+                long uidLong = long.Parse(userId);
+                foreach (var chat in chatRecords)
+                {
+                    var user = users.FirstOrDefault(x => x.id == chat.FromId);
+                    result.Add(new ChatMessageViewModel
+                    {
+                        addtime = chat.AddTime,
+                        from = chat.FromId,
+                        msg = chat.Msg,
+                        self = chat.FromId == uidLong,
+                        avatar = user?.avatar,
+                        username = user?.username
+                    });
+                }
+                return result.OrderBy(x=>x.addtime);
+            }
+            return LayIMNoData.NoChatMessages;
         }
     }
 }
