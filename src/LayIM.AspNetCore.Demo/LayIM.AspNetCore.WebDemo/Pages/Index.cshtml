@@ -2,8 +2,6 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
-    //这里要和后台对应
-    var layimPrefix = "/layim";
 }
 
 <div class="row">
@@ -15,5 +13,5 @@
         </style>
     <script src="~/layui/layui.js"></script>
     <!--对应后台配置前缀-->
-    <script src="@layimPrefix/js/layim-init.js"></script>
+    <script src="/layim/js/init.js"></script>
 </div>

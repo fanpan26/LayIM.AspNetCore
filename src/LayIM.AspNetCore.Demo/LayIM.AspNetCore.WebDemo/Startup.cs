@@ -24,12 +24,15 @@ namespace LayIM.AspNetCore.WebDemo
         {
             services.AddMvc();
 
+            //注册LayIM的默认服务
             services.AddLayIM()
+                //使用融云通信（如果自定义的话，这里改成自定义的即可。需要实现 ILayIMServer接口）
                 .AddRongCloud(config =>
                     {
                         config.AppKey = "pvxdm17jpv1or";
                         config.AppSecret = "I8a4qFGzFe8";
                     })
+                //使用SqlServer保存相关信息
                 .AddSqlServer("server=192.168.1.18;user id=sa;password=123123;database=LayIM;Min Pool Size=16;Connect Timeout=500;");
 
             services.AddSession();
@@ -54,8 +57,10 @@ namespace LayIM.AspNetCore.WebDemo
             //客户端模拟使用session保存当前用户ID
             app.UseSession();
 
+            //使用LayIM，自定义配置
             app.UseLayIM(options => {
-                options.ApiPrefix = "/layim";
+                //默认前缀就是/layim，不过也不推荐自定义（可能有bug。。。）
+                //options.ApiPrefix = "/layim";
                 options.UserFactory = new MyUserFactory();
             });
 

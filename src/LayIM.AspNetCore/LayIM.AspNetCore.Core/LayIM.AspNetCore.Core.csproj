@@ -26,8 +26,6 @@
     <None Remove="Resources\font\iconfont.woff" />
     <None Remove="Resources\js\chatlog.js" />
     <None Remove="Resources\js\jquery.js" />
-    <None Remove="Resources\js\layim-init.js" />
-    <None Remove="Resources\js\layim-init.min.js" />
     <None Remove="Resources\js\protobuf.js" />
     <None Remove="Resources\js\rmlib.js" />
     <None Remove="Resources\js\socket.js" />
@@ -43,8 +41,7 @@
     <EmbeddedResource Include="Resources\font\iconfont.woff" />
     <EmbeddedResource Include="Resources\js\chatlog.js" />
     <EmbeddedResource Include="Resources\js\jquery.js" />
-    <EmbeddedResource Include="Resources\js\layim-init.js" />
-    <EmbeddedResource Include="Resources\js\layim-init.min.js" />
+    <EmbeddedResource Include="Resources\js\init.js" />
     <EmbeddedResource Include="Resources\js\protobuf.js" />
     <EmbeddedResource Include="Resources\js\rmlib.js" />
     <EmbeddedResource Include="Resources\js\socket.js" />
