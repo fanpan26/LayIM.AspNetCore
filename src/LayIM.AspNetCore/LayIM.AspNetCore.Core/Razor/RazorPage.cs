@@ -38,6 +38,11 @@ namespace LayIM.AspNetCore.Core.Razor
             HttpContext = context;
         }
 
+        protected string UserId()
+        {
+            return HttpContext.UserId();
+        }
+
         public string Query(string key)
         {
             HttpContext.Request.Query.TryGetValue(key, out var value);

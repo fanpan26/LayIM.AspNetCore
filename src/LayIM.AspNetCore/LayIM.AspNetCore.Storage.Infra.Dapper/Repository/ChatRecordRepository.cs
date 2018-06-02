@@ -1,4 +1,5 @@
 ﻿using LayIM.AspNetCore.Core.Models.Base;
+using LayIM.AspNetCore.Storage.Infra.Dapper.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,6 +20,13 @@ namespace LayIM.AspNetCore.Storage.Infra.Dapper.Repository
             var sql = "insert into layim_chat_record values (@From,@To,@RoomId,@Type,@Msg,@AddTime)";
 
             return ExecuteSqlAsync<int>(sql, msg);
+        }
+
+        public Task<IEnumerable<ChatRecord>> GetList(string roomId, int page, long fromTimestamp)
+        {
+            var where = fromTimestamp == 0 ? "" : "and addtime < " + fromTimestamp;
+            var sql = $"SELECT top {page} from_id as FromId,[msg] as Msg,addtime as AddTime FROM layim_chat_record where room_id=@roomid {where} order by Id desc";
+            return QueryAsync<ChatRecord>(sql, new { roomid = roomId, page = page });
         }
 
     }

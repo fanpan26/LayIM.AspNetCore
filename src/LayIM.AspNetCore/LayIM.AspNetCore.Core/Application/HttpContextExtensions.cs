@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace LayIM.AspNetCore.Core.Application
 {
@@ -59,7 +60,8 @@ namespace LayIM.AspNetCore.Core.Application
         public static bool IsLayIMResourceRequest(this HttpContext context, LayIMOptions options)
         {
             string path = context.GetRoutePath(options);
-            return path.StartsWith("/js")|| path.StartsWith("/page") || path.StartsWith("/css");
+            return Regex.IsMatch(path, "^(js/|page/|css/|font/)*.*$");
+           
         }
 
         /// <summary>

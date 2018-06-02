@@ -12,7 +12,6 @@ namespace LayIM.AspNetCore.Core.Models.Base
         public string Type { get; set; }
         public long AddTime { get; set; }
         public bool IsVlid => !(string.IsNullOrEmpty(From) || string.IsNullOrEmpty(To) || Msg == null);
-
-        public string RoomId => string.Compare(From, To) > 0 ? $"{To}{From}" : $"{From}{To}";
+        public string RoomId { get; set; }
     }
 }

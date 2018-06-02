@@ -12,6 +12,7 @@
     <Compile Remove="Models\Base\AvatarModel.cs" />
     <Compile Remove="Models\Base\FriendGroupModel.cs" />
     <Compile Remove="Models\Base\IdModel.cs" />
+    <Compile Remove="Razor\HtmlParser.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +20,10 @@
     <None Remove="Resources\css\apply.css" />
     <None Remove="Resources\css\chatlog.css" />
     <None Remove="Resources\css\layui.css" />
+    <None Remove="Resources\font\iconfont.eot" />
+    <None Remove="Resources\font\iconfont.svg" />
+    <None Remove="Resources\font\iconfont.ttf" />
+    <None Remove="Resources\font\iconfont.woff" />
     <None Remove="Resources\js\chatlog.js" />
     <None Remove="Resources\js\jquery.js" />
     <None Remove="Resources\js\layim-init.js" />
@@ -32,6 +37,10 @@
     <EmbeddedResource Include="Resources\css\apply.css" />
     <EmbeddedResource Include="Resources\css\chatlog.css" />
     <EmbeddedResource Include="Resources\css\layui.css" />
+    <EmbeddedResource Include="Resources\font\iconfont.eot" />
+    <EmbeddedResource Include="Resources\font\iconfont.svg" />
+    <EmbeddedResource Include="Resources\font\iconfont.ttf" />
+    <EmbeddedResource Include="Resources\font\iconfont.woff" />
     <EmbeddedResource Include="Resources\js\chatlog.js" />
     <EmbeddedResource Include="Resources\js\jquery.js" />
     <EmbeddedResource Include="Resources\js\layim-init.js" />

@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace LayIM.AspNetCore.Core.Routes
 {
+    /// <summary>
+    /// 业务实现细节，需要重构，业务不应该放在Routes里
+    /// </summary>
     internal sealed partial class LayIMRoutes
     {
         public static RoutesCollection Routes => routes;
@@ -60,8 +63,7 @@ namespace LayIM.AspNetCore.Core.Routes
             //上传文件
             routes.AddExecute(LayIMUrls.LAYIM_ROUTE_UPLOAD_FILE, async context => await GetUploadResult(context, false));
             //保存聊天记录
-            routes.AddExecute(LayIMUrls.LAYIM_ROUTE_SAVE_CHAT,  context => SaveChatMessage(context));
-            //读取聊天历史记录
+            routes.AddExecute(LayIMUrls.LAYIM_ROUTE_SAVE_CHAT, context => SaveChatMessage(context));
         }
         /// <summary>
         /// 注册页面
@@ -69,7 +71,7 @@ namespace LayIM.AspNetCore.Core.Routes
         private static void RegisterPages()
         {
             routes.AddRazorPage(LayIMUrls.LAYIM_ROUTE_PAGE_CHATLOG, () => new ChatLogPage());
-            //routes.AddRazorPage("/msgbox",()=>)
+            routes.AddRazorPage(LayIMUrls.LAYIM_ROUTE_PAGE_HISTORY, () => new PartialChatLogBindPage(storage.Value));
         }
         #endregion
 

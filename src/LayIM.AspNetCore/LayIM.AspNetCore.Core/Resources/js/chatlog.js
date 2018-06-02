@@ -22,7 +22,6 @@
                 t = $li.data('timestamp');
             }
             $('#chatLogMore').find('span').text('正在加载...');
-
             $.get(_his, {type: _type, id: _id, stamp: t, page: 20 }, function (res) {
                 if (res && res.trim() != '') {
                     if ($li.length) {
@@ -33,11 +32,13 @@
                     //转换 content
                     $('#LAY_view li[trans="0"]').each(function () {
                         var o = $(this).find('.layim-chat-text'), ot = o.text().trim(), n = parent.layui.layim.content(ot);
-
                         o.html(n);
                         $(this).attr('trans', "1");
                     });
                     $('#chatLogMore').find('span').text('查看更多记录');
+                    if (t == 0) {
+                        $(document).scrollTop($(document).height());  
+                    }
                 } else {
                     $('#chatLogMore').find('span').text('无更多记录了');
                     record = false;

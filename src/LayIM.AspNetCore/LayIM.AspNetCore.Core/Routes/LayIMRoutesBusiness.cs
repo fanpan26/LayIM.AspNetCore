@@ -92,9 +92,29 @@ namespace LayIM.AspNetCore.Core.Routes
                 To = context.Request.Form["to"],
                 Type = context.Request.Form["type"],
                 AddTime = DateTime.Now.ToTimestamp(),
-                Msg = context.Request.Form["msg"]
+                Msg = StringUtil.ReplaceHtmlTag(context.Request.Form["msg"])
             });
             return Task.FromResult(LayIMCommonResult.Result(1));
+        }
+
+        private static async Task<LayIMCommonResult> GetChatMessages(HttpContext context)
+        {
+            if (LayIMServiceLocator.Options.UIConfig.UseHistoryPage == false)
+            {
+                return LayIMCommonResult.Error("未开启历史消息记录接口，非法的请求");
+            }
+
+            var query = context.Request.Query;
+            query.TryGetValue("type", out var type);
+            query.TryGetValue("id", out var id);
+            query.TryGetValue("stamp", out var stamp);
+            query.TryGetValue("page", out var page);
+
+            long.TryParse(stamp, out var timestamp);
+            int.TryParse(page, out var pageInt);
+
+            var msgs = await storage.Value.GetChatMessages(context.UserId(), id, type, timestamp, pageInt);
+            return LayIMCommonResult.Result(msgs);
         }
         #endregion
     }
