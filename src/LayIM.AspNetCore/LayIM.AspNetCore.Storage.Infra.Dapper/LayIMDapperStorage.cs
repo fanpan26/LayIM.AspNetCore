@@ -103,6 +103,15 @@ namespace LayIM.AspNetCore.Storage.Infra.Dapper
             return Task.FromResult(0);
         }
 
+        /// <summary>
+        /// 获取聊天历史记录
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="targetId"></param>
+        /// <param name="type"></param>
+        /// <param name="fromTimestamp"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<ChatMessageViewModel>> GetChatMessages(string userId, string targetId, string type, long fromTimestamp, int page = 20)
         {
             if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(targetId))
@@ -135,6 +144,26 @@ namespace LayIM.AspNetCore.Storage.Infra.Dapper
                 return result.OrderBy(x=>x.addtime);
             }
             return LayIMNoData.NoChatMessages;
+        }
+
+        /// <summary>
+        /// 根据群ID获取群员列表
+        /// </summary>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
+        public async Task<LayIMGroupMemberModel> GetGroupMembers(string userId, string groupId)
+        {
+            var mine = await userRepository.GetUserById(userId);
+            var memberIds = await groupMemberRepository.GetUsersByGroupId(groupId);
+            var members = await userRepository.GetUsersByIds(memberIds);
+
+            LayIMGroupMemberModel result = new LayIMGroupMemberModel
+            {
+                list = members,
+                owner = mine,
+                members = members.Count()
+            };
+            return result;
         }
     }
 }

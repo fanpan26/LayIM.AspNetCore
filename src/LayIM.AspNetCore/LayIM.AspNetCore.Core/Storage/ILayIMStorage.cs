@@ -17,6 +17,13 @@ namespace LayIM.AspNetCore.Core.Storage
         Task<LayIMInitModel> GetInitData(string userId);
 
         /// <summary>
+        /// 根据群组ID获取群员列表
+        /// </summary>
+        /// <param name="groupId"></param>
+        /// <returns></returns>
+        Task<LayIMGroupMemberModel> GetGroupMembers(string userId,string groupId);
+
+        /// <summary>
         /// save chat messages
         /// </summary>
         /// <param name="message"></param>

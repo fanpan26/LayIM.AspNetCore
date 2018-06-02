@@ -47,17 +47,11 @@ namespace LayIM.AspNetCore.Core.Routes
                 });
             });
             //获取连接websocket的token
-            routes.AddQuery(LayIMUrls.LAYIM_ROUTE_IM_TOKEN, async context => await api.Value.GetToken(context.UserId()), new CacheConfig
-            {
-                CacheKey = "layim_cache_user_token",
-                ExpireMinutes = 60
-            });
+            routes.AddQuery(LayIMUrls.LAYIM_ROUTE_IM_TOKEN, async context => await api.Value.GetToken(context.UserId()));
             //layim初始化接口
-            routes.AddQuery(LayIMUrls.LAYIM_ROUTE_INIT, async context => await GetInitData(context), new CacheConfig
-            {
-                CacheKey = "layim_cache_user_init",
-                ExpireMinutes = 20
-            });
+            routes.AddQuery(LayIMUrls.LAYIM_ROUTE_INIT, async context => await GetInitData(context));
+            //群员接口
+            routes.AddQuery(LayIMUrls.LAYIM_ROUTE_GROUP_MEMBERS, async context => await GetGroupMembers(context));
             //上传图片
             routes.AddExecute(LayIMUrls.LAYIM_ROUTE_UPLOAD_IMAGE, async context => await GetUploadResult(context, true));
             //上传文件

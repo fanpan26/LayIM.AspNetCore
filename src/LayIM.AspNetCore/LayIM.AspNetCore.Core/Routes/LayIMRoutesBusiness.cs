@@ -75,6 +75,22 @@ namespace LayIM.AspNetCore.Core.Routes
         }
 
         /// <summary>
+        /// 获取群员列表
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        private static async Task<LayIMCommonResult> GetGroupMembers(HttpContext context)
+        {
+            if (LayIMServiceLocator.Options.UIConfig.UseGroup == false) {
+                return LayIMCommonResult.Error("未开启群组接口");
+            }
+            context.Request.Query.TryGetValue("id", out var groupId);
+            var res = await storage.Value.GetGroupMembers(context.UserId(), groupId);
+            return LayIMCommonResult.Result(res);
+        }
+
+
+        /// <summary>
         /// 保存聊天消息
         /// </summary>
         /// <param name="context"></param>
@@ -83,7 +99,7 @@ namespace LayIM.AspNetCore.Core.Routes
         {
             if (LayIMServiceLocator.Options.OtherConfig.SaveMsgAfterSend == false)
             {
-                return Task.FromResult(LayIMCommonResult.Error("未开启上传接口，非法的请求"));
+                return Task.FromResult(LayIMCommonResult.Error("未开启上传接口"));
             }
 
             storage.Value.SaveMessage(new Models.Base.LayIMMessageModel
@@ -101,7 +117,7 @@ namespace LayIM.AspNetCore.Core.Routes
         {
             if (LayIMServiceLocator.Options.UIConfig.UseHistoryPage == false)
             {
-                return LayIMCommonResult.Error("未开启历史消息记录接口，非法的请求");
+                return LayIMCommonResult.Error("未开启历史消息记录接口");
             }
 
             var query = context.Request.Query;
