@@ -59,9 +59,8 @@ namespace LayIM.AspNetCore.WebDemo
 
             //使用LayIM，自定义配置
             app.UseLayIM(options => {
-                //默认前缀就是/layim，不过也不推荐自定义（可能有bug。。。）
-                //options.ApiPrefix = "/layim";
                 options.UserFactory = new MyUserFactory();
+                //options.UIConfig.
             });
 
             app.UseMvc(routes =>
