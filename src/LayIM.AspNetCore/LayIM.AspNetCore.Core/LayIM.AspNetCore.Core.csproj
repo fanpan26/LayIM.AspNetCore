@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Cache\**" />
+    <EmbeddedResource Remove="Cache\**" />
+    <None Remove="Cache\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Application\ILayIMUserIdFactory.cs" />
     <Compile Remove="Application\LayIMServiceConfig.cs" />
     <Compile Remove="Application\LayIMServiceExtension.cs" />
@@ -54,10 +60,6 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Cache\" />
   </ItemGroup>
 
   <ItemGroup>
