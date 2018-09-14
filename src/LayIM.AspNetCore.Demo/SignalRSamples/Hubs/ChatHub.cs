@@ -18,9 +18,14 @@ namespace SignalRSamples.Hubs
             await Clients.Others.SendAsync("Receive", $"{Context.ConnectionId} left");
         }
 
+        //public Task Send(string message)
+        //{
+        //    return Clients.All.SendAsync("Receive", $"{Context.ConnectionId}: {message}");
+        //}
+
         public Task Send(string message)
         {
-            return Clients.All.SendAsync("Receive", $"{Context.ConnectionId}: {message}");
+            return Clients.All.LoginAsync($"{Context.ConnectionId}: {message}");
         }
 
         public Task SendToOthers(string message)

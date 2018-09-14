@@ -40,7 +40,8 @@ namespace SignalRSamples
             {
                 options.KeepAliveInterval = TimeSpan.FromSeconds(10);
                 options.EnableDetailedErrors = true;
-            }).AddRedis("192.168.187.129:6379");
+            })
+            .AddRedis("192.168.187.129:6379");
 
             services.AddCors(o =>
             {

@@ -23,6 +23,11 @@ namespace SignalRSamples.Hubs
             return Clients.All.Receive($"{Context.ConnectionId}: {message}");
         }
 
+        public Task Login(long userId)
+        {
+            return Clients.Caller.LoginSuccess(userId);
+        }
+
         public Task SendToOthers(string message)
         {
             return Clients.Others.Receive($"{Context.ConnectionId}: {message}");
@@ -61,5 +66,6 @@ namespace SignalRSamples.Hubs
     public interface IChatClient
     {
         Task Receive(string message);
+        Task LoginSuccess(long userId);
     }
 }

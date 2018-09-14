@@ -145,6 +145,9 @@
         connection.on('Receive', function (msg) {
             addLine('message-list', msg);
         });
+        connection.on('LoginSuccess', function (msg) {
+            addLine('message-list', "message from myextension:"+msg);
+        });
         connection.onclose(function (e) {
             if (e) {
                 addLine('message-list', 'Connection closed with error: ' + e, 'red');
