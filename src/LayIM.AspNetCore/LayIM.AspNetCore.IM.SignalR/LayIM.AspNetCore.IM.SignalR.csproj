@@ -5,4 +5,14 @@
     <RootNamespace>LayIM.AspNetCore.IM.SignalR</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Connections.Abstractions" Version="2.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Redis" Version="1.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LayIM.AspNetCore.Core\LayIM.AspNetCore.Core.csproj" />
+  </ItemGroup>
+
 </Project>

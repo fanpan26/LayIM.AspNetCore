@@ -12,14 +12,12 @@ namespace LayIM.AspNetCore.Core.Application
     {
         private readonly RequestDelegate next;
         private readonly LayIMOptions options;
-        private readonly IServiceProvider serviceProvider;
 
-        public LayIMMiddleware(RequestDelegate next, LayIMOptions options, IServiceProvider serviceProvider)
+        public LayIMMiddleware(RequestDelegate next, LayIMOptions options,IServiceProvider serviceProvider)
         {
             this.next = next;
             this.options = options;
-            this.serviceProvider = serviceProvider;
-            LayIMServiceLocator.SetServiceProvider(this.serviceProvider);
+            LayIMServiceLocator.SetServiceProvider(serviceProvider);
         }
 
 

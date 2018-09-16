@@ -1,4 +1,5 @@
-﻿using LayIM.AspNetCore.Core.Application;
+﻿using LayIM.AspNetCore.Core;
+using LayIM.AspNetCore.Core.Application;
 using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
@@ -26,8 +27,12 @@ namespace Microsoft.AspNetCore.Builder
                 FileProvider = new EmbeddedFileProvider(typeof(LayIMBuilderExtensions).GetTypeInfo().Assembly, LayIMEmbeddedFileNamespace),
             });
 
+            ILayIMAppBuilder appBuilder = LayIMServiceLocator.GetService<ILayIMAppBuilder>();
+            appBuilder?.Init(app);
+
             return app;
         }
+
 
         public static IApplicationBuilder UseLayIM(this IApplicationBuilder app)
         {

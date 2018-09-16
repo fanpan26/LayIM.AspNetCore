@@ -37,6 +37,7 @@ namespace LayIM.AspNetCore.Core.Application
         public LayIMConfig UIConfig { get; set; } = defaultConfig;
 
         public OtherConfig OtherConfig { get; set; } = OtherConfig.DefaultOtherConfig;
+        public ServerType ServerType { get; set; } = ServerType.RongCloud;
 
         public ILayIMUserFactory UserFactory { get; set; } = new DefaultQueryUserFactory();
     }
