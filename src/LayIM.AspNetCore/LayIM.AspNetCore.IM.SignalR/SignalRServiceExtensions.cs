@@ -1,11 +1,7 @@
 ﻿using LayIM.AspNetCore.Core;
 using LayIM.AspNetCore.Core.Application;
 using LayIM.AspNetCore.IM.SignalR;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.AspNetCore.SignalR.Redis;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -21,8 +17,6 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             var options = new LayIMHubOptions();
             configure?.Invoke(options);
-
-            services.AddConnections();
             var signalRServerBuilder = services.AddSignalR(options.HubConfigure);
             if (options.UseRedis)
             {

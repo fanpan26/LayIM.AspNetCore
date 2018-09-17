@@ -11,7 +11,11 @@ namespace LayIM.AspNetCore.IM.SignalR
         public void Init(IApplicationBuilder builder)
         {
             builder.UseSignalR(route => {
-                route.MapHub<LayIMHub>("/layimHub");
+                route.MapHub<LayIMHub>("/layimHub", connectionOptions =>
+                {
+                    //connectionOptions.ApplicationMaxBufferSize = 32 * 1024 * 8;
+                    //connectionOptions.TransportMaxBufferSize = 32 * 1024 * 8;
+                });
             });
         }
     }
