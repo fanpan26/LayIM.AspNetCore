@@ -210,16 +210,31 @@ namespace LayIM.AspNetCore.Core.Application
         [JsonProperty("rmlib")]
         public string RmLibJs => LayIMUrls.BuildUrl(LayIMUrls.Resources.LAYIM_JS_IM_RONG_LIB);
 
+        [JsonProperty("signalr")]
+        public string SignalRJs => LayIMUrls.BuildUrl(LayIMUrls.Resources.LAYIM_JS_IM_SIGNALR);
+
         [JsonProperty("protobuf")]
         public string ProtoBufJs => LayIMUrls.BuildUrl(LayIMUrls.Resources.LAYIM_JS_IM_PROTOBUF);
 
         [JsonProperty("socket")]
-        public string SocketJs => LayIMUrls.BuildUrl(LayIMUrls.Resources.LAYIM_JS_IM_SOCKET);
+        public string SocketJs
+        {
+            get {
+                switch (LayIMServiceLocator.Options.ServerType)
+                {
+                    case ServerType.RongCloud:
+                        return LayIMUrls.BuildUrl(LayIMUrls.Resources.LAYIM_JS_IM_SOCKET_RONG_CLOUD);
+                    case ServerType.SignalR:
+                        return LayIMUrls.BuildUrl(LayIMUrls.Resources.LAYIM_JS_IM_SOCKET_SIGNALR);
+                }
+                throw new NotSupportedException($"not supported ServerType {LayIMServiceLocator.Options.ServerType}");
+            }
+        } 
 
         [JsonProperty("init")]
         public string InitJs => LayIMUrls.Resources.LAYIM_RESOURCE_INIT_JS;
 
         [JsonProperty("appKey")]
-        public string AppKey => LayIMServiceLocator.GetService<ILayIMAppInfo>()?.AppKey ?? "";
+        public string AppKey =>  LayIMServiceLocator.GetService<ILayIMAppInfo>()?.AppKey ?? "";
     }
 }

@@ -4,9 +4,12 @@
   "libraries": [
     {
       "library": "@aspnet/signalr@1.0.3",
-      "destination": "wwwroot/lib/signalr/",
+      "destination": "wwwroot/lib/@aspnet/signalr/",
       "files": [
-        "dist/browser/signalr.min.js"
+        "dist/browser/signalr.js",
+        "dist/browser/signalr.js.map",
+        "dist/browser/signalr.min.js",
+        "dist/browser/signalr.min.js.map"
       ]
     }
   ]

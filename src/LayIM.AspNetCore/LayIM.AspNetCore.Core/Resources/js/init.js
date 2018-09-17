@@ -6,7 +6,7 @@
             layui.use(conf.extend.init, function (socket) {
                 socket.start(conf);
             });
-        }
+        };
         var config = layui.data('layim_global')['config'];
         if (config) {
             callback(config);

@@ -16,7 +16,6 @@
     //事件监听
     var listener = function (code) {
         code && (call['status'] ? call['status'](code) : log(code));
-
     }
     //全局配置
     var conf = {
@@ -224,7 +223,7 @@
                     log('保存消息结果：' + res.code);
                 });
             } else {
-                log('未开启保存消息，消息将不被保存.若要开启，请将[options.OtherConfig.SaveMsgAfterSend]设置为true')
+                log('未开启保存消息，消息将不被保存.若要开启，请将[options.OtherConfig.SaveMsgAfterSend]设置为true');
             }
         },
         sendMsg: function (data) {
@@ -383,5 +382,5 @@
             });
         }
     };
-    exports('socket', out)
+    exports('socket', out);
 });

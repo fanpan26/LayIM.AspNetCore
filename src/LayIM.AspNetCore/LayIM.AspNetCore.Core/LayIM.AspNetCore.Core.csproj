@@ -35,7 +35,9 @@
     <None Remove="Resources\js\layui.js" />
     <None Remove="Resources\js\protobuf.js" />
     <None Remove="Resources\js\rmlib.js" />
-    <None Remove="Resources\js\socket.js" />
+    <None Remove="Resources\js\signalr.js" />
+    <None Remove="Resources\js\socket-rcloud.js" />
+    <None Remove="Resources\js\socket-signalr.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,7 +54,9 @@
     <EmbeddedResource Include="Resources\js\layui.js" />
     <EmbeddedResource Include="Resources\js\protobuf.js" />
     <EmbeddedResource Include="Resources\js\rmlib.js" />
-    <EmbeddedResource Include="Resources\js\socket.js" />
+    <EmbeddedResource Include="Resources\js\signalr.js" />
+    <EmbeddedResource Include="Resources\js\socket\signalr\socket.js" />
+    <EmbeddedResource Include="Resources\js\socket\rongcloud\socket.js" />
   </ItemGroup>
 
   <ItemGroup>

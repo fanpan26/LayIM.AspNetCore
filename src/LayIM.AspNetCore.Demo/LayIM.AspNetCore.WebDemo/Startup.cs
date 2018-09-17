@@ -41,7 +41,7 @@ namespace LayIM.AspNetCore.WebDemo
                         hubOptions.KeepAliveInterval = TimeSpan.FromSeconds(5);
                     };
                 })
-                   //使用SqlServer保存相关信息
+                //使用SqlServer保存相关信息
                 .AddSqlServer("server=DESKTOP-GK56MO8\\PZSQLSERVER;user id=sa;password=panzi123;database=LayIM;Min Pool Size=16;Connect Timeout=500;");
 
             services.BuildServiceProvider();

@@ -23,7 +23,7 @@ namespace LayIM.AspNetCore.Core.Application
 
         public static TService GetService<TService>()
         {
-            return (TService)serviceProvider.GetService(typeof(TService));
+            return (TService)serviceProvider?.GetService(typeof(TService));
         }
     }
 }

@@ -61,9 +61,17 @@ namespace LayIM.AspNetCore.Core.Routes
         internal static class Resources
         {
             /// <summary>
-            /// 静态资源：/js/token.js
+            /// 静态资源：融云版本通信JS
             /// </summary>
-            public static readonly string LAYIM_JS_IM_SOCKET = "/js/socket";
+            public static readonly string LAYIM_JS_IM_SOCKET_RONG_CLOUD = "/js/socket/rongcloud/socket";
+            /// <summary>
+            /// 静态资源：SignlaR版本通信JS
+            /// </summary>
+            public static readonly string LAYIM_JS_IM_SOCKET_SIGNALR = "/js/socket/signalr/socket";
+            /// <summary>
+            /// 静态资源：/js/signalr.js
+            /// </summary>
+            public static readonly string LAYIM_JS_IM_SIGNALR = "/js/signalr";
             /// <summary>
             /// 静态资源：/js/rmlib.js
             /// </summary>
