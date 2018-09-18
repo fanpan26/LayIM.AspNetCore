@@ -2,9 +2,6 @@
 using LayIM.AspNetCore.Core.Storage;
 using LayIM.AspNetCore.Storage.Infra.Dapper;
 using LayIM.AspNetCore.Storage.Infra.Dapper.Repository;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 
 namespace Microsoft.Extensions.DependencyInjection
