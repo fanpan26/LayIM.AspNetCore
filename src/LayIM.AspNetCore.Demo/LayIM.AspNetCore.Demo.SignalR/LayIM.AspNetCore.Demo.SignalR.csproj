@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\images\photo\gonggong.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\photo\huafei.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\photo\huanghou.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\photo\huangshang.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\photo\huangzu.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\photo\meijiejie.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\photo\xiaoniao.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\photo\xiaopanzi.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\images\photo\zhenhuan.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Connections.Abstractions" Version="2.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\LayIM.AspNetCore\LayIM.AspNetCore.Core\LayIM.AspNetCore.Core.csproj" />
+    <ProjectReference Include="..\..\LayIM.AspNetCore\LayIM.AspNetCore.IM.SignalR\LayIM.AspNetCore.IM.SignalR.csproj" />
+    <ProjectReference Include="..\..\LayIM.AspNetCore\LayIM.AspNetCore.Storage.SqlServer\LayIM.AspNetCore.Storage.SqlServer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\images\banner1.svg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\images\banner2.svg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\images\banner3.svg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\images\banner4.svg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>
