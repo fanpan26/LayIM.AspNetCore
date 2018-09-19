@@ -26,7 +26,7 @@ namespace LayIM.AspNetCore.Storage.Infra.Dapper.Repository
         {
             var where = fromTimestamp == 0 ? "" : "and addtime < " + fromTimestamp;
             var sql = $"SELECT top {page} from_id as FromId,[msg] as Msg,addtime as AddTime FROM layim_chat_record where room_id=@roomid {where} order by Id desc";
-            return QueryAsync<ChatRecord>(sql, new { roomid = roomId, page = page });
+            return QueryAsync<ChatRecord>(sql, new { roomid = roomId, page });
         }
 
     }

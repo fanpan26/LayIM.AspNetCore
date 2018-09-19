@@ -11,12 +11,11 @@ namespace LayIM.AspNetCore.Storage.Infra.Dapper
     }
     public class DBConnectionConfig
     {
-        private DBType dbType;
         public DBConnectionConfig(DBType dbType)
         {
-            this.dbType = dbType;
+            DbType = dbType;
         }
-        internal DBType DbType => dbType;
+        internal DBType DbType { get; }
         public string ConnectionString { get; set; }
     }
 }
