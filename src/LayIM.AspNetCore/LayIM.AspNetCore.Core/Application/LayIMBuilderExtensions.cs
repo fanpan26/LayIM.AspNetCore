@@ -28,7 +28,7 @@ namespace Microsoft.AspNetCore.Builder
             });
 
             ILayIMAppBuilder appBuilder = LayIMServiceLocator.GetService<ILayIMAppBuilder>();
-            appBuilder?.Init(app);
+            appBuilder?.Build(app);
 
             return app;
         }

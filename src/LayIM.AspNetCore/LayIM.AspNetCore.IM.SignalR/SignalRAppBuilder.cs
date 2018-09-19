@@ -8,7 +8,7 @@ namespace LayIM.AspNetCore.IM.SignalR
 {
     public class SignalRAppBuilder : ILayIMAppBuilder
     {
-        public void Init(IApplicationBuilder builder)
+        public void Build(IApplicationBuilder builder)
         {
             builder.UseSignalR(route => {
                 route.MapHub<LayIMHub>("/layimHub", connectionOptions =>

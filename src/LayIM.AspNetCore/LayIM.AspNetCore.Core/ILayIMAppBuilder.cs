@@ -7,6 +7,6 @@ namespace LayIM.AspNetCore.Core
 {
     public interface ILayIMAppBuilder
     {
-        void Init(IApplicationBuilder builder);
+        void Build(IApplicationBuilder builder);
     }
 }
