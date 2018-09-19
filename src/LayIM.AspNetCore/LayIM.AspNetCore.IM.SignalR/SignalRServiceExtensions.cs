@@ -23,6 +23,7 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 signalRServerBuilder.AddRedis(options.RedisConfiguration, options.RedisConfigure);
             }
+            //AddSignalR must be called before registering your custom SignalR services.
             services.AddSingleton<ILayIMAppBuilder, SignalRAppBuilder>();
             services.AddSingleton<IUserIdProvider, LayIMUserIdProvider>();
 
