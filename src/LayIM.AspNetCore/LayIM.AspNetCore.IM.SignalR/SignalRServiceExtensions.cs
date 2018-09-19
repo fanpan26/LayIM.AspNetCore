@@ -56,36 +56,37 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer(options =>{
+            .AddJwtBearer(options =>
+            {
                 options.TokenValidationParameters =
                     new TokenValidationParameters
-                {
-                    LifetimeValidator = (before, expires, token, param) =>
                     {
-                        return expires > DateTime.UtcNow;
-                    },
-                    ValidateAudience = false,
-                    ValidateIssuer = false,
-                    ValidateActor = false,
-                    ValidateLifetime = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SignalRSecurityKey.TOKEN_KEY))
-                };
+                        LifetimeValidator = (before, expires, token, param) =>
+                        {
+                            return expires > DateTime.UtcNow;
+                        },
+                        ValidateAudience = false,
+                        ValidateIssuer = false,
+                        ValidateActor = false,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(SignalRSecurityKey.TOKEN_KEY))
+                    };
                 options.Events = new JwtBearerEvents
-            {
-                OnMessageReceived = context =>
                 {
-                    var accessToken = context.Request.Query["access_token"];
-
-                    var path = context.HttpContext.Request.Path;
-                    if (!string.IsNullOrEmpty(accessToken) &&
-                        (path.StartsWithSegments("/layimHub")))
+                    OnMessageReceived = context =>
                     {
-                        context.Token = accessToken;
+                        var accessToken = context.Request.Query["access_token"];
+
+                        var path = context.HttpContext.Request.Path;
+                        if (!string.IsNullOrEmpty(accessToken) &&
+                            (path.StartsWithSegments("/layimHub")))
+                        {
+                            context.Token = accessToken;
+                        }
+                        return Task.CompletedTask;
                     }
-                    return Task.CompletedTask;
-                }
-            };
-        });
+                };
+            });
         }
     }
 
