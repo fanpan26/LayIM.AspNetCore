@@ -32,8 +32,8 @@ namespace LayIM.AspNetCore.Core.Dispatcher
             if (string.IsNullOrEmpty(currentUserId))
             {
                 context.Response.ContentType = "application/json;charset=utf-8;";
-                context.Response.StatusCode = StatusCodes.Status403Forbidden;
-                await context.Response.WriteAsync(JsonUtil.ToJSON(LayIMCommonResult.Error("无效的用户ID")));
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                await context.Response.WriteAsync(JsonUtil.ToJSON(LayIMCommonResult.Error("Unauthorized")));
                 return;
             }
             //save current user id in http context
