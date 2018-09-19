@@ -180,7 +180,7 @@
             log(msg);
 
             if (im.connected) {
-                this.invoke(connection,'SendMessage', msg);
+                this.invoke(connection, 'SendMessage', targetId, msg);
             } else {
                 im.saveMsg(mine.id, targetId, msg.type, msg.content);
             }

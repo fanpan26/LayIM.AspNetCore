@@ -33,10 +33,10 @@ namespace LayIM.AspNetCore.IM.SignalR
             return base.OnDisconnectedAsync(exception);
         }
 
-        public async Task SendMessage(LayIMMessage message)
+        public async Task SendMessage(string toUserId, LayIMMessage message)
         {
             var toClientMessage = MessageWrapper.Wrapper(message, LayIMMessageType.ClientToClient);
-            await Clients.Caller.Receive(toClientMessage);
+            await Clients.User(toUserId).Receive(toClientMessage);
         }
     }
 }

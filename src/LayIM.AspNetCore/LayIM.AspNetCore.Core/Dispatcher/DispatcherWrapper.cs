@@ -22,17 +22,7 @@ namespace LayIM.AspNetCore.Core.Dispatcher
         /// <returns></returns>
         private string GetCurrentUserId(HttpContext context)
         {
-            //先使用用户自定义的
-            var userFactory = LayIMServiceLocator.Options.UserFactory;
-            if (userFactory == null)
-            {
-                //在使用框架自带的
-                userFactory = LayIMServiceLocator.GetService<ILayIMUserFactory>();
-            }
-            if (userFactory == null)
-            {
-                return null;
-            }
+            var userFactory = LayIMServiceLocator.GetService<ILayIMUserFactory>();
             return userFactory.GetUserId(context);
         }
 

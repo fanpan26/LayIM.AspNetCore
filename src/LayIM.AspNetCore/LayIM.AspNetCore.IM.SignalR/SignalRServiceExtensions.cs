@@ -1,6 +1,7 @@
 ﻿using LayIM.AspNetCore.Core;
 using LayIM.AspNetCore.Core.Application;
 using LayIM.AspNetCore.IM.SignalR;
+using Microsoft.AspNetCore.SignalR;
 using System;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -23,6 +24,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 signalRServerBuilder.AddRedis(options.RedisConfiguration, options.RedisConfigure);
             }
             services.AddSingleton<ILayIMAppBuilder, SignalRAppBuilder>();
+            services.AddSingleton<IUserIdProvider, LayIMUserIdProvider>();
 
             LayIMServiceLocator.SetServiceProvider(services.BuildServiceProvider());
             return services;

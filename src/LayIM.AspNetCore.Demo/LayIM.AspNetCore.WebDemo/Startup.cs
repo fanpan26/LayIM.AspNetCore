@@ -26,7 +26,10 @@ namespace LayIM.AspNetCore.WebDemo
             services.AddMvc();
 
             //注册LayIM的默认服务
-            services.AddLayIM()
+            services.AddLayIM(() =>
+            {
+                return new MyUserFactory();
+            })
                 ////使用融云通信（如果自定义的话，这里改成自定义的即可。需要实现 ILayIMServer接口）
                 //.AddRongCloud(config =>
                 //    {
@@ -70,7 +73,6 @@ namespace LayIM.AspNetCore.WebDemo
             //使用LayIM，自定义配置
             app.UseLayIM(options =>
             {
-                options.UserFactory = new MyUserFactory();
                 options.ServerType = ServerType.SignalR;
             });
 
