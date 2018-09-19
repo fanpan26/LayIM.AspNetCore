@@ -103,6 +103,7 @@
             let hubRoute = "layimHub";
             let protocol = new signalR.JsonHubProtocol();
             var options = {};
+            options.accessTokenFactory = () => "testToken";
             connection = new signalR.HubConnectionBuilder()
                 .configureLogging(signalR.LogLevel.Trace)
                 .withUrl(hubRoute, options)

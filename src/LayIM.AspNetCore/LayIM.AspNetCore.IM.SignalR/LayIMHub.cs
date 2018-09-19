@@ -1,4 +1,5 @@
 ﻿using LayIM.AspNetCore.Core.Models.Messages;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace LayIM.AspNetCore.IM.SignalR
 {
+    [Authorize(AuthenticationSchemes ="signalr")]
     public class LayIMHub : Hub<ILayIMClient>
     {
         /// <summary>
@@ -15,6 +17,7 @@ namespace LayIM.AspNetCore.IM.SignalR
         /// <returns></returns>
         public override async Task OnConnectedAsync()
         {
+            var context = Context.GetHttpContext();
             var toClientMessage = MessageWrapper.Wrapper(new LayIMConnectedSuccessMessage
             {
                 Content = "Connected Success"
