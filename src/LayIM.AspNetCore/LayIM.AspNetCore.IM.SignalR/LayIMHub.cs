@@ -1,4 +1,5 @@
 ﻿using LayIM.AspNetCore.Core.Models.Messages;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LayIM.AspNetCore.IM.SignalR
 {
-    [Authorize(AuthenticationSchemes ="signalr")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class LayIMHub : Hub<ILayIMClient>
     {
         /// <summary>

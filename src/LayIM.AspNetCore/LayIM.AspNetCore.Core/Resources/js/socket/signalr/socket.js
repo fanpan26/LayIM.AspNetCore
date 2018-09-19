@@ -50,7 +50,7 @@
             });
         },
         open: function () {
-            im.connect();
+            im.connectWithToken();
         },
         on: function (event, callback) {
             call[event] ? '' : call[event] = callback;
@@ -99,11 +99,41 @@
             errorAppkey: { code: 10010, msg: 'appkey 无效' },
             errorService: { code: 10011, msg: '服务器不可用' }
         },
-        connect: function () {
+        getToken: function (callback) {
+            //从本地读取
+            var t = token.get(conf.uid);
+
+            if (t && t.length > 10) {
+                log('从本地获取token');
+                callback(t);
+                return;
+            }
+            if (!conf.api.token) {
+                layer.msg('请检查config.api.token配置');
+                return;
+            }
+            //根据网络请求获取token
+            log("从网络获取token");
+            $.get(conf.api.token, function (res) {
+                if (res.token && callback) {
+                    token.save(res.token);
+                    callback(res.token);
+                } else {
+                    layer.msg('token获取失败，请检查相应配置或者服务端代码');
+                }
+            });
+        },
+        connectWithToken: function () {
+            im.getToken(function (token) {
+                im.connect(token);
+            });
+        },
+        connect: function (token) {
             let hubRoute = "layimHub";
             let protocol = new signalR.JsonHubProtocol();
             var options = {};
-            options.accessTokenFactory = () => "testToken";
+            options.accessTokenFactory = () => token;
+            //options.skipNegotiation = true;
             connection = new signalR.HubConnectionBuilder()
                 .configureLogging(signalR.LogLevel.Trace)
                 .withUrl(hubRoute, options)
@@ -210,6 +240,23 @@
                     layim.getMessage(msg.msg);
                     break;
             }
+        }
+    };
+
+    //token
+    var token = {
+        save: function (t) {
+            layui.data('layim_global', {
+                key: 'rong_token_' + conf.uid,
+                value: t
+            });
+        },
+        get: function (uid) {
+            return layui.data('layim_global')['rong_token_' + uid] || '';
+        },
+        reset: function () {
+            log("重置token");
+            this.save('reset');
         }
     };
 
