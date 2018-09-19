@@ -33,7 +33,6 @@
         },
         init: function () {
             layim.config(conf.config);
-            im.init();
             this.open();
             this.register();
         },
@@ -47,11 +46,11 @@
             });
             //监听ready事件
             layim.on('ready', function () {
-                log('初始化群组信息...');
+                log('layim初始化完毕...');
             });
         },
         open: function () {
-            im.connectWithToken();
+            im.connect();
         },
         on: function (event, callback) {
             call[event] ? '' : call[event] = callback;
@@ -81,12 +80,9 @@
         }
     };
     //im部分
+    var connection;
     var im = {
         connected: false,
-        init: function () {
-            this.initListener();
-            this.defineMessage();
-        },
         code: {
             init: { code: 0, msg: '配置初始化，尚未连接' },
             success: { code: 10000, msg: '连接成功' },
@@ -103,16 +99,38 @@
             errorAppkey: { code: 10010, msg: 'appkey 无效' },
             errorService: { code: 10011, msg: '服务器不可用' }
         },
-        getToken: function (callback) {
-           
-        },
-        connectWithToken: function () {
-           
+        connect: function () {
+            let hubRoute = "layimHub";
+            let protocol = new signalR.JsonHubProtocol();
+            var options = {};
+            connection = new signalR.HubConnectionBuilder()
+                .configureLogging(signalR.LogLevel.Trace)
+                .withUrl(hubRoute, options)
+                .withHubProtocol(protocol)
+                .build();
+            //receive message
+            connection.on('Receive', im.handle);
+            connection.onclose(function (e) {
+                if (e) {
+                    addLine('message-list', 'Connection closed with error: ' + e, 'red');
+                }
+                else {
+                    addLine('message-list', 'Disconnected', 'green');
+                }
+
+                log('连接已关闭' + e ? e : '');
+            });
+            connection.start()
+                .then(function () {
+                    im.connectSuccess(10001);
+                })
+                .catch(function (err) {
+                    log('服务器连接失败：' + err);
+                });
         },
         connectSuccess: function (uid) {
             im.code.usuccess.uid = uid;
             im.connected = true;//连接成功
-
             listener(im.code.usuccess);
 
             if (msgQueue.length) {
@@ -162,19 +180,35 @@
             log(msg);
 
             if (im.connected) {
-               //发送消息
+                this.invoke(connection,'SendMessage', msg);
             } else {
                 im.saveMsg(mine.id, targetId, msg.type, msg.content);
             }
         },
-        joinGroup: function (gid, gname) {
+        invoke: function () {
+            if (!im.connected) {
+                return;
+            }
+            var argsArray = Array.prototype.slice.call(arguments);
+            connection.invoke.apply(connection, argsArray.slice(1))
+                .then(function (result) {
+                    if (result) {
+                        log(result);
+                    }
+                }).catch(function (err) {
+                    log(err);
+                });
         },
-        //初始化监听
-        initListener: function () {
-        },
-        //自定义消息
-        defineMessage: function () {
-           
+        handle: function (msg) {
+            switch (msg.type) {
+                case 0:
+                    log(msg.msg.content);
+                    break;
+                case 1:
+                    msg.msg.id = '10002';
+                    layim.getMessage(msg.msg);
+                    break;
+            }
         }
     };
 

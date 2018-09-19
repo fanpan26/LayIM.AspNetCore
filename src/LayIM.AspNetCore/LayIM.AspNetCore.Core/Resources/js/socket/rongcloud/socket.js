@@ -16,7 +16,7 @@
     //事件监听
     var listener = function (code) {
         code && (call['status'] ? call['status'](code) : log(code));
-    }
+    };
     //全局配置
     var conf = {
         api: {},
@@ -27,7 +27,7 @@
     //记录日志
     var log = function (msg) {
         conf.other.log && console.log(msg);
-    }
+    };
 
     //这里引用融云，但是socket接口都是一致的
     //事件有很多 open 

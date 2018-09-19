@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using LayIM.AspNetCore.Core.Models.Messages;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,7 +15,12 @@ namespace LayIM.AspNetCore.IM.SignalR
         /// <returns></returns>
         public override async Task OnConnectedAsync()
         {
-            await Clients.Caller.Receive("connected succeed");
+            var toClientMessage = MessageWrapper.Wrapper(new LayIMConnectedSuccessMessage
+            {
+                Content = "Connected Success"
+            }, LayIMMessageType.System);
+
+            await Clients.Caller.Receive(toClientMessage);
         }
 
         /// <summary>
@@ -27,9 +33,10 @@ namespace LayIM.AspNetCore.IM.SignalR
             return base.OnDisconnectedAsync(exception);
         }
 
-        public async Task SendMessage()
+        public async Task SendMessage(LayIMMessage message)
         {
-            await Clients.Caller.Receive("hello signalr");
+            var toClientMessage = MessageWrapper.Wrapper(message, LayIMMessageType.ClientToClient);
+            await Clients.Caller.Receive(toClientMessage);
         }
     }
 }

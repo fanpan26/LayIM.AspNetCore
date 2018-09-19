@@ -3,12 +3,12 @@ using LayIM.AspNetCore.Core.Models.Messages;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace LayIM.AspNetCore.IM.SignalR
 {
-    public interface ILayIMClient
+    internal class ToClientMessage<TMessage>
     {
-        Task Receive(object message);
+        public LayIMMessageType Type { get; set; }
+        public TMessage Message { get; set; }
     }
 }

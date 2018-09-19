@@ -84,14 +84,14 @@ namespace LayIM.AspNetCore.Core.Application
         /// 是否开启消息提醒
         /// </summary>
         [JsonIgnore]
-        public bool UseVoiceOnMessageReceived { get; set; } = true;
+        public bool UseVoiceOnMessageReceived { get; set; } = false;
 
         [JsonProperty("voice")]
         internal string Voice
         {
             get
             {
-                return UseVoiceOnMessageReceived ? "default.mp3" : "false";
+                return UseVoiceOnMessageReceived ? "default.mp3" : string.Empty;
             }
         }
 

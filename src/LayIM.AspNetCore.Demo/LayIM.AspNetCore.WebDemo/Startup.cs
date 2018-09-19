@@ -28,19 +28,19 @@ namespace LayIM.AspNetCore.WebDemo
             //注册LayIM的默认服务
             services.AddLayIM()
                 ////使用融云通信（如果自定义的话，这里改成自定义的即可。需要实现 ILayIMServer接口）
-                .AddRongCloud(config =>
-                    {
-                        config.AppKey = "pvxdm17jpv1or";
-                        config.AppSecret = "I8a4qFGzFe8";
-                    })
-                //.AddSignalR(options =>
-                //{
-                //    options.HubConfigure = hubOptions =>
+                //.AddRongCloud(config =>
                 //    {
-                //        hubOptions.EnableDetailedErrors = true;
-                //        hubOptions.KeepAliveInterval = TimeSpan.FromSeconds(5);
-                //    };
-                //})
+                //        config.AppKey = "pvxdm17jpv1or";
+                //        config.AppSecret = "I8a4qFGzFe8";
+                //    })
+                .AddSignalR(options =>
+                {
+                    options.HubConfigure = hubOptions =>
+                    {
+                        hubOptions.EnableDetailedErrors = true;
+                        hubOptions.KeepAliveInterval = TimeSpan.FromSeconds(5);
+                    };
+                })
                 //使用SqlServer保存相关信息
                 //.AddSqlServer("server=DESKTOP-GK56MO8\\PZSQLSERVER;user id=sa;password=panzi123;database=LayIM;Min Pool Size=16;Connect Timeout=500;");
                 .AddSqlServer("server=192.168.1.18;user id=sa;password=123123;database=LayIM;Min Pool Size=16;Connect Timeout=500;");
@@ -71,7 +71,7 @@ namespace LayIM.AspNetCore.WebDemo
             app.UseLayIM(options =>
             {
                 options.UserFactory = new MyUserFactory();
-                options.ServerType = ServerType.RongCloud;
+                options.ServerType = ServerType.SignalR;
             });
 
             app.UseMvc(routes =>
