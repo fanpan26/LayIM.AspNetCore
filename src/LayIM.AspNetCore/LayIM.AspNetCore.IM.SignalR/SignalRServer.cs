@@ -1,12 +1,6 @@
 ﻿using LayIM.AspNetCore.Core.IM;
 using LayIM.AspNetCore.Core.Models;
-using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.IdentityModel;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace LayIM.AspNetCore.IM.SignalR

@@ -19,7 +19,7 @@ namespace LayIM.AspNetCore.IM.SignalR
         public override async Task OnConnectedAsync()
         {
             var context = Context.GetHttpContext();
-            var toClientMessage = MessageWrapper.Wrapper(new LayIMConnectedSuccessMessage
+            var toClientMessage = LayIMToClientMessage<LayIMConnectedSuccessMessage>.Create(new LayIMConnectedSuccessMessage
             {
                 Content = "Connected Success"
             }, LayIMMessageType.System);
@@ -39,7 +39,7 @@ namespace LayIM.AspNetCore.IM.SignalR
 
         public async Task SendMessage(string toUserId, LayIMMessage message)
         {
-            var toClientMessage = MessageWrapper.Wrapper(message, LayIMMessageType.ClientToClient);
+            var toClientMessage = LayIMToClientMessage<LayIMMessage>.Create(message, LayIMMessageType.ClientToClient);
             await Clients.User(toUserId).Receive(toClientMessage);
         }
     }
