@@ -24,6 +24,13 @@ namespace LayIM.AspNetCore.Core.Storage
         Task<LayIMGroupMemberModel> GetGroupMembers(string userId,string groupId);
 
         /// <summary>
+        /// 获取用户所在的群组ID
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        Task<IEnumerable<long>> GetGroups(string userId);
+
+        /// <summary>
         /// save chat messages
         /// </summary>
         /// <param name="message"></param>

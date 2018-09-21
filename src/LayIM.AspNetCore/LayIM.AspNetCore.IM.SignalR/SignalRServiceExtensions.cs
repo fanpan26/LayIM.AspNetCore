@@ -34,6 +34,7 @@ namespace Microsoft.Extensions.DependencyInjection
             //AddSignalR must be called before registering your custom SignalR services.
             services.AddSingleton<ILayIMAppBuilder, SignalRAppBuilder>();
             services.AddSingleton<ILayIMServer, SignalRServer>();
+            services.AddScoped<ISignalRHandler, SignalRHandler>();
             services.AddSingleton<IUserIdProvider, LayIMUserIdProvider>();
 
 

@@ -1,4 +1,5 @@
 ﻿using LayIM.AspNetCore.Core.Application;
+using LayIM.AspNetCore.Core.Extensions;
 using LayIM.AspNetCore.Core.Models.Base;
 using LayIM.AspNetCore.Core.Storage;
 using Microsoft.AspNetCore.Http;
@@ -27,11 +28,11 @@ namespace LayIM.AspNetCore.Core.Razor
                 WriteLiteral($"<img src=\"{item.avatar}\" />\r\n");
                 if (item.self)
                 {
-                    WriteLiteral($"<cite><i>{item.addtime}</i>{item.username}</cite>\r\n");
+                    WriteLiteral($"<cite><i>{item.addtime.FromTimestamp().ToTimeDetailString(2)}</i>{item.username}</cite>\r\n");
                 }
                 else
                 {
-                    WriteLiteral($"<cite><i>{item.username}</i>{item.addtime}</cite>\r\n");
+                    WriteLiteral($"<cite><i>{item.username}</i>{item.addtime.FromTimestamp().ToTimeDetailString(2)}</cite>\r\n");
                 }
                 WriteLiteral("</div>\r\n");
                 WriteLiteral("<div class=\"layim-chat-text\">\r\n");

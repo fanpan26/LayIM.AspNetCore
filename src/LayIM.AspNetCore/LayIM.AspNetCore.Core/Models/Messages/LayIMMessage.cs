@@ -8,7 +8,7 @@ namespace LayIM.AspNetCore.Core.Models.Messages
     public class LayIMMessage
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public long Id { get; set; }
         [JsonProperty("avatar")]
         public string Avatar { get; set; }
         [JsonProperty("type")]

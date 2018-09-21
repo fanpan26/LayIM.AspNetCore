@@ -165,5 +165,10 @@ namespace LayIM.AspNetCore.Storage.Infra.Dapper
             };
             return result;
         }
+
+        public Task<IEnumerable<long>> GetGroups(string userId)
+        {
+            return groupMemberRepository.GetUserBigGroups(userId);
+        }
     }
 }

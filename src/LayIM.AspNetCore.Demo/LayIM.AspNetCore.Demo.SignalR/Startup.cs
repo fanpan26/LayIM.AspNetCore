@@ -15,6 +15,9 @@ namespace LayIM.AspNetCore.Demo.SignalR
 {
     public class Startup
     {
+
+        private string connectionString = "server=192.168.1.18;user id=sa;password=123123;database=LayIM;Min Pool Size=16;Connect Timeout=500;";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -45,7 +48,8 @@ namespace LayIM.AspNetCore.Demo.SignalR
                         hubOptions.EnableDetailedErrors = true;
                         hubOptions.KeepAliveInterval = TimeSpan.FromSeconds(5);
                     };
-                }).AddSqlServer("server=DESKTOP-GK56MO8\\PZSQLSERVER;user id=sa;password=panzi123;database=LayIM;Min Pool Size=16;Connect Timeout=500;");
+                })
+                .AddSqlServer(connectionString);
             services.AddSession();
         }
 

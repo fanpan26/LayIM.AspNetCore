@@ -193,7 +193,7 @@
             //根据layim提供的data数据，进行解析
             var mine = data.mine;
             var to = data.to;
-            var id = conf.uid || mine.id;//当前用户id
+            var id = mine.id;//当前用户id
             var group = to.type === 'group';
             if (group) {
                 id = to.id;//如果是group类型，id就是当前groupid，切记不可写成 mine.id否则会出现一些问题。
@@ -212,9 +212,8 @@
 
             if (im.connected) {
                 this.invoke(connection, 'SendMessage', targetId, msg);
-            } else {
-                im.saveMsg(mine.id, targetId, msg.type, msg.content);
             }
+            im.saveMsg(mine.id, targetId, msg.type, msg.content);
         },
         invoke: function () {
             if (!im.connected) {
@@ -236,7 +235,6 @@
                     log(msg.msg.content);
                     break;
                 case 1:
-                    msg.msg.id = '10002';
                     layim.getMessage(msg.msg);
                     break;
             }
