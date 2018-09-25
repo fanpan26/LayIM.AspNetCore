@@ -2,13 +2,10 @@
 using LayIM.AspNetCore.Core.Application;
 using LayIM.AspNetCore.Core.IM;
 using LayIM.AspNetCore.IM.SignalR;
-using LayIM.AspNetCore.IM.SignalR.Auth;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,11 +14,13 @@ namespace Microsoft.Extensions.DependencyInjection
 
     public static class SignalRServiceExtensions
     {
+        private const string HubPath = "/layimHub";
+
         /// <summary>
         /// 使用SignalR通信
         /// </summary>
         /// <param name="services"></param>
-        /// <param name="setConfig"></param>
+        /// <param name="configure"></param>
         public static IServiceCollection AddSignalR(this IServiceCollection services, Action<LayIMHubOptions> configure)
         {
             var options = new LayIMHubOptions();
@@ -37,14 +36,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<ISignalRHandler, SignalRHandler>();
             services.AddSingleton<IUserIdProvider, LayIMUserIdProvider>();
 
-
             services.AddJwtBearer();
-            //简单验证
-            //services.AddAuthentication(auth =>
-            //{
-            //    auth.DefaultScheme = "User";
-            //}).AddScheme<UserAuthenticationOptions, UserAuthenticationHandler>("User", o => { });
-
             LayIMServiceLocator.SetServiceProvider(services.BuildServiceProvider());
             return services;
         }
@@ -62,10 +54,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 options.TokenValidationParameters =
                     new TokenValidationParameters
                     {
-                        LifetimeValidator = (before, expires, token, param) =>
-                        {
-                            return expires > DateTime.UtcNow;
-                        },
+                        LifetimeValidator = (before, expires, token, param) => expires > DateTime.UtcNow,
                         ValidateAudience = false,
                         ValidateIssuer = false,
                         ValidateActor = false,
@@ -80,7 +69,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
                         var path = context.HttpContext.Request.Path;
                         if (!string.IsNullOrEmpty(accessToken) &&
-                            (path.StartsWithSegments("/layimHub")))
+                            (path.StartsWithSegments(HubPath)))
                         {
                             context.Token = accessToken;
                         }

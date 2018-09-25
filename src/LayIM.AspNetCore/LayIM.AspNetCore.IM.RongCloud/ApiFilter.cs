@@ -33,19 +33,17 @@ namespace LayIM.AspNetCore.IM.RongCloud
         public Task OnBeginRequestAsync(ApiActionContext context)
         {
            
-            int rd_i = randoms.Value.Next();
+            int rdlNext = randoms.Value.Next();
 
-            string nonce = rd_i.ToString();
+            string nonce = rdlNext.ToString();
             string timestamp = DateTime.Now.ToTimestamp().ToString();
             string signature = GetHash(appInfo.AppSecret + nonce + timestamp).ToLowerInvariant();
-            //appkey
+
             context.RequestMessage.Headers.Add("App-Key", appInfo.AppKey);
-            //随机字符串
             context.RequestMessage.Headers.Add("Nonce", nonce);
-            //时间戳
             context.RequestMessage.Headers.Add("Timestamp", timestamp);
-            //根据字符串获取的签名
             context.RequestMessage.Headers.Add("Signature", signature);
+
             return Task.CompletedTask;
         }
 
@@ -54,25 +52,22 @@ namespace LayIM.AspNetCore.IM.RongCloud
             return Task.CompletedTask;
         }
 
+        
         /// <summary>
-        /// 将字符串进行sha1加密
+        /// SHA1加密
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         private static string GetHash(string input)
         {
-            //建立SHA1对象
+            //建立 SHA1 对象
             SHA1 sha = new SHA1CryptoServiceProvider();
+            var enc = new UTF8Encoding();
+            var dataToHash = enc.GetBytes(input);
 
-            //将mystr转换成byte[]
-            UTF8Encoding enc = new UTF8Encoding();
-            byte[] dataToHash = enc.GetBytes(input);
+            var dataHashed = sha.ComputeHash(dataToHash);
 
-            //Hash运算
-            byte[] dataHashed = sha.ComputeHash(dataToHash);
-
-            //将运算结果转换成string
-            string hash = BitConverter.ToString(dataHashed).Replace("-", "");
+            var hash = BitConverter.ToString(dataHashed).Replace("-", "");
 
             return hash;
         }
