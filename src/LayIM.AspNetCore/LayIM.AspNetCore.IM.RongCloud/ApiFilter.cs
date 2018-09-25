@@ -14,16 +14,13 @@ namespace LayIM.AspNetCore.IM.RongCloud
 {
     public class ApiFilter : IApiActionFilter
     {
-        private readonly ILayIMAppInfo appInfo;
+        private readonly ILayIMAppInfo _appInfo;
 
-        private ThreadLocal<Random> randoms = new ThreadLocal<Random>(() =>
-        {
-            return new Random();
-        });
+        private readonly ThreadLocal<Random> _randoms = new ThreadLocal<Random>(() => new Random());
 
         public ApiFilter(ILayIMAppInfo appInfo)
         {
-            this.appInfo = appInfo;
+            this._appInfo = appInfo;
         }
         /// <summary>
         /// 构造融云请求头
@@ -33,13 +30,13 @@ namespace LayIM.AspNetCore.IM.RongCloud
         public Task OnBeginRequestAsync(ApiActionContext context)
         {
            
-            int rdlNext = randoms.Value.Next();
+            int rdlNext = _randoms.Value.Next();
 
             string nonce = rdlNext.ToString();
             string timestamp = DateTime.Now.ToTimestamp().ToString();
-            string signature = GetHash(appInfo.AppSecret + nonce + timestamp).ToLowerInvariant();
+            string signature = GetHash(_appInfo.AppSecret + nonce + timestamp).ToLowerInvariant();
 
-            context.RequestMessage.Headers.Add("App-Key", appInfo.AppKey);
+            context.RequestMessage.Headers.Add("App-Key", _appInfo.AppKey);
             context.RequestMessage.Headers.Add("Nonce", nonce);
             context.RequestMessage.Headers.Add("Timestamp", timestamp);
             context.RequestMessage.Headers.Add("Signature", signature);

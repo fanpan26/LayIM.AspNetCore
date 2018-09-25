@@ -1,10 +1,6 @@
-﻿using LayIM.AspNetCore.Core.Application;
-using LayIM.AspNetCore.Core.IM;
+﻿using LayIM.AspNetCore.Core.IM;
 using LayIM.AspNetCore.IM.RongCloud;
-using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using WebApiClient;
 
 namespace Microsoft.Extensions.DependencyInjection
