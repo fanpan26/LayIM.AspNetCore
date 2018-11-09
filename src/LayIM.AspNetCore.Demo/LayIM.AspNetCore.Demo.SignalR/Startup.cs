@@ -69,6 +69,7 @@ namespace LayIM.AspNetCore.Demo.SignalR
             app.UseLayIM(options =>
             {
                 options.ServerType = ServerType.SignalR;
+                options.UIConfig.UseMessageBoxPage = true;
             });
            
             app.UseStaticFiles();
